@@ -1,5 +1,5 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -10,20 +10,21 @@ export default {
     };
   },
 
-  // !!chiamata axios per le category!!
-  // created() {
-  //   axios
-  //     .get("/api/categories")
-  //     .then((response) => {
-  //       this.categories = response.data;
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // },
-  // components: {
-  //   MyComponent,
-  // },
+  mounted() {
+    this.fetchCategories();
+  },
+  methods: {
+    fetchCategories() {
+      axios
+        .get("http://127.0.0.1:8000/api/categories")
+        .then((response) => {
+          this.categories = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
 };
 </script>
 
@@ -47,6 +48,7 @@ export default {
   <section class="search-tag container my-5">
     <h2>I tuoi Piatti preferiti, consegnati da noi</h2>
 
+    <!-- CATEGORY CARDS -->
     <div v-for="category in categories" :key="category.id" class="card">
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6">
         <div class="col">

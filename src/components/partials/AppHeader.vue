@@ -32,6 +32,11 @@ export default {
             <a class="nav-link" href="#">About</a>
           </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
