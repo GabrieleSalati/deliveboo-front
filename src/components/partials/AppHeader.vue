@@ -1,16 +1,12 @@
 <script>
 export default {
   name: "AppHeader",
-
-  props: {
-    title: String,
-  },
 };
 </script>
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <div class="container-fluid">
+    <div class="container">
       <button
         class="navbar-toggler"
         type="button"
