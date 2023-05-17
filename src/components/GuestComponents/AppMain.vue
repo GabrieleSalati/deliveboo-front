@@ -49,14 +49,17 @@ export default {
     <h2>I tuoi Piatti preferiti, consegnati da noi</h2>
 
     <!-- CATEGORY CARDS -->
-    <div v-for="category in categories" :key="category.id" class="card">
-      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6">
-        <div class="col">
-          <div class="card text-bg-dark">
-            <img :src="category.picture" class="img-fluid" alt="..." />
-            <div class="card-img-overlay">
-              <h5 class="card-title text-center">{{ category.label }}</h5>
-            </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+      <div v-for="category in categories" :key="category.id" class="col">
+        <div class="card position-relative">
+          <img :src="category.picture" class="card-img" alt="..." />
+          <div
+            class="card-img-overlay d-flex align-items-center justify-content-center"
+          >
+            <h5 class="card-title text-center text-light">
+              {{ category.label }}
+            </h5>
           </div>
         </div>
       </div>
@@ -78,5 +81,24 @@ export default {
 .jumbo .text-white {
   position: relative;
   z-index: 1;
+}
+
+.card-img {
+  object-fit: cover;
+  height: 200px;
+}
+
+.card-img-overlay {
+  opacity: 0;
+  background-color: rgba(255, 165, 0, 0.8);
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card-img-overlay {
+  opacity: 1;
+}
+
+.card-title {
+  font-size: 18px;
 }
 </style>
