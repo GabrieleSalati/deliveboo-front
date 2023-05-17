@@ -1,25 +1,30 @@
-
 <script>
-
 import axios from "axios";
 import RestaurantIndex from './components/partials/UserComponents/RestaurantIndex.vue';
+import AppHeader from "./components/partials/AppHeader.vue";
+import AppFooter from "./components/partials/AppFooter.vue";
+import AppMain from "./components/GuestComponents/AppMain.vue";
 
 export default {
   data() {
     return {
-      restaurants: []
-    }
+      title: "Deliveboo",
+      restaurants: [],
+    };
   },
-
   components: {
-    RestaurantIndex,
+    AppHeader,
+    AppFooter,
+    AppMain,
+    RestaurantIndex
   },
-
 
   methods: {
     fetchRestaurants() {
-      axios.get('http://127.0.0.1:8000/api/restaurants').then((response) => { this.restaurants = response.data; })
-    }
+      axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
+        this.restaurants = response.data;
+      });
+    },
   },
 
   created() {
@@ -29,9 +34,12 @@ export default {
 </script>
 
 <template>
+  <AppHeader />
+  <AppMain />
   <div class="container">
     <RestaurantIndex :restaurants="restaurants" />
   </div>
+  <AppFooter />,
 </template>
 
 <style lang="scss" scoped></style>
