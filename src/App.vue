@@ -1,20 +1,20 @@
 <script>
 import axios from "axios";
-import UserForm from "./components/UserComponents/FormComponents/UserForm.vue";
-import LoginForm from "./components/UserComponents/FormComponents/LoginForm.vue";
-import DishForm from "./components/UserComponents/FormComponents/DishForm.vue";
+import AppHeader from "./components/partials/AppHeader.vue";
+import AppFooter from "./components/partials/AppFooter.vue";
+import AppMain from "./components/GuestComponents/AppMain.vue";
 
 export default {
   data() {
     return {
+      title: "Deliveboo",
       restaurants: [],
     };
   },
-
   components: {
-    UserForm,
-    LoginForm,
-    DishForm,
+    AppHeader,
+    AppFooter,
+    AppMain,
   },
 
   methods: {
@@ -32,11 +32,9 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <UserForm />
-    <LoginForm />
-    <DishForm />
-  </div>
+  <AppHeader />
+  <AppMain />
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped></style>
