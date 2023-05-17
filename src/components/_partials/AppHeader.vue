@@ -7,13 +7,8 @@ export default {
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" aria-expanded="false"
+        aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse">
@@ -22,12 +17,12 @@ export default {
           <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="#">DeliveBoo</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
+          <router-link :to="{ name: 'home' }" class="nav-link">
+            Home
+          </router-link>
+          <router-link :to="{ name: 'restaurants' }" class="nav-link">
+            Restaurants
+          </router-link>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>

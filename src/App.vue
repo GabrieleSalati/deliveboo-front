@@ -1,10 +1,7 @@
 <script>
 
-import axios from "axios";
+import HomePage from "../src/components/GuestComponents/HomePage.vue";
 import AppHeader from "./components/_partials/AppHeader.vue";
-import AppFooter from "./components/_partials/AppFooter.vue";
-import AppMain from "./components/GuestComponents/AppMain.vue";
-
 
 export default {
   data() {
@@ -13,32 +10,14 @@ export default {
     };
   },
   components: {
-    AppHeader,
-    AppFooter,
-    AppMain,
-  },
-
-  methods: {
-    fetchRestaurants() {
-      axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
-        this.restaurants = response.data;
-      });
-    },
-  },
-
-  created() {
-    this.fetchRestaurants();
+    AppHeader
   },
 };
 </script>
 
 <template>
   <AppHeader />
-  <AppMain />
-  <div class="container">
-    <RestaurantIndex :restaurants="restaurants" />
-  </div>
-  <AppFooter />
+  <router-view></router-view>
 </template>
 
 <style lang="scss" scoped></style>
