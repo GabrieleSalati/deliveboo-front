@@ -2,7 +2,7 @@
 <script>
 
 import axios from "axios";
-import RestaurantShow from './components/partials/UserComponents/RestaurantShow.vue';
+import RestaurantIndex from './components/partials/UserComponents/RestaurantIndex.vue';
 
 export default {
   data() {
@@ -12,7 +12,7 @@ export default {
   },
 
   components: {
-    RestaurantShow,
+    RestaurantIndex,
   },
 
 
@@ -30,7 +30,7 @@ export default {
 
 <template>
   <div class="container">
-    <RestaurantShow :restaurants="restaurants" />
+    <RestaurantIndex :restaurants="restaurants" />
   </div>
 </template>
 
