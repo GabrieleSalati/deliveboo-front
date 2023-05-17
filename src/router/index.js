@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import App from "src/App.vue";
-import RestaurantIndex from "./components/GuestComponents/RestaurantIndex.vue";
+import HomePage from "../components/GuestComponents/HomePage.vue"
+import RestaurantIndex from "../components/GuestComponents/RestaurantIndex.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,7 +11,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: App,
+            component: HomePage,
         },
 
         {
