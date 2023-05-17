@@ -1,22 +1,21 @@
 <script>
+
 import axios from "axios";
-import RestaurantIndex from "./components/GuestComponents/RestaurantIndex.vue";
 import AppHeader from "./components/_partials/AppHeader.vue";
 import AppFooter from "./components/_partials/AppFooter.vue";
 import AppMain from "./components/GuestComponents/AppMain.vue";
+
 
 export default {
   data() {
     return {
       title: "Deliveboo",
-      restaurants: [],
     };
   },
   components: {
     AppHeader,
     AppFooter,
     AppMain,
-    RestaurantIndex,
   },
 
   methods: {

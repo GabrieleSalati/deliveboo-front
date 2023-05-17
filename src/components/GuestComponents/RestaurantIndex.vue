@@ -1,13 +1,30 @@
 <script>
 
-export default {
+import axios from "axios";
 
-    props: {
-        restaurants: Array,
-        categories: Array,
+export default {
+    data() {
+        return {
+            restaurants: [],
+            categories: []
+        };
     },
 
+    methods: {
+        fetchRestaurants() {
+            axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
+                this.restaurants = response.data;
+            });
+        },
+    },
+
+
+    created() {
+        this.fetchRestaurants();
+    },
 };
+
+
 </script>
 
 <template>
