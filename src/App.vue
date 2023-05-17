@@ -39,7 +39,7 @@ export default {
   <div class="container">
     <RestaurantIndex :restaurants="restaurants" />
   </div>
-  <AppFooter />,
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped></style>
