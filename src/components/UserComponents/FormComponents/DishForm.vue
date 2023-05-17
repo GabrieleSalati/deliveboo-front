@@ -1,6 +1,6 @@
 <script>
-import AppHeader from "./components/partials/AppHeader.vue";
-import AppFooter from "./components/partials/AppFooter.vue";
+import AppHeader from "../../_partials/AppHeader.vue";
+import AppFooter from "../../_partials/AppFooter.vue";
 export default {
   data() {
     return {
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <!-- <AppHeader /> -->
   <form class="row g-3 needs-validation" novalidate>
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">Nome Piatto</label>

@@ -30,7 +30,7 @@ export default {
 
 <template>
   <!-- JUMBOTRON -->
-  <section class="jumbo container">
+  <section class="jumbo container mt-5">
     <div class="p-5 text-center bg-image">
       <div class="mask d-flex align-items-center justify-content-center">
         <div class="text-white">
@@ -50,7 +50,9 @@ export default {
 
     <!-- CATEGORY CARDS -->
 
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+    <div
+      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
+    >
       <div v-for="category in categories" :key="category.id" class="col">
         <div class="card position-relative">
           <img :src="category.picture" class="card-img" alt="..." />
@@ -63,6 +65,8 @@ export default {
           </div>
         </div>
       </div>
+
+      <!-- Colonna vuota per centrare l'ultima card -->
     </div>
   </section>
 </template>

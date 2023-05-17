@@ -4,6 +4,9 @@ import RestaurantIndex from "./components/GuestComponents/RestaurantIndex.vue";
 import AppHeader from "./components/_partials/AppHeader.vue";
 import AppFooter from "./components/_partials/AppFooter.vue";
 import AppMain from "./components/GuestComponents/AppMain.vue";
+import DishForm from "./components/UserComponents/FormComponents/DishForm.vue";
+import UserForm from "./components/UserComponents/FormComponents/UserForm.vue";
+import LoginForm from "./components/UserComponents/FormComponents/LoginForm.vue";
 
 export default {
   data() {
@@ -17,6 +20,9 @@ export default {
     AppFooter,
     AppMain,
     RestaurantIndex,
+    DishForm,
+    UserForm,
+    LoginForm,
   },
 
   methods: {
@@ -36,10 +42,15 @@ export default {
 <template>
   <AppHeader />
   <AppMain />
-  <div class="container">
+  <!-- <div class="container">
     <RestaurantIndex :restaurants="restaurants" />
-  </div>
+  </div> -->
   <AppFooter />
+  <!-- <LoginForm />
+  <hr />
+  <UserForm />
+  <hr /> -->
+  <!-- <DishForm /> -->
 </template>
 
 <style lang="scss" scoped></style>

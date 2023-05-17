@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mb-5">
     <div class="container">
       <button
         class="navbar-toggler"
