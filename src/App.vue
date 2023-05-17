@@ -1,25 +1,28 @@
-
 <script>
-
 import axios from "axios";
-import RestaurantShow from './components/partials/UserComponents/RestaurantShow.vue';
+import UserForm from "./components/UserComponents/FormComponents/UserForm.vue";
+import LoginForm from "./components/UserComponents/FormComponents/LoginForm.vue";
+import DishForm from "./components/UserComponents/FormComponents/DishForm.vue";
 
 export default {
   data() {
     return {
-      restaurants: []
-    }
+      restaurants: [],
+    };
   },
 
   components: {
-    RestaurantShow,
+    UserForm,
+    LoginForm,
+    DishForm,
   },
-
 
   methods: {
     fetchRestaurants() {
-      axios.get('http://127.0.0.1:8000/api/restaurants').then((response) => { this.restaurants = response.data; })
-    }
+      axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
+        this.restaurants = response.data;
+      });
+    },
   },
 
   created() {
@@ -30,7 +33,9 @@ export default {
 
 <template>
   <div class="container">
-    <RestaurantShow :restaurants="restaurants" />
+    <UserForm />
+    <LoginForm />
+    <DishForm />
   </div>
 </template>
 
