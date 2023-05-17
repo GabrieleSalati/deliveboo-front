@@ -36,13 +36,14 @@ export default {
 
 <template>
   <!-- <AppHeader /> -->
-  <h1 class="text-center my-5">Accedi al tuo account</h1>
 
-  <div class="container">
+  <div class="container my-5 py-5">
+    <h1 class="text-center my-5">Accedi al tuo account</h1>
     <form
       action=""
       method="post"
       class="row g-3 needs-validation d-flex justify-content-center text-center"
+      novalidate
     >
       <div class="col-md-4">
         <label for="validationCustom04" class="form-label">Email</label>
@@ -50,6 +51,7 @@ export default {
           type="email"
           class="form-control"
           id="validationCustom04"
+          name="email"
           required
         />
         <div class="invalid-feedback">
@@ -63,6 +65,7 @@ export default {
           type="password"
           class="form-control"
           id="validationCustom05"
+          name="password"
           pattern=".{8,}"
           required
         />
@@ -75,12 +78,9 @@ export default {
       </div>
     </form>
   </div>
-
-  <AppFooter />
+  <div class="utility mt-5 pt-5">
+    <AppFooter />
+  </div>
 </template>
 
-<style lang="scss" scoped>
-.needs-validation {
-  margin-top: 10vh;
-}
-</style>
+<style lang="scss" scoped></style>
