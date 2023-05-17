@@ -194,3 +194,9 @@ export default {
   </div>
   <AppFooter />
 </template>
+
+<style lang="scss" scoped>
+.needs-validation {
+  margin-top: 10vh;
+}
+</style>
