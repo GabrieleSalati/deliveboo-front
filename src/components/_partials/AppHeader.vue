@@ -7,8 +7,13 @@ export default {
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mb-5">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" aria-expanded="false"
-        aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse">
@@ -23,9 +28,6 @@ export default {
           <router-link :to="{ name: 'restaurants' }" class="nav-link">
             Ristoranti
           </router-link>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <router-link :to="{ name: 'login' }" class="nav-link">
