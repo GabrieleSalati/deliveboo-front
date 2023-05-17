@@ -1,5 +1,6 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import AppHeader from "./components/partials/AppHeader.vue";
+import AppFooter from "./components/partials/AppFooter.vue";
 
 export default {
   data() {
@@ -33,6 +34,7 @@ export default {
 </script>
 
 <template>
+  <AppHeader />
   <form action="" method="post" class="row g-3 needs-validation">
     <div class="col-md-3">
       <label for="validationCustom04" class="form-label">Email</label>
@@ -62,6 +64,7 @@ export default {
       <button class="btn btn-primary" type="submit">Accedi</button>
     </div>
   </form>
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped></style>

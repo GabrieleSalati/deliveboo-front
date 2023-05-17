@@ -1,5 +1,6 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import AppHeader from "./components/partials/AppHeader.vue";
+import AppFooter from "./components/partials/AppFooter.vue";
 
 export default {
   data() {
@@ -33,6 +34,8 @@ export default {
 </script>
 
 <template>
+  <AppHeader />
+
   <form class="row g-3 needs-validation" novalidate>
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">Nome Utente</label>
@@ -161,6 +164,7 @@ export default {
       <button class="btn btn-primary" type="submit">Registrati</button>
     </div>
   </form>
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped></style>

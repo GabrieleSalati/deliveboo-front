@@ -1,6 +1,6 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
-
+import AppHeader from "./components/partials/AppHeader.vue";
+import AppFooter from "./components/partials/AppFooter.vue";
 export default {
   data() {
     return {
@@ -27,13 +27,15 @@ export default {
     });
   },
 
-  // components: {
-  //   MyComponent,
-  // },
+  components: {
+    AppHeader,
+    AppFooter,
+  },
 };
 </script>
 
 <template>
+  <AppHeader />
   <form class="row g-3 needs-validation" novalidate>
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">Nome Piatto</label>
@@ -108,6 +110,7 @@ export default {
       <button class="btn btn-primary" type="submit">Crea piatto</button>
     </div>
   </form>
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped></style>
