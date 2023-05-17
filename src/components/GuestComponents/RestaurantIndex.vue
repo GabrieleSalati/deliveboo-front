@@ -1,6 +1,7 @@
 <script>
 
 import axios from "axios";
+import AppFooter from "../_partials/AppFooter.vue";
 
 export default {
     data() {
@@ -8,6 +9,10 @@ export default {
             restaurants: [],
             categories: []
         };
+    },
+
+    components: {
+        AppFooter,
     },
 
     methods: {
@@ -28,17 +33,26 @@ export default {
 </script>
 
 <template>
-    <div class="card" v-for="restaurant in restaurants">
-        <div class="card-body">
-            <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
-            <p class="card-text">{{ restaurant.p_iva }}</p>
-            <p class="card-text">{{ restaurant.address }}</p>
-            <div v-for="category in restaurant.categories">
-                <p class="card-text">{{ category.label }}</p>
+    <div class="container card-list">
+        <div class="row">
+            <div class="card col-6" v-for="restaurant in restaurants">
+                <div class="card-body">
+                    <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
+                    <p class="card-text">{{ restaurant.p_iva }}</p>
+                    <p class="card-text">{{ restaurant.address }}</p>
+                    <div v-for="category in restaurant.categories">
+                        <p class="card-text">{{ category.label }}</p>
+                    </div>
+                    <!-- <img :src="project.image" class="card-img-top" alt="Picture"> -->
+                </div>
             </div>
-            <!-- <img :src="project.image" class="card-img-top" alt="Picture"> -->
         </div>
     </div>
+    <AppFooter />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card-list {
+    margin-top: 10vh;
+}
+</style>
