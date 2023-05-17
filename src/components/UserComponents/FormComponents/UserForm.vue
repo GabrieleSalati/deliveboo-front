@@ -1,6 +1,6 @@
 <script>
-import AppHeader from "./components/partials/AppHeader.vue";
-import AppFooter from "./components/partials/AppFooter.vue";
+import AppHeader from "../../_partials/AppHeader.vue";
+import AppFooter from "../../_partials/AppFooter.vue";
 
 export default {
   data() {
@@ -39,29 +39,16 @@ export default {
   <form class="row g-3 needs-validation" novalidate>
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">Nome Utente</label>
-      <input
-        type="text"
-        class="form-control"
-        id="validationCustom01"
-        value="Mark"
-        required
-      />
+      <input type="text" class="form-control" id="validationCustom01" value="Mark" required />
       <div class="valid-feedback">Perfetto!</div>
     </div>
 
     <div class="col-md-4">
-      <label for="validationCustomUsername" class="form-label"
-        >Il nome della tua attività</label
-      >
+      <label for="validationCustomUsername" class="form-label">Il nome della tua attività</label>
       <div class="input-group has-validation">
         <span class="input-group-text" id="inputGroupPrepend">@</span>
-        <input
-          type="text"
-          class="form-control"
-          id="validationCustomUsername"
-          aria-describedby="inputGroupPrepend"
-          required
-        />
+        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend"
+          required />
         <div class="invalid-feedback">
           Per favore inserisci il nome della tua attività.
         </div>
@@ -71,13 +58,7 @@ export default {
 
     <div class="col-md-6">
       <label for="validationCustom03" class="form-label">Partita IVA</label>
-      <input
-        type="text"
-        class="form-control"
-        id="validationCustom03"
-        pattern=".{11}"
-        required
-      />
+      <input type="text" class="form-control" id="validationCustom03" pattern=".{11}" required />
       <div class="invalid-feedback">
         La Partita IVA deve essere di 11 caratteri.
       </div>
@@ -85,41 +66,22 @@ export default {
 
     <div class="col-md-3">
       <label for="validationCustom04" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="validationCustom04"
-        required
-      />
+      <input type="email" class="form-control" id="validationCustom04" required />
       <div class="invalid-feedback">Per favore inserisci una mail valida.</div>
     </div>
 
     <div class="col-md-3">
       <label for="validationCustom05" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="validationCustom05"
-        pattern=".{8,}"
-        required
-      />
+      <input type="password" class="form-control" id="validationCustom05" pattern=".{8,}" required />
       <div class="invalid-feedback">
         La password deve avere almeno 8 caratteri.
       </div>
     </div>
 
     <div class="mb-3">
-      <label for="fileform" class="form-label"
-        >Scegli l'immagine di copertina</label
-      >
-      <input
-        id="fileform"
-        type="file"
-        class="form-control"
-        aria-label="file example"
-        accept=".jpg, .png, .jpeg"
-        required
-      />
+      <label for="fileform" class="form-label">Scegli l'immagine di copertina</label>
+      <input id="fileform" type="file" class="form-control" aria-label="file example" accept=".jpg, .png, .jpeg"
+        required />
       <div class="invalid-feedback">
         Inserisci un file di tipo: jpg, png, jpeg.
       </div>
@@ -127,13 +89,7 @@ export default {
 
     <div class="col-12">
       <div class="form-check">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value=""
-          id="invalidCheck"
-          required
-        />
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
         <label class="form-check-label" for="invalidCheck">
           Accetto i termini e le condizioni
         </label>
@@ -143,14 +99,8 @@ export default {
 
     <div class="col-12">
       <div class="form-check">
-        <input
-          class="form-check-input is-invalid"
-          type="checkbox"
-          value=""
-          id="invalidCheck3"
-          aria-describedby="invalidCheck3Feedback"
-          required
-        />
+        <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3"
+          aria-describedby="invalidCheck3Feedback" required />
         <label class="form-check-label" for="invalidCheck3">
           Seleziona almeno una categoria.
         </label>

@@ -14,23 +14,29 @@ export default {
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li><img src="" alt="" /></li>
-          <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="#">DeliveBoo</a>
-          </li>
+          <router-link :to="{ name: 'home' }" class="nav-link">
+            DeliveBoo
+          </router-link>
           <router-link :to="{ name: 'home' }" class="nav-link">
             Home
           </router-link>
           <router-link :to="{ name: 'restaurants' }" class="nav-link">
-            Restaurants
+            Ristoranti
           </router-link>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
-          </li>
+          <router-link :to="{ name: 'login' }" class="nav-link">
+            Login
+          </router-link>
+          <router-link :to="{ name: 'user-form' }" class="nav-link">
+            Registrati
+          </router-link>
+          <router-link :to="{ name: 'dish-form' }" class="nav-link">
+            Crea Piatto
+          </router-link>
         </ul>
       </div>
     </div>
