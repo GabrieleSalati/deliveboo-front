@@ -36,9 +36,7 @@ export default {
         <div class="text-white">
           <h1 class="mb-3">I piatti che ami, a domicilio.</h1>
           <h4 class="mb-3">Subheading</h4>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >Call to action</a
-          >
+          <a class="btn btn-outline-light btn-lg" href="#!" role="button">Call to action</a>
         </div>
       </div>
     </div>
@@ -50,15 +48,11 @@ export default {
 
     <!-- CATEGORY CARDS -->
 
-    <div
-      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
-    >
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3">
       <div v-for="category in categories" :key="category.id" class="col">
         <div class="card position-relative">
           <img :src="category.picture" class="card-img" alt="..." />
-          <div
-            class="card-img-overlay d-flex align-items-center justify-content-center"
-          >
+          <div class="card-img-overlay d-flex align-items-center justify-content-center">
             <h5 class="card-title text-center text-light">
               {{ category.label }}
             </h5>

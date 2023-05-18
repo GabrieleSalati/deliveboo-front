@@ -1,5 +1,5 @@
 <script>
-
+import axios from "axios";
 import AppHeader from "./components/_partials/AppHeader.vue";
 
 export default {
@@ -10,11 +10,6 @@ export default {
   },
   components: {
     AppHeader,
-    AppFooter,
-    AppMain,
-    DishForm,
-    UserForm,
-    LoginForm,
   },
 
   methods: {
