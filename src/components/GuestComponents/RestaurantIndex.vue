@@ -44,6 +44,9 @@ export default {
                     <div v-for="category in restaurant.categories">
                         <p class="card-text">{{ category.label }}</p>
                     </div>
+                    <router-link :to="{ name: 'home' }" class="nav-link">
+                        <button class="btn-main">Menu'</button>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -61,8 +64,16 @@ img {
     border: none;
 }
 
+button {
+    border: none;
+    border-radius: 50px;
+    margin-top: 1rem;
+    padding: 0.5rem 2rem;
+}
+
 .card-body {
-    background-color: aquamarine;
+    background-color: darkturquoise;
+    color: white;
 }
 
 .card-list {
