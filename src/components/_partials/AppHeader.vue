@@ -1,6 +1,13 @@
 <script>
 export default {
   name: "AppHeader",
+
+  methods: {
+    redirectToPage() {
+      window.location.href = 'login.blade.php';
+    }
+  }
+
 };
 </script>
 
@@ -28,9 +35,7 @@ export default {
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <router-link :to="{ name: 'login' }" class="nav-link">
-            Login
-          </router-link>
+          <button @click="redirectToPage">Login</button>
           <router-link :to="{ name: 'user-form' }" class="nav-link">
             Registrati
           </router-link>
