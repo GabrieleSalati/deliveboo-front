@@ -43,7 +43,7 @@ export default {
                     <div v-for="category in restaurant.categories">
                         <p class="card-text">{{ category.label }}</p>
                     </div>
-                    <!-- <img :src="project.image" class="card-img-top" alt="Picture"> -->
+                    <img :src="restaurant.picture" class="card-img-top" alt="Picture">
                 </div>
             </div>
         </div>
