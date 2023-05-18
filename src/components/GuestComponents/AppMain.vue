@@ -30,8 +30,8 @@ export default {
 
 <template>
   <!-- JUMBOTRON -->
-  <section class="jumbo container mt-5">
-    <div class="p-5 text-center bg-image">
+  <section class="jumbo mt-5">
+    <!-- <div class="p-5 container text-center bg-image">
       <div class="mask d-flex align-items-center justify-content-center">
         <div class="text-white">
           <h1 class="mb-3">I piatti che ami, a domicilio.</h1>
@@ -41,7 +41,7 @@ export default {
           >
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 
   <!-- SEARCH TAG SECTION -->
@@ -73,8 +73,10 @@ export default {
 
 <style lang="scss">
 .jumbo {
-  background-image: url(https://images.pexels.com/photos/13443799/pexels-photo-13443799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
-  background-position: center bottom;
+  background-image: url(../../assets/jumbo-.svg);
+  background-position: center top;
+  background-size: cover; /* Aggiunto per adattare l'immagine */
+
   height: 40rem;
   display: flex;
   align-items: center;

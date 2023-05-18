@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mb-5">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5">
     <div class="container">
       <button
         class="navbar-toggler"
@@ -20,7 +20,7 @@ export default {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li><img src="" alt="" /></li>
           <router-link :to="{ name: 'home' }" class="nav-link">
-            DeliveBoo
+            <span class="nav-link fw-bold fs-4">DeliveBoo</span>
           </router-link>
           <router-link :to="{ name: 'home' }" class="nav-link">
             Home
@@ -51,5 +51,10 @@ export default {
   top: 0;
   width: 100%;
   z-index: 1;
+  background-color: #f8d24c;
+}
+
+.nav-link {
+  color: #bd2222; /* Colore del testo */
 }
 </style>
