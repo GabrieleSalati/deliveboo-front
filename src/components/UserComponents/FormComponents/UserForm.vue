@@ -62,11 +62,8 @@ export default {
   <!-- <AppHeader /> -->
 
   <div class="container mb-5">
-    <form
-      class="row g-3 needs-validation"
-      novalidate
-      :class="{ 'was-validated': selectedCategories.length === 0 }"
-    >
+    <h1 class="text-center my-5 pt-3">Crea al tuo account</h1>
+    <form class="row g-3 needs-validation" novalidate>
       <div class="col-6">
         <label for="validationCustom01" class="form-label">Nome Utente</label>
         <input
@@ -146,7 +143,7 @@ export default {
 
       <div class="col-6 mb-3">
         <label for="fileform" class="form-label"
-          >Scegli l'immagine di copertina</label
+          >Scegli l'immagine di copertina, file di tipo: jpg, png, jpeg.</label
         >
         <input
           id="fileform"
@@ -155,11 +152,8 @@ export default {
           aria-label="file example"
           accept=".jpg, .png, .jpeg"
           name="coverImage"
-          required
         />
-        <div class="invalid-feedback">
-          Inserisci un file di tipo: jpg, png, jpeg.
-        </div>
+        <div class="invalid-feedback"></div>
       </div>
 
       <div class="col-4" v-for="category in categories" :key="category.id">
@@ -177,7 +171,7 @@ export default {
         </div>
       </div>
 
-      <!-- <div class="col-12">
+      <div class="col-12">
         <div
           id="invalidCheck3Feedback"
           class="invalid-feedback"
@@ -185,7 +179,7 @@ export default {
         >
           Seleziona almeno una categoria.
         </div>
-      </div> -->
+      </div>
 
       <div class="col-12">
         <button class="btn btn-primary" type="submit">Registrati</button>
@@ -195,8 +189,4 @@ export default {
   <AppFooter />
 </template>
 
-<style lang="scss" scoped>
-.needs-validation {
-  margin-top: 10vh;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -12,24 +12,23 @@ export default {
     AppHeader,
   },
 
-  methods: {
-    fetchRestaurants() {
-      axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
-        this.restaurants = response.data;
-      });
-    },
-  },
+  // methods: {
+  //   fetchRestaurants() {
+  //     axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
+  //       this.restaurants = response.data;
+  //     });
+  //   },
+  // },
 
-  created() {
-    this.fetchRestaurants();
-  },
+  // created() {
+  //   this.fetchRestaurants();
+  // },
 };
 </script>
 
 <template>
   <AppHeader />
   <router-view></router-view>
-  <AppFooter />
 </template>
 
 <style lang="scss" scoped></style>
