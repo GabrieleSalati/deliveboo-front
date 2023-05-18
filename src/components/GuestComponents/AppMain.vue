@@ -78,7 +78,7 @@ export default {
   </section>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .jumbo {
   background-image: url(../../assets/jumbo-.svg);
   background-position: center bottom;
