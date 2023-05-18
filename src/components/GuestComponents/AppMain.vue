@@ -110,7 +110,7 @@ export default {
 
 .card-img-overlay {
   opacity: 0;
-  background-color: rgba(255, 165, 0, 0.8);
+  background-color: rgba(248, 210, 76, 0.8);
   transition: opacity 0.3s ease;
 }
 
