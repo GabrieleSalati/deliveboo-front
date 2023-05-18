@@ -31,20 +31,18 @@ export default {
 <template>
   <!-- JUMBOTRON -->
   <section class="jumbo mt-5">
-    <div class="p-5 container text-center">
-      <div class="d-flex align-items-center justify-content-start">
-        <div class="text-white text-start">
-          <h1 class="header mb-1">DeliveBoo</h1>
-          <h4 class="mb-3">
-            Soddisfa la tua fame con <span class="highlight">un click!</span
-            ><br />
-            Il cibo delizioso viene direttamente
-            <span class="highlight">da te.</span>
-          </h4>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >Call to action</a
-          >
-        </div>
+    <div class="container text-center">
+      <div class="text-white text-start">
+        <h1 class="header-jumbo mb-3">DeliveBoo</h1>
+        <h4 class="mb-3">
+          Soddisfa la tua fame con <span class="highlight">un click!</span
+          ><br />
+          Il cibo delizioso viene direttamente
+          <span class="highlight">da te.</span>
+        </h4>
+        <a class="btn btn-outline-light btn-lg" href="#!" role="button"
+          >Ordina subito!</a
+        >
       </div>
     </div>
   </section>
@@ -59,8 +57,6 @@ export default {
   height: 80vh;
   display: flex;
   align-items: center;
-  justify-content: start;
-  text-align: center;
 }
 
 .jumbo .text-white {
@@ -73,7 +69,22 @@ export default {
   font-weight: 900;
 }
 
-.header {
+.header-jumbo {
   font-size: 7rem;
+}
+
+@media (max-width: 767px) {
+  .jumbo {
+    height: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .header-jumbo {
+    font-size: 4rem;
+  }
+  .highlight {
+    color: aliceblue;
+  }
 }
 </style>
