@@ -33,16 +33,46 @@ export default {
   <section class="jumbo mt-5">
     <div class="container text-center">
       <div class="text-white text-start">
-        <h1 class="header-jumbo mb-3">DeliveBoo</h1>
-        <h4 class="mb-3">
+        <h1 class="header-jumbo mb-2">DeliveBoo</h1>
+        <h4 class="mb-4">
           Soddisfa la tua fame con <span class="highlight">un click!</span
           ><br />
           Il cibo delizioso viene direttamente
           <span class="highlight">da te.</span>
         </h4>
-        <a class="btn btn-outline-light btn-lg" href="#!" role="button"
+        <a
+          class="btn btn-outline-light btn-lg custom-btn"
+          href="#!"
+          role="button"
           >Ordina subito!</a
         >
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH TAG SECTION -->
+  <section class="search-tag container my-5">
+    <h2 class="fs-1 fw-bold">I tuoi Piatti preferiti, consegnati da noi.</h2>
+    <h4>
+      Di cosa hai voglia oggi? <span class="highlight">Lasciati ispirare!</span>
+    </h4>
+
+    <!-- CATEGORY CARDS -->
+
+    <div
+      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
+    >
+      <div v-for="category in categories" :key="category.id" class="col">
+        <div class="card position-relative">
+          <img :src="category.picture" class="card-img" alt="..." />
+          <div
+            class="card-img-overlay text-light d-flex align-items-center justify-content-center"
+          >
+            <h5 class="label-category align-center text-center fs-2">
+              {{ category.label }}
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -73,6 +103,37 @@ export default {
   font-size: 7rem;
 }
 
+.card-img {
+  object-fit: cover;
+  height: 200px;
+}
+
+.card-img-overlay {
+  opacity: 0;
+  background-color: rgba(255, 165, 0, 0.8);
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card-img-overlay {
+  opacity: 1;
+}
+.label-category {
+  font-weight: 800;
+  font-size: 2rem;
+  /* Aggiungi altre proprietà di stile desiderate */
+}
+
+.btn.custom-btn {
+  font-weight: 800;
+  color: #f8d24c;
+  border-color: #f8d24c;
+}
+
+.btn.custom-btn:hover {
+  color: #fff;
+  background-color: #f8d24c;
+}
+
 @media (max-width: 767px) {
   .jumbo {
     height: auto;
@@ -84,7 +145,7 @@ export default {
     font-size: 4rem;
   }
   .highlight {
-    color: aliceblue;
+    color: inherit;
   }
 }
 </style>
