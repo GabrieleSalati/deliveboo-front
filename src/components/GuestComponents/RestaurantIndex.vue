@@ -35,7 +35,7 @@ export default {
 <template>
     <div class="container card-list">
         <div class="row justify-content-center">
-            <div class="card col-4 g-4 p-0 mx-5" v-for="restaurant in restaurants">
+            <div class="card d-flex col-4 g-4 p-0 mx-5" v-for="restaurant in restaurants">
                 <img :src="restaurant.picture" class="card-img-top" alt="Picture">
                 <div class="card-body p-4">
                     <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
@@ -44,10 +44,10 @@ export default {
                     <div v-for="category in restaurant.categories">
                         <p class="card-text">{{ category.label }}</p>
                     </div>
-                    <router-link :to="{ name: 'home' }" class="nav-link">
-                        <button class="btn-main">Menu'</button>
-                    </router-link>
                 </div>
+                <router-link :to="{ name: 'menu' }" class="nav-link">
+                    <button class="btn-main">Menu'</button>
+                </router-link>
             </div>
         </div>
     </div>
@@ -62,13 +62,14 @@ img {
 
 .card {
     border: none;
+    background-color: darkturquoise;
 }
 
 button {
     border: none;
     border-radius: 50px;
-    margin-top: 1rem;
     padding: 0.5rem 2rem;
+    margin: 1rem;
 }
 
 .card-body {
