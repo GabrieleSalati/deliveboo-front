@@ -3,7 +3,6 @@ export default {
   name: "AppHeader",
 
   methods: {
-<<<<<<< HEAD
     redirectToPage() {
       window.location.href = "http://127.0.0.1:8000/login";
     },
@@ -11,15 +10,6 @@ export default {
       const navbarCollapse = document.querySelector(".navbar-collapse");
       navbarCollapse.classList.toggle("show");
     },
-=======
-    redirectToPage(page) {
-      if (page === 'login') {
-        window.location.href = 'http://127.0.0.1:8000/login';
-      } else if (page === 'register') {
-        window.location.href = 'http://127.0.0.1:8000/register';
-      }
-    }
->>>>>>> restaurant-style
   },
 };
 </script>
