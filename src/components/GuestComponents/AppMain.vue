@@ -31,42 +31,21 @@ export default {
 <template>
   <!-- JUMBOTRON -->
   <section class="jumbo mt-5">
-    <!-- <div class="p-5 container text-center bg-image">
-      <div class="mask d-flex align-items-center justify-content-center">
-        <div class="text-white">
-          <h1 class="mb-3">I piatti che ami, a domicilio.</h1>
-          <h4 class="mb-3">Subheading</h4>
+    <div class="p-5 container text-center">
+      <div class="d-flex align-items-center justify-content-start">
+        <div class="text-white text-start">
+          <h1 class="header mb-1">DeliveBoo</h1>
+          <h4 class="mb-3">
+            Soddisfa la tua fame con <span class="highlight">un click!</span
+            ><br />
+            Il cibo delizioso viene direttamente
+            <span class="highlight">da te.</span>
+          </h4>
           <a class="btn btn-outline-light btn-lg" href="#!" role="button"
             >Call to action</a
           >
         </div>
       </div>
-    </div> -->
-  </section>
-
-  <!-- SEARCH TAG SECTION -->
-  <section class="search-tag container my-5">
-    <h2>I tuoi Piatti preferiti, consegnati da noi</h2>
-
-    <!-- CATEGORY CARDS -->
-
-    <div
-      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
-    >
-      <div v-for="category in categories" :key="category.id" class="col">
-        <div class="card position-relative">
-          <img :src="category.picture" class="card-img" alt="..." />
-          <div
-            class="card-img-overlay d-flex align-items-center justify-content-center"
-          >
-            <h5 class="card-title text-center text-light">
-              {{ category.label }}
-            </h5>
-          </div>
-        </div>
-      </div>
-
-      <!-- Colonna vuota per centrare l'ultima card -->
     </div>
   </section>
 </template>
@@ -74,10 +53,10 @@ export default {
 <style lang="scss">
 .jumbo {
   background-image: url(../../assets/jumbo-.svg);
-  background-position: center top;
-  background-size: cover; /* Aggiunto per adattare l'immagine */
-
-  height: 40rem;
+  background-position: center bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -89,22 +68,12 @@ export default {
   z-index: 1;
 }
 
-.card-img {
-  object-fit: cover;
-  height: 200px;
+.highlight {
+  color: #f8d24c;
+  font-weight: 900;
 }
 
-.card-img-overlay {
-  opacity: 0;
-  background-color: rgba(255, 165, 0, 0.8);
-  transition: opacity 0.3s ease;
-}
-
-.card:hover .card-img-overlay {
-  opacity: 1;
-}
-
-.card-title {
-  font-size: 18px;
+.header {
+  font-size: 7rem;
 }
 </style>
