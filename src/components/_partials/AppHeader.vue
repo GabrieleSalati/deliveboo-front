@@ -33,12 +33,6 @@ export default {
         </ul>
         <ul class="navbar-nav ml-auto">
           <button @click="redirectToPage">Login</button>
-          <router-link :to="{ name: 'user-form' }" class="nav-link">
-            Registrati
-          </router-link>
-          <router-link :to="{ name: 'dish-form' }" class="nav-link">
-            Crea Piatto
-          </router-link>
         </ul>
       </div>
     </div>
