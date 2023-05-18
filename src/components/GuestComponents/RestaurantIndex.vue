@@ -42,7 +42,7 @@ export default {
                     <p class="card-text">{{ restaurant.p_iva }}</p>
                     <p class="card-text">{{ restaurant.address }}</p>
                     <div v-for="category in restaurant.categories">
-                        <p class="card-text">{{ category.label }}</p>
+                        <p class="card-text categories">{{ category.label }}</p>
                     </div>
                 </div>
                 <router-link :to="{ name: 'menu' }" class="nav-link">
@@ -57,7 +57,7 @@ export default {
 <style lang="scss" scoped>
 img {
     width: 100%;
-    max-height: 200px;
+    max-height: 180px;
 }
 
 .card {

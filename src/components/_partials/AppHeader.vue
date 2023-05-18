@@ -3,11 +3,14 @@ export default {
   name: "AppHeader",
 
   methods: {
-    redirectToPage() {
-      window.location.href = 'http://127.0.0.1:8000/login';
+    redirectToPage(page) {
+      if (page === 'login') {
+        window.location.href = 'http://127.0.0.1:8000/login';
+      } else if (page === 'register') {
+        window.location.href = 'http://127.0.0.1:8000/register';
+      }
     }
-  }
-
+  },
 };
 </script>
 
@@ -32,7 +35,10 @@ export default {
           </router-link>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <button @click="redirectToPage">Login</button>
+          <button @click="redirectToPage('login')">Login</button>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <button @click="redirectToPage('register')">Registrati</button>
         </ul>
       </div>
     </div>
