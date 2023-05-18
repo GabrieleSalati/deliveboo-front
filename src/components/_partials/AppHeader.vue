@@ -52,4 +52,10 @@ export default {
   width: 100%;
   z-index: 1;
 }
+
+button {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem 2rem;
+}
 </style>
