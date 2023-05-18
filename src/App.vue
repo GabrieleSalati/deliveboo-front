@@ -1,11 +1,6 @@
 <script>
-import HomePage from "../src/components/GuestComponents/HomePage.vue";
+import axios from "axios";
 import AppHeader from "./components/_partials/AppHeader.vue";
-import AppFooter from "./components/_partials/AppFooter.vue";
-import AppMain from "./components/GuestComponents/AppMain.vue";
-import DishForm from "./components/UserComponents/FormComponents/DishForm.vue";
-import UserForm from "./components/UserComponents/FormComponents/UserForm.vue";
-import LoginForm from "./components/UserComponents/FormComponents/LoginForm.vue";
 
 export default {
   data() {
@@ -15,11 +10,6 @@ export default {
   },
   components: {
     AppHeader,
-    AppFooter,
-    AppMain,
-    DishForm,
-    UserForm,
-    LoginForm,
   },
 
   // methods: {
