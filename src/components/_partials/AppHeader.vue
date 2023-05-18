@@ -6,6 +6,10 @@ export default {
     redirectToPage() {
       window.location.href = "http://127.0.0.1:8000/login";
     },
+    toggleNavbar() {
+      const navbarCollapse = document.querySelector(".navbar-collapse");
+      navbarCollapse.classList.toggle("show");
+    },
   },
 };
 </script>
@@ -16,9 +20,10 @@ export default {
       <button
         class="navbar-toggler"
         type="button"
-        data-mdb-toggle="collapse"
+        data-bs-toggle="collapse"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="toggleNavbar"
       >
         <i class="fas fa-bars"></i>
       </button>
@@ -26,23 +31,23 @@ export default {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <router-link
             :to="{ name: 'home' }"
-            class="navbar-nav nav-link text-danger fs-6 me-2 fw-bold"
+            class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
           >
             DeliveBoo
           </router-link>
           <router-link
             :to="{ name: 'home' }"
-            class="navbar-nav nav-link text-danger fs-6 me-2"
+            class="navbar-nav nav-link text-light fs-5 me-2"
           >
             Home
           </router-link>
           <router-link
             :to="{ name: 'restaurants' }"
-            class="navbar-nav nav-link text-danger fs-6 me-2"
+            class="navbar-nav nav-link text-light fs-5 me-2"
           >
             Ristoranti
           </router-link>
-          <button @click="redirectToPage" class="nav-link text-danger fs-6">
+          <button @click="redirectToPage" class="nav-link text-light fs-5">
             Sei un ristoratore?
           </button>
         </ul>

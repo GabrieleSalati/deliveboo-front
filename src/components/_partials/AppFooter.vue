@@ -81,10 +81,34 @@ export default {
           >
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">I nostri Contatti</h6>
-            <p><a href="#!" class="text-reset">Thomas Basadonne</a></p>
-            <p><a href="#!" class="text-reset">Sofia Curreri</a></p>
-            <p><a href="#!" class="text-reset">Hadolph Mercogliano</a></p>
-            <p><a href="#!" class="text-reset">Gabriele Salati</a></p>
+            <p>
+              <a
+                href="https://www.linkedin.com/in/thomasbasadonne"
+                class="text-reset"
+                >Thomas Basadonne</a
+              >
+            </p>
+            <p>
+              <a
+                href="https://www.linkedin.com/in/sofia-curreri-38b281276"
+                class="text-reset"
+                >Sofia Curreri</a
+              >
+            </p>
+            <p>
+              <a
+                href="https://www.linkedin.com/in/hadolph-mercogliano-00016b275/"
+                class="text-reset"
+                >Hadolph Mercogliano</a
+              >
+            </p>
+            <p>
+              <a
+                href="https:/www.linkedin.com/in/gabriele-salati-910091275"
+                class="text-reset"
+                >Gabriele Salati</a
+              >
+            </p>
           </div>
           <!-- Grid column -->
         </div>
