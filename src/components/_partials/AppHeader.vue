@@ -57,5 +57,6 @@ button {
   border: none;
   border-radius: 50px;
   padding: 0.5rem 2rem;
+  margin: 0 0.5rem;
 }
 </style>
