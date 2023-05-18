@@ -30,7 +30,7 @@ export default {
 
 <template>
   <!-- JUMBOTRON -->
-  <section class="jumbo mt-5">
+  <section class="jumbo">
     <div class="container text-center">
       <div class="text-white text-start">
         <h1 class="header-jumbo mb-2">DeliveBoo</h1>

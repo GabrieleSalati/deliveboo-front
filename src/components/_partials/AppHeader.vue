@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <button
         class="navbar-toggler"
@@ -47,14 +47,16 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1;
   background-color: #f8d24c;
 }
 
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
 .nav-link {
-  color: #bd2222; /* Colore del testo */
+  color: #bd2222;
+  margin-right: 1rem;
 }
 </style>
