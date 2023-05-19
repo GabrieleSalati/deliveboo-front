@@ -4,8 +4,14 @@ import axios from "axios";
 export default {
   name: "restaurant-card",
 
+  data() {
+    return {
+      restaurant: null
+    };
+  },
+
   created() {
-    console.log(this.$route.params.id);
+    axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => { this.restaurant = response.data });
   },
 };
 </script>
@@ -14,10 +20,10 @@ export default {
   <div>
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title"></h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ restaurant.address }}</h6>
+        <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">{{ restaurant.address }}</h6>
         <p class="card-text">{{ restaurant.description }}</p>
-        <p class="card-text">P.IVA: {{ restaurant.p_iva }}</p>
+        <p class="card-text">P.IVA: {{ restaurant.p_iva }}</p> -->
       </div>
     </div>
   </div>
@@ -55,6 +61,7 @@ export default {
   height: 30vh;
   width: auto;
 }
+
 .list-group-item .list-group-item-action .text-center {
   background-color: #bd2222;
 }
