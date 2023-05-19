@@ -31,4 +31,8 @@ export default {
   <router-view></router-view>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+body {
+  font-family: 'Josefin Sans', sans-serif;
+}
+</style>

@@ -35,17 +35,11 @@ export default {
       <div class="text-white text-start">
         <h1 class="header-jumbo mb-2">DeliveBoo</h1>
         <h4 class="mb-4">
-          Soddisfa la tua fame con <span class="highlight">un click!</span
-          ><br />
+          Soddisfa la tua fame con <span class="highlight">un click!</span><br />
           Il cibo delizioso viene direttamente
           <span class="highlight">da te.</span>
         </h4>
-        <a
-          class="btn btn-outline-light btn-lg custom-btn"
-          href="#!"
-          role="button"
-          >Ordina subito!</a
-        >
+        <a class="btn btn-outline-light btn-lg custom-btn" href="#!" role="button">Ordina subito!</a>
       </div>
     </div>
   </section>
@@ -59,15 +53,11 @@ export default {
 
     <!-- CATEGORY CARDS -->
 
-    <div
-      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
-    >
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3">
       <div v-for="category in categories" :key="category.id" class="col">
         <div class="card position-relative">
           <img :src="category.picture" class="card-img" alt="..." />
-          <div
-            class="card-img-overlay text-light d-flex align-items-center justify-content-center"
-          >
+          <div class="card-img-overlay text-light d-flex align-items-center justify-content-center">
             <h5 class="label-category align-center text-center fs-2">
               {{ category.label }}
             </h5>
@@ -117,6 +107,7 @@ export default {
 .card:hover .card-img-overlay {
   opacity: 1;
 }
+
 .label-category {
   font-weight: 800;
   font-size: 2rem;
@@ -143,6 +134,7 @@ export default {
   .header-jumbo {
     font-size: 4rem;
   }
+
   .highlight {
     color: inherit;
   }

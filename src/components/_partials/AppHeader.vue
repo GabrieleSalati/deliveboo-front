@@ -44,6 +44,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+body {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 .navbar {
   background-color: #f8d24c;
   height: 4rem;
