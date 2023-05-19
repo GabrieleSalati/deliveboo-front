@@ -42,14 +42,22 @@ export default {
               :key="dish.id"
               class="list-group-item list-group-item-action d-flex justify-content-center"
             >
-              <img :src="dish.picture" class="card-img-top img-fluid" alt="" />
-              <div class="text-start px-4 py-3">
-                <h4>{{ dish.name }}</h4>
-                <p>Descrizione: {{ dish.description }}</p>
-                <p>Prezzo: {{ dish.price }}</p>
-                <div>
-                  <i class="bi bi-cart-plus"></i>
-                  <i class="bi bi-cart-dash"></i>
+              <div class="col">
+                <img
+                  :src="dish.picture"
+                  class="card-img-top img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="col">
+                <div class="text-start px-4 py-3">
+                  <h4>{{ dish.name }}</h4>
+                  <p>Descrizione: {{ dish.description }}</p>
+                  <p>Prezzo: {{ dish.price }}</p>
+                  <div>
+                    <i class="bi bi-cart-plus"></i>
+                    <i class="bi bi-cart-dash"></i>
+                  </div>
                 </div>
               </div>
             </div>
