@@ -8,9 +8,11 @@ export default {
     };
   },
 
-  // components: {
-  //   MyComponent,
-  // },
+  methods: {
+    redirectToPage() {
+      window.location.href = "http://127.0.0.1:8000/login";
+    },
+  }
 };
 </script>
 
@@ -23,9 +25,7 @@ export default {
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div
-            class="block col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 pt-3 rounded"
-          >
+          <div class="block col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 pt-3 rounded">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">DeliveBoo</h6>
             <p>
@@ -37,9 +37,7 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div
-            class="block col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded"
-          >
+          <div class="block col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">Menu Rapido</h6>
             <p>
@@ -48,9 +46,9 @@ export default {
             <p>
               <a href="#!" class="text-reset">Ristoranti</a>
             </p>
-            <p>
-              <a href="#!" class="text-reset">Lavora con noi</a>
-            </p>
+            <p><button @click="redirectToPage" class="nav-link text-light fs-5">
+                Sei un ristoratore?
+              </button></p>
             <p>
               <a href="#!" class="text-reset">Chi Siamo</a>
             </p>
@@ -58,9 +56,7 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div
-            class="block col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded"
-          >
+          <div class="block col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">Note Legali</h6>
             <p>
@@ -76,38 +72,21 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div
-            class="block col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 h-100 pt-3 rounded"
-          >
+          <div class="block col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 h-100 pt-3 rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">I nostri Contatti</h6>
             <p>
-              <a
-                href="https://www.linkedin.com/in/thomasbasadonne"
-                class="text-reset"
-                >Thomas Basadonne</a
-              >
+              <a href="https://www.linkedin.com/in/thomasbasadonne" class="text-reset">Thomas Basadonne</a>
             </p>
             <p>
-              <a
-                href="https://www.linkedin.com/in/sofia-curreri-38b281276"
-                class="text-reset"
-                >Sofia Curreri</a
-              >
+              <a href="https://www.linkedin.com/in/sofia-curreri-38b281276" class="text-reset">Sofia Curreri</a>
             </p>
             <p>
-              <a
-                href="https://www.linkedin.com/in/hadolph-mercogliano-00016b275/"
-                class="text-reset"
-                >Hadolph Mercogliano</a
-              >
+              <a href="https://www.linkedin.com/in/hadolph-mercogliano-00016b275/" class="text-reset">Hadolph
+                Mercogliano</a>
             </p>
             <p>
-              <a
-                href="https:/www.linkedin.com/in/gabriele-salati-910091275"
-                class="text-reset"
-                >Gabriele Salati</a
-              >
+              <a href="https:/www.linkedin.com/in/gabriele-salati-910091275" class="text-reset">Gabriele Salati</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -131,7 +110,12 @@ export default {
 footer {
   background-color: #2e3333;
 }
+
 .block {
   background-color: #484b4b;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
