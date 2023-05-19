@@ -2,10 +2,10 @@
 import axios from "axios";
 
 export default {
-  data() {
-    return {
-      title: "Restaurant Show",
-    };
+  name: "restaurant-card",
+
+  created() {
+    console.log(this.$route.params.id);
   },
 };
 </script>
