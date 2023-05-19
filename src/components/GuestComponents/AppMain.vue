@@ -40,12 +40,12 @@ export default {
           Il cibo delizioso viene direttamente
           <span class="highlight">da te.</span>
         </h4>
-        <a
+        <router-link
+          :to="{ name: 'restaurants' }"
           class="btn btn-outline-light btn-lg custom-btn"
-          href="#!"
-          role="button"
-          >Ordina subito!</a
         >
+          Ordina subito!
+        </router-link>
       </div>
     </div>
   </section>
