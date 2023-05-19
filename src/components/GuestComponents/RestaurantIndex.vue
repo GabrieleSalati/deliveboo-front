@@ -10,13 +10,30 @@ export default {
     };
   },
 
-  // components: {
-  // },
-
+  components: {
+    AppFooter,
+  },
+  computed: {
+    filteredRestaurants() {
+      if (this.selectedCategories.length > 0) {
+        return this.restaurants.filter((restaurant) => {
+          for (const category of restaurant.categories) {
+            if (this.selectedCategories.includes(category.label)) {
+              return true;
+            }
+          }
+          return false;
+        });
+      } else {
+        return this.restaurants;
+      }
+    },
+  },
   methods: {
     fetchRestaurants() {
       axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
         this.restaurants = response.data;
+        console.log(this.restaurants);
       });
     },
     fetchCategories() {
@@ -114,7 +131,7 @@ export default {
     <div class="row justify-content-center">
       <div
         class="col-lg-4 col-md-6 col-sm-12 g-5"
-        v-for="restaurant in restaurants"
+        v-for="restaurant in filteredRestaurants"
       >
         <div class="card h-100 border-0 shadow-lg">
           <img
