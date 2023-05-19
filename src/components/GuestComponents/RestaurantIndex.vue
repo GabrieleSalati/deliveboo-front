@@ -1,4 +1,5 @@
 <script>
+import AppFooter from "../_partials/AppFooter.vue";
 import axios from "axios";
 
 export default {
@@ -80,65 +81,35 @@ export default {
       <h4 class="fs-2 ms-3 mb-2" style="color: #bd2222">
         Scegli cosa mangiare:
       </h4>
-      <div
-        class="form-check form-check-inline my-2 mx-0"
-        v-for="category in categories"
-      >
-        <input
-          class="btn-check"
-          type="checkbox"
-          :value="category.label"
-          v-model="selectedCategories"
-          autocomplete="off"
-        />
+      <div class="form-check form-check-inline my-2 mx-0" v-for="category in categories">
+        <input class="btn-check" type="checkbox" :value="category.label" v-model="selectedCategories"
+          autocomplete="off" />
         <!-- forse  :for="category.id qui sotto -->
 
-        <button
-          type="button"
-          class="btn custom-btn"
-          :class="{
-            customActive:
-              selectedCategories.includes(category.label) &&
-              checkboxChecked(category.label),
-          }"
-          data-bs-toggle="button"
-          :id="'toggleBtn-' + category.id"
-          @click="toggleCheckbox(category.label)"
-        >
+        <button type="button" class="btn custom-btn" :class="{
+          customActive:
+            selectedCategories.includes(category.label) &&
+            checkboxChecked(category.label),
+        }" data-bs-toggle="button" :id="'toggleBtn-' + category.id" @click="toggleCheckbox(category.label)">
           {{ category.label }}
         </button>
       </div>
     </div>
   </section>
   <!-- WAVE SVG -->
-  <svg
-    class="wave"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1440 100"
-    preserveAspectRatio="none"
-  >
-    <path
-      class="wavePath-haxJK1 animationPaused-2hZ4IO"
+  <svg class="wave" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
       d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
-      fill="currentColor"
-    ></path>
+      fill="currentColor"></path>
   </svg>
 
   <!-- CARDS GRID -->
 
   <div class="container card-group pb-5">
     <div class="row justify-content-center">
-      <div
-        class="col-lg-4 col-md-6 col-sm-12 g-5"
-        v-for="restaurant in filteredRestaurants"
-      >
+      <div class="col-lg-4 col-md-6 col-sm-12 g-5" v-for="restaurant in filteredRestaurants">
         <div class="card h-100 border-0 shadow-lg">
-          <img
-            :src="restaurant.picture"
-            class="card-img-top restaurant-picture img-fluid"
-            alt="Picture"
-          />
+          <img :src="restaurant.picture" class="card-img-top restaurant-picture img-fluid" alt="Picture" />
           <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title text-center fw-bold mb-1">
               {{ restaurant.restaurant_name }}
@@ -149,9 +120,7 @@ export default {
             </h6>
 
             <div class="row justify-content-center">
-              <div
-                class="d-flex align-items-center justify-content-center flex-wrap"
-              >
+              <div class="d-flex align-items-center justify-content-center flex-wrap">
                 <p class="m-0 me-2">Cosa si mangia?</p>
                 <div v-for="category in restaurant.categories" class="">
                   <span class="card-text badge rounded-pill text-bg-danger">{{
@@ -161,15 +130,12 @@ export default {
               </div>
             </div>
 
-            <router-link
-              :to="{
-                name: 'restaurant-card',
-                params: {
-                  id: restaurant.id,
-                },
-              }"
-              class="nav-link d-flex justify-content-center mt-1"
-            >
+            <router-link :to="{
+              name: 'restaurant-card',
+              params: {
+                id: restaurant.id,
+              },
+            }" class="nav-link d-flex justify-content-center mt-1">
               <button class="btn custom-btn">Vai al Menu</button>
             </router-link>
           </div>
