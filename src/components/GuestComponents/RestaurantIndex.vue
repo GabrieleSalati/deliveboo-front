@@ -185,7 +185,7 @@ export default {
   background-color: #ffffff;
   height: auto;
   border-radius: 50px;
-  padding: 4rem;
+  padding: 2rem;
 }
 .restaurant-picture {
   height: 45%;
