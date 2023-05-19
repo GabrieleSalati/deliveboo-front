@@ -24,7 +24,7 @@ export default {
 <template>
   <div class="container my-5">
     <div class="card mb-3">
-      <img :src="restaurant.picture" class="card-img-top img-fluid" alt="" />
+      <img :src="restaurant.picture" class="restaurant-img img-fluid" alt="" />
       <div class="card-body">
         <div class="info-restaurant text-center">
           <h5 class="card-title fs-1">{{ restaurant.restaurant_name }}</h5>
@@ -52,8 +52,8 @@ export default {
               <div class="col">
                 <div class="text-start px-4 py-3">
                   <h4>{{ dish.name }}</h4>
-                  <p>Descrizione: {{ dish.description }}</p>
-                  <p>Prezzo: {{ dish.price }}</p>
+                  <p>{{ dish.description }}</p>
+                  <p class="fw-bold">Prezzo: {{ dish.price }}€</p>
                   <div>
                     <i class="bi bi-cart-plus"></i>
                     <i class="bi bi-cart-dash"></i>
@@ -75,17 +75,6 @@ export default {
 </template>
 
 <style>
-@media (max-width: 576px) {
-  .card {
-    max-width: 100%;
-  }
-}
-
-.card-img-top {
-  height: 30vh;
-  width: auto;
-}
-
 .list-group-item .list-group-item-action .text-center {
   background-color: #bd2222;
 }
