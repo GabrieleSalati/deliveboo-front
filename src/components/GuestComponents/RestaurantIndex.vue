@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-import AppFooter from "../_partials/AppFooter.vue";
 
 export default {
   data() {
@@ -11,9 +10,8 @@ export default {
     };
   },
 
-  components: {
-    AppFooter,
-  },
+  // components: {
+  // },
 
   methods: {
     fetchRestaurants() {
@@ -162,7 +160,9 @@ export default {
             </div>
 
             <router-link
-              :to="{ name: 'menu' }"
+              :to="{
+                name: 'restaurant-card',
+              }"
               class="nav-link d-flex justify-content-center mt-1"
             >
               <button class="btn custom-btn">Vai al Menu</button>
@@ -172,8 +172,6 @@ export default {
       </div>
     </div>
   </div>
-
-  <AppFooter />
 </template>
 
 <style lang="scss" scoped>
