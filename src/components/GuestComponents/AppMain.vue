@@ -32,9 +32,9 @@ export default {
   <!-- JUMBOTRON -->
   <section class="jumbo">
     <div class="container text-center">
-      <div class="text-white text-start">
+      <div class="text-white text-start ps-5">
         <h1 class="header-jumbo mb-2">DeliveBoo</h1>
-        <h4 class="mb-4">
+        <h4 class="header-txt mb-4">
           Soddisfa la tua fame con <span class="highlight">un click!</span
           ><br />
           Il cibo delizioso viene direttamente
@@ -82,6 +82,7 @@ export default {
 .jumbo {
   background-image: url(../../assets/jumbo-.svg);
   background-position: center bottom;
+  object-fit: cover;
   background-size: cover;
   background-repeat: no-repeat;
   height: 80vh;
@@ -141,7 +142,7 @@ export default {
   }
 
   .header-jumbo {
-    font-size: 4rem;
+    font-size: 3rem;
   }
   .highlight {
     color: inherit;
