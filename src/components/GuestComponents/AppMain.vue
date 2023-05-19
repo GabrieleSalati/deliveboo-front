@@ -120,7 +120,6 @@ export default {
 .label-category {
   font-weight: 800;
   font-size: 2rem;
-  /* Aggiungi altre proprietà di stile desiderate */
 }
 
 .btn.custom-btn {
