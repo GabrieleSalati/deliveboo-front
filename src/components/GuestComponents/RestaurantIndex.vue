@@ -62,12 +62,6 @@ export default {
   created() {
     this.fetchRestaurants();
     this.fetchCategories();
-    const category = this.$route.query.category;
-
-    // Verifica se il parametro di query è presente e aggiungilo all'array "selectedCategories"
-    if (category) {
-      this.selectedCategories.push(category.label);
-    }
   },
 };
 </script>
