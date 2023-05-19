@@ -41,12 +41,16 @@ export default {
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">Menu Rapido</h6>
             <p>
-              <a href="#!" class="text-reset">HomePage</a>
+              <router-link :to="{ name: 'home' }" class="nav-link text-light">
+                Home
+              </router-link>
             </p>
             <p>
-              <a href="#!" class="text-reset">Ristoranti</a>
+              <router-link :to="{ name: 'restaurants' }" class="nav-link text-light">
+                Ristoranti
+              </router-link>
             </p>
-            <p><button @click="redirectToPage" class="nav-link text-light fs-5">
+            <p><button @click="redirectToPage" class="nav-link text-light">
                 Sei un ristoratore?
               </button></p>
             <p>
