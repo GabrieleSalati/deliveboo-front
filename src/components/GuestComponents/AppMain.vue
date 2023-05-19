@@ -35,15 +35,11 @@ export default {
       <div class="text-white text-start ps-5">
         <h1 class="header-jumbo mb-2">DeliveBoo</h1>
         <h4 class="header-txt mb-4">
-          Soddisfa la tua fame con <span class="highlight">un click!</span
-          ><br />
+          Soddisfa la tua fame con <span class="highlight">un click!</span><br />
           Il cibo delizioso viene direttamente
           <span class="highlight">da te.</span>
         </h4>
-        <router-link
-          :to="{ name: 'restaurants' }"
-          class="btn btn-outline-light btn-lg custom-btn"
-        >
+        <router-link :to="{ name: 'restaurants' }" class="btn btn-outline-light btn-lg custom-btn">
           Ordina subito!
         </router-link>
       </div>
@@ -59,19 +55,19 @@ export default {
 
     <!-- CATEGORY CARDS -->
 
-    <div
-      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
-    >
-      <div v-for="category in categories" :key="category.id" class="col">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3">
+      <div v-for="category in  categories " :key="category.id" class="col">
         <div class="card position-relative">
-          <img :src="category.picture" class="card-img" alt="..." />
-          <div
-            class="card-img-overlay text-light d-flex align-items-center justify-content-center"
-          >
-            <h5 class="label-category align-center text-center fs-2">
-              {{ category.label }}
-            </h5>
-          </div>
+          <router-link :to="{
+            name: 'restaurants'
+          }">
+            <img :src="category.picture" class="card-img" alt="..." />
+            <div class="card-img-overlay text-light d-flex align-items-center justify-content-center">
+              <h5 class="label-category align-center text-center fs-2">
+                {{ category.label }}
+              </h5>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -118,6 +114,7 @@ export default {
 .card:hover .card-img-overlay {
   opacity: 1;
 }
+
 .label-category {
   font-weight: 800;
   font-size: 2rem;
@@ -144,6 +141,7 @@ export default {
   .header-jumbo {
     font-size: 3rem;
   }
+
   .highlight {
     color: inherit;
   }
