@@ -61,7 +61,7 @@ export default {
       <h4>A casa tua a tempo <span style="color: #f8d24c"> di click!</span></h4>
     </div>
 
-    <div class="bg-category container mb-5 p-3">
+    <div class="bg-category container mb-5 p-2 shadow-lg">
       <h4 class="fs-2 ms-3 mb-2" style="color: #bd2222">
         Scegli cosa mangiare:
       </h4>
