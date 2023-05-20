@@ -5,10 +5,6 @@ import axios from "axios";
 
 export default {
 
-  mounted() {
-    this.selectedCategories.push(this.$route.params.id);
-  },
-
   data() {
     return {
       restaurants: [],
@@ -73,6 +69,9 @@ export default {
   created() {
     this.fetchRestaurants();
     this.fetchCategories();
+    if (this.$route.params.label) {
+      this.selectedCategories.push(this.$route.params.label);
+    }
   },
 };
 </script>

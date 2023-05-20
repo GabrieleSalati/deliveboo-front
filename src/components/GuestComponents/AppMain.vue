@@ -61,7 +61,7 @@ export default {
         <div class="card position-relative">
           <router-link :to="{
             name: 'restaurants', params: {
-              id: category.id
+              label: category.label
             }
           }">
             <img :src="category.picture" class="card-img" alt="..." />
