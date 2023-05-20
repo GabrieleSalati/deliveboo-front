@@ -2,12 +2,19 @@
 import AppFooter from "../_partials/AppFooter.vue";
 import axios from "axios";
 
+
 export default {
+
+  mounted() {
+    this.selectedCategories.push(this.$route.params.id);
+  },
+
   data() {
     return {
       restaurants: [],
       categories: [],
       selectedCategories: [],
+
     };
   },
 
@@ -60,6 +67,8 @@ export default {
       }
     },
   },
+
+
 
   created() {
     this.fetchRestaurants();
