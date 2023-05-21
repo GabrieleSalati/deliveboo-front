@@ -58,18 +58,20 @@ export default {
         <div class="info-restaurant text-center">
           <h5 class="card-title fs-1">{{ restaurant.restaurant_name }}</h5>
           <p class="card-text">
-            {{ restaurant.address }}
+            <i class="bi bi-geo-alt me-1"></i>{{ restaurant.address }}
           </p>
           <p>{{ restaurant.category }}</p>
         </div>
 
         <div class="menu">
-          <div class="list-group my-5" id="myList" role="tablist">
-            <li class="list-group-item text-center fw-bold fs-2">Menu</li>
+          <div class="list-group d-flex my-5" id="myList" role="tablist">
+            <div class="menu-title text-center fw-bold fs-2 my-4 rounded-top">
+              Menu
+            </div>
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
-              class="list-group-item row list-group-item-action d-flex justify-content-start"
+              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center"
             >
               <!-- MODIFICA FLEX BREAK POINT -->
               <div class="col-3">
@@ -113,6 +115,10 @@ export default {
 <style>
 .restaurant-img {
   max-width: 600px;
+}
+.menu-title {
+  color: #bd2222;
+  border: 1px solid #bd2222;
 }
 .dish-picture {
   max-width: 300px;
