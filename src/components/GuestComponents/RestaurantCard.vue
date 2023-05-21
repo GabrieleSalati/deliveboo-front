@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       restaurant: null,
+      cartItems: [],
     };
   },
 
@@ -18,13 +19,41 @@ export default {
         console.log(this.restaurant);
       });
   },
+  methods: {
+    incrementCounter(dishId) {
+      const cartItem = this.cartItems.find((item) => item.dishId === dishId);
+      if (cartItem) {
+        cartItem.quantity++;
+      } else {
+        this.cartItems.push({
+          dishId: dishId,
+          quantity: 1,
+        });
+      }
+    },
+    decrementCounter(dishId) {
+      const cartItem = this.cartItems.find((item) => item.dishId === dishId);
+      if (cartItem && cartItem.quantity > 0) {
+        cartItem.quantity--;
+      }
+    },
+    getCartItemQuantity(dishId) {
+      const cartItem = this.cartItems.find((item) => item.dishId === dishId);
+      return cartItem ? cartItem.quantity : 0;
+    },
+  },
 };
 </script>
 
 <template>
   <div class="container my-5">
-    <div class="card mb-3">
-      <img :src="restaurant.picture" class="restaurant-img img-fluid" alt="" />
+    <div class="card mb-3 shadow-lg">
+      <div class="container d-flex justify-content-center">
+        <div class="restaurant-img mt-3">
+          <img :src="restaurant.picture" class="img-fluid rounded" alt="" />
+        </div>
+      </div>
+
       <div class="card-body">
         <div class="info-restaurant text-center">
           <h5 class="card-title fs-1">{{ restaurant.restaurant_name }}</h5>
@@ -40,25 +69,32 @@ export default {
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
-              class="list-group-item list-group-item-action d-flex justify-content-center"
+              class="list-group-item row list-group-item-action d-flex justify-content-start"
             >
-              <div class="col">
-                <img
-                  :src="dish.picture"
-                  class="card-img-top img-fluid"
-                  alt=""
-                />
+              <!-- MODIFICA FLEX BREAK POINT -->
+              <div class="col-3">
+                <img :src="dish.picture" class="dish-picture" alt="piatto" />
               </div>
-              <div class="col">
+              <div class="col-8">
                 <div class="text-start px-4 py-3">
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
                   <p class="fw-bold">Prezzo: {{ dish.price }}€</p>
-                  <div>
-                    <i class="bi bi-cart-plus"></i>
-                    <i class="bi bi-cart-dash"></i>
-                  </div>
                 </div>
+              </div>
+              <div
+                class="col-1 d-flex align-items-center justify-content-evenly fs-4"
+                :key="dish.id"
+              >
+                <i
+                  class="bi bi-cart-plus"
+                  @click="incrementCounter(dish.id)"
+                ></i>
+                {{ getCartItemQuantity(dish.id) }}
+                <i
+                  class="bi bi-cart-dash"
+                  @click="decrementCounter(dish.id)"
+                ></i>
               </div>
             </div>
           </div>
@@ -75,7 +111,10 @@ export default {
 </template>
 
 <style>
-.list-group-item .list-group-item-action .text-center {
-  background-color: #bd2222;
+.restaurant-img {
+  max-width: 600px;
+}
+.dish-picture {
+  max-width: 300px;
 }
 </style>
