@@ -25,7 +25,7 @@ export default {
         <!-- Grid row -->
         <div class="row mt-3">
           <!-- Grid column -->
-          <div class="block col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 pt-3 rounded">
+          <div class="block col-md-3 col-lg-4 col-xl-3 mx-1 mb-4 pt-3 rounded">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">DeliveBoo</h6>
             <p>
@@ -37,7 +37,7 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="block col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded ">
+          <div class="block col-md-3 col-lg-3 col-xl-2 mx-1 mb-4 pt-3 rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4 text-center">Menu Rapido</h6>
             <p class="text-center">
@@ -62,7 +62,7 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="block col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded">
+          <div class="block col-md-2 col-lg-3 col-xl-2 mx-1 mb-4 pt-3 rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4 text-center">Note Legali</h6>
             <p>
@@ -78,7 +78,7 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="block col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 h-100 pt-3 rounded">
+          <div class="block col-md-3 col-lg-4 col-xl-3 mx-1  mb-4  pt-3 rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">I nostri Contatti</h6>
             <p>
