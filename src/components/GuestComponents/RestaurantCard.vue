@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       restaurant: null,
+      cartItems: [],
     };
   },
   components: {
@@ -18,42 +19,72 @@ export default {
       console.log(this.restaurant);
     });
   },
+  methods: {
+    incrementCounter(dishId) {
+      const cartItem = this.cartItems.find((item) => item.dishId === dishId);
+      if (cartItem) {
+        cartItem.quantity++;
+      } else {
+        this.cartItems.push({
+          dishId: dishId,
+          quantity: 1,
+        });
+      }
+    },
+    decrementCounter(dishId) {
+      const cartItem = this.cartItems.find((item) => item.dishId === dishId);
+      if (cartItem && cartItem.quantity > 0) {
+        cartItem.quantity--;
+      }
+    },
+    getCartItemQuantity(dishId) {
+      const cartItem = this.cartItems.find((item) => item.dishId === dishId);
+      return cartItem ? cartItem.quantity : 0;
+    },
+  },
 };
 </script>
 
 <template>
   <div class="container my-5">
-    <div class="card mb-3">
-      <img :src="restaurant.picture" class="restaurant-img img-fluid" alt="" />
+    <div class="card mb-3 shadow-lg">
+      <div class="container d-flex justify-content-center">
+        <div class="restaurant-img mt-3">
+          <img :src="restaurant.picture" class="img-fluid rounded" alt="" />
+        </div>
+      </div>
+
       <div class="card-body">
         <div class="info-restaurant text-center">
           <h5 class="card-title fs-1">{{ restaurant.restaurant_name }}</h5>
-          <p class="card-text">
-            {{ restaurant.address }}
-          </p>
+          <p class="card-text"><i class="bi bi-geo-alt me-1"></i>{{ restaurant.address }}</p>
           <p>{{ restaurant.category }}</p>
         </div>
 
         <div class="menu">
-          <div class="list-group my-5" id="myList" role="tablist">
-            <li class="list-group-item text-center fw-bold fs-2">Menu</li>
+          <div class="list-group d-flex my-5" id="myList" role="tablist">
+            <div class="menu-title text-center fw-bold fs-2 my-4 rounded-top">Menu</div>
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
-              class="list-group-item list-group-item-action d-flex justify-content-center">
-              <div class="col">
-                <img :src="dish.picture" class="card-img-top img-fluid" alt="" />
+              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center">
+              <!-- MODIFICA FLEX BREAK POINT -->
+              <div class="col-3">
+                <img :src="dish.picture" class="dish-picture" alt="piatto" />
               </div>
-              <div class="col">
+              <div class="col-8">
                 <div class="text-start px-4 py-3">
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
                   <p class="fw-bold">Prezzo: {{ dish.price }}€</p>
-                  <div>
-                    <i class="bi bi-cart-plus"></i>
-                    <i class="bi bi-cart-dash"></i>
-                  </div>
                 </div>
+              </div>
+              <div
+                class="col-1 d-flex align-items-center justify-content-evenly fs-4"
+                :key="dish.id">
+                <i class="bi bi-cart-plus" @click="incrementCounter(dish.id)"></i>
+                {{ getCartItemQuantity(dish.id) }}
+                <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
               </div>
             </div>
           </div>
@@ -69,7 +100,14 @@ export default {
 </template>
 
 <style>
-.list-group-item .list-group-item-action .text-center {
-  background-color: #bd2222;
+.restaurant-img {
+  max-width: 600px;
+}
+.menu-title {
+  color: #bd2222;
+  border: 1px solid #bd2222;
+}
+.dish-picture {
+  max-width: 300px;
 }
 </style>
