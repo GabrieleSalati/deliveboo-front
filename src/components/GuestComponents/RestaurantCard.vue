@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-
+import Cart from "./Cart.vue";
 export default {
   name: "restaurant-card",
 
@@ -9,14 +9,14 @@ export default {
       restaurant: null,
     };
   },
-
+  components: {
+    Cart,
+  },
   created() {
-    axios
-      .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
-      .then((response) => {
-        this.restaurant = response.data[0];
-        console.log(this.restaurant);
-      });
+    axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
+      this.restaurant = response.data[0];
+      console.log(this.restaurant);
+    });
   },
 };
 </script>
@@ -40,14 +40,9 @@ export default {
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
-              class="list-group-item list-group-item-action d-flex justify-content-center"
-            >
+              class="list-group-item list-group-item-action d-flex justify-content-center">
               <div class="col">
-                <img
-                  :src="dish.picture"
-                  class="card-img-top img-fluid"
-                  alt=""
-                />
+                <img :src="dish.picture" class="card-img-top img-fluid" alt="" />
               </div>
               <div class="col">
                 <div class="text-start px-4 py-3">
@@ -65,11 +60,10 @@ export default {
         </div>
 
         <p class="card-text">
-          <small class="text-body-secondary">
-            P. IVA: {{ restaurant.p_iva }}
-          </small>
+          <small class="text-body-secondary"> P. IVA: {{ restaurant.p_iva }} </small>
         </p>
       </div>
+      <Cart />
     </div>
   </div>
 </template>
