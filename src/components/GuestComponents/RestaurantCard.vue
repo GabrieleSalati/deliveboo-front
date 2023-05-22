@@ -83,10 +83,12 @@ export default {
               class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center"
             >
               <!-- MODIFICA FLEX BREAK POINT -->
-              <div class="col-sm-12 col-md-12 col-lg-4">
+              <div
+                class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center justify-content-center"
+              >
                 <img :src="dish.picture" class="dish-picture" alt="piatto" />
               </div>
-              <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="text-start px-4 py-3">
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
@@ -94,7 +96,7 @@ export default {
                 </div>
               </div>
               <div
-                class="col-sm-12 col-md-12 col-lg-2 d-flex align-items-center justify-content-evenly fs-4"
+                class="col-lg-2 col-md-12 col-sm-12 d-flex align-items-center justify-content-evenly fs-4 my-3"
                 :key="dish.id"
               >
                 <i
