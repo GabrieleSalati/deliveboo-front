@@ -114,4 +114,8 @@ export default {
 .dish-picture {
   max-width: 300px;
 }
+
+.bi {
+  cursor: pointer;
+}
 </style>
