@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     incrementCounter(dishId) {
+      // TODO portare come parametro il piatto intero e confrontare gli id
       const cartItem = this.cartItems.find((item) => item.dishId === dishId);
       if (cartItem) {
         cartItem.quantity++;
@@ -35,7 +36,11 @@ export default {
       const cartItem = this.cartItems.find((item) => item.dishId === dishId);
       if (cartItem && cartItem.quantity > 0) {
         cartItem.quantity--;
+      } else if (cartItem && cartItem.quantity) {
+        const index = this.cartItems.indexOf(cartItem);
+        this.cartItems.splice(index, 1);
       }
+      console.log(this.cartItems);
     },
     getCartItemQuantity(dishId) {
       const cartItem = this.cartItems.find((item) => item.dishId === dishId);
@@ -82,9 +87,9 @@ export default {
               <div
                 class="col-1 d-flex align-items-center justify-content-evenly fs-4"
                 :key="dish.id">
-                <i class="bi bi-cart-plus" @click="incrementCounter(dish.id)"></i>
-                {{ getCartItemQuantity(dish.id) }}
                 <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
+                {{ getCartItemQuantity(dish.id) }}
+                <i class="bi bi-cart-plus" @click="incrementCounter(dish.id)"></i>
               </div>
             </div>
           </div>
