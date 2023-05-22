@@ -12,12 +12,12 @@ export default {
   components: {},
   computed: {
     fetchid2() {
-      return (this.id = this.getFromLocalStorage("chiave"));
+      return (this.id = this.getFromLocalStorage("chiave2"));
     },
   },
   methods: {
     fetchid() {
-      this.id = this.getFromLocalStorage("chiave");
+      this.id = this.getFromLocalStorage("chiave2");
     },
     syncAfterRemove(key) {
       this.removeFromLocalStorage(key);
@@ -34,7 +34,9 @@ export default {
     <h1>carrello</h1>
     <h2 v-for="id in fetchid2">{{ id }}</h2>
 
-    <button class="btn btn-danger" @click="this.syncAfterRemove(this.key)">Remove</button>
+    <button class="btn btn-danger" @click="this.syncAfterRemove(this.key)">
+      Remove
+    </button>
   </div>
 </template>
 
