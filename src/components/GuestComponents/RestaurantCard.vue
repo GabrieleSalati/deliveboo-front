@@ -68,35 +68,23 @@ export default {
             <div class="menu-title text-center fw-bold fs-2 my-4 rounded-top">
               Menu
             </div>
-            <div
-              v-for="dish in restaurant.dishes"
-              :key="dish.id"
-              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center"
-            >
+            <div v-for="dish in restaurant.dishes" :key="dish.id"
+              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center">
               <!-- MODIFICA FLEX BREAK POINT -->
-              <div class="col-3">
+              <div class="col-sm-12 col-md-6">
                 <img :src="dish.picture" class="dish-picture" alt="piatto" />
               </div>
-              <div class="col-8">
+              <div class="col-sm-12 col-md-6">
                 <div class="text-start px-4 py-3">
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
                   <p class="fw-bold">Prezzo: {{ dish.price }}€</p>
                 </div>
-              </div>
-              <div
-                class="col-1 d-flex align-items-center justify-content-evenly fs-4"
-                :key="dish.id"
-              >
-                <i
-                  class="bi bi-cart-plus"
-                  @click="incrementCounter(dish.id)"
-                ></i>
-                {{ getCartItemQuantity(dish.id) }}
-                <i
-                  class="bi bi-cart-dash"
-                  @click="decrementCounter(dish.id)"
-                ></i>
+                <div class="col-1 d-flex align-items-center justify-content-evenly fs-4" :key="dish.id">
+                  <i class="bi bi-cart-plus" @click="incrementCounter(dish.id)"></i>
+                  {{ getCartItemQuantity(dish.id) }}
+                  <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -116,10 +104,12 @@ export default {
 .restaurant-img {
   max-width: 600px;
 }
+
 .menu-title {
   color: #bd2222;
   border: 1px solid #bd2222;
 }
+
 .dish-picture {
   max-width: 300px;
 }
