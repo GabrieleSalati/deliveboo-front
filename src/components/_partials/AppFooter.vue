@@ -37,23 +37,25 @@ export default {
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="block col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded">
+          <div class="block col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded ">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Menu Rapido</h6>
-            <p>
+            <h6 class="text-uppercase fw-bold mb-4 text-center">Menu Rapido</h6>
+            <p class="text-center">
               <router-link :to="{ name: 'home' }" class="nav-link text-light">
                 Home
               </router-link>
             </p>
-            <p>
+            <p class="text-center">
               <router-link :to="{ name: 'restaurants' }" class="nav-link text-light">
                 Ristoranti
               </router-link>
             </p>
-            <p><button @click="redirectToPage" class="nav-link text-light">
-                Sei un ristoratore?
-              </button></p>
             <p>
+              <button @click="redirectToPage" class="nav-link text-light">
+                Sei un ristoratore?
+              </button>
+            </p>
+            <p class="text-center">
               <a href="#!" class="text-reset">Chi Siamo</a>
             </p>
           </div>
@@ -62,7 +64,7 @@ export default {
           <!-- Grid column -->
           <div class="block col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 pt-3 rounded">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Note Legali</h6>
+            <h6 class="text-uppercase fw-bold mb-4 text-center">Note Legali</h6>
             <p>
               <a href="#!" class="text-reset">Termini & Condizioni</a>
             </p>
@@ -121,5 +123,9 @@ footer {
 
 a {
   text-decoration: none;
+}
+
+button {
+  width: 100%;
 }
 </style>
