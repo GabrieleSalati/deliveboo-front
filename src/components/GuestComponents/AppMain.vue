@@ -74,7 +74,7 @@ export default {
       class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
     >
       <div v-for="category in categories" :key="category.id" class="col">
-        <div class="card position-relative">
+        <div class="card position-relative zoom-effect">
           <router-link
             :to="{
               name: 'restaurants',
@@ -142,6 +142,15 @@ h3:hover .highlight {
 .card-img {
   object-fit: cover;
   height: 200px;
+}
+
+.zoom-effect {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.zoom-effect:hover {
+  transform: scale(1.05);
 }
 
 .card-img-overlay {
