@@ -10,8 +10,8 @@ const localStorageMixin = {
     removeFromLocalStorage(key) {
       localStorage.removeItem(key);
     },
-    sync(data, key) {
-      let cart = JSON.stringify(data);
+    sync(key, cartItems) {
+      let cart = JSON.stringify(cartItems);
       localStorage.setItem(key, cart);
     }
   },

@@ -5,23 +5,26 @@ export default {
   data() {
     return {
       title: "Cart",
-      id: null,
-      key: "chiave",
+      id: [],
+      key: "carrello",
     };
   },
   components: {},
   computed: {
     fetchid2() {
-      return (this.id = this.getFromLocalStorage("chiave2"));
+      return (this.id = this.getFromLocalStorage(this.key));
     },
   },
   methods: {
+    // fetchid() {
+    //   this.id = this.getFromLocalStorage(this.key);
+    // },
     fetchid() {
-      this.id = this.getFromLocalStorage("chiave2");
+      this.id = this.getFromLocalStorage(this.key);
     },
     syncAfterRemove(key) {
       this.removeFromLocalStorage(key);
-      // this.fetchid();
+      this.fetchid();
     },
   },
   created() {
@@ -34,9 +37,7 @@ export default {
     <h1>carrello</h1>
     <h2 v-for="id in fetchid2">{{ id }}</h2>
 
-    <button class="btn btn-danger" @click="this.syncAfterRemove(this.key)">
-      Remove
-    </button>
+    <button class="btn btn-danger" @click="this.syncAfterRemove(this.key)">Remove</button>
   </div>
 </template>
 

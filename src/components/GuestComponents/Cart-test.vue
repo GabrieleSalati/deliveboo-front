@@ -1,4 +1,6 @@
 <script>
+//////////////////////////////// funzioni della pagina lista piatti
+
 const CART = {
   KEY: "bkasjbdfkjasdkfjhaksdfjskd",
   contents: [],
@@ -7,14 +9,14 @@ const CART = {
     let _contents = localStorage.getItem(CART.KEY);
     if (_contents) {
       CART.contents = JSON.parse(_contents);
-    } else {
+      // } else {
       //dummy test data
-      CART.contents = [
-        { id: 1, title: "Apple", qty: 5, itemPrice: 0.85 },
-        { id: 2, title: "Banana", qty: 3, itemPrice: 0.35 },
-        { id: 3, title: "Cherry", qty: 8, itemPrice: 0.05 },
-      ];
-      CART.sync();
+      // CART.contents = [
+      // { id: 1, title: "Apple", qty: 5, itemPrice: 0.85 },
+      // { id: 2, title: "Banana", qty: 3, itemPrice: 0.35 },
+      // { id: 3, title: "Cherry", qty: 8, itemPrice: 0.05 },
+      // ];
+      // CART.sync();
     }
   },
   async sync() {
@@ -55,6 +57,9 @@ const CART = {
       }
     }
   },
+
+  /////////////////// funzioni della pagina carrello
+
   increase(id, qty = 1) {
     //increase the quantity of an item in the cart
     CART.contents = CART.contents.map((item) => {
