@@ -82,7 +82,7 @@ export default {
 <template>
   <Loader v-if="loading" />
 
-  <section class="bg pb-5">
+  <section class="bg mt-5 pb-5">
     <div class="container py-5 text-center text-white">
       <h1 class="mb-4 fw-bold">
         Scopri i ristoranti più apprezzati della nostra città.

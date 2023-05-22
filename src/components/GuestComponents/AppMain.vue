@@ -41,7 +41,7 @@ export default {
   <Loader v-if="loading" />
 
   <!-- JUMBOTRON -->
-  <section class="jumbo">
+  <section class="jumbo mt-5">
     <div class="container text-center">
       <div class="text-white text-start ps-5">
         <h1 class="header-jumbo mb-2">DeliveBoo</h1>

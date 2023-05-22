@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import Loader from "../_partials/Loader.vue";
 
 export default {
   name: "restaurant-card",
@@ -8,17 +9,24 @@ export default {
     return {
       restaurant: null,
       cartItems: [],
+      loading: true,
     };
+  },
+  components: {
+    Loader,
   },
 
   created() {
+    this.loading = true;
+
     axios
       .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
       .then((response) => {
         this.restaurant = response.data[0];
-        console.log(this.restaurant);
+        this.loading = false;
       });
   },
+
   methods: {
     incrementCounter(dishId) {
       const cartItem = this.cartItems.find((item) => item.dishId === dishId);
@@ -46,7 +54,8 @@ export default {
 </script>
 
 <template>
-  <div class="container my-5">
+  <Loader v-if="loading" />
+  <div class="container pt-4 my-5">
     <div class="card mb-3 shadow-lg">
       <div class="container d-flex justify-content-center">
         <div class="restaurant-img mt-3">
@@ -68,8 +77,11 @@ export default {
             <div class="menu-title text-center fw-bold fs-2 my-4 rounded-top">
               Menu
             </div>
-            <div v-for="dish in restaurant.dishes" :key="dish.id"
-              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center">
+            <div
+              v-for="dish in restaurant.dishes"
+              :key="dish.id"
+              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center"
+            >
               <!-- MODIFICA FLEX BREAK POINT -->
               <div class="col-sm-12 col-md-12 col-lg-4">
                 <img :src="dish.picture" class="dish-picture" alt="piatto" />
@@ -81,11 +93,19 @@ export default {
                   <p class="fw-bold">Prezzo: {{ dish.price }}€</p>
                 </div>
               </div>
-              <div class="col-sm-12 col-md-12 col-lg-2 d-flex align-items-center justify-content-evenly fs-4"
-                :key="dish.id">
-                <i class="bi bi-cart-plus" @click="incrementCounter(dish.id)"></i>
+              <div
+                class="col-sm-12 col-md-12 col-lg-2 d-flex align-items-center justify-content-evenly fs-4"
+                :key="dish.id"
+              >
+                <i
+                  class="bi bi-cart-plus"
+                  @click="incrementCounter(dish.id)"
+                ></i>
                 {{ getCartItemQuantity(dish.id) }}
-                <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
+                <i
+                  class="bi bi-cart-dash"
+                  @click="decrementCounter(dish.id)"
+                ></i>
               </div>
             </div>
           </div>

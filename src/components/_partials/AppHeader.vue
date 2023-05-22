@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md">
+  <nav class="navbar navbar-expand-md fixed-top">
     <div class="container">
       <div class="navbar-brand">
         <router-link
@@ -59,7 +59,7 @@ export default {
       </div>
     </div>
   </nav>
-  <div class="mobile-icons" v-if="isMobileView">
+  <div class="mobile-icons fixed-top" v-if="isMobileView">
     <!-- icone per la visualizzazione mobile -->
     <div class="mobile-icon text-white d-flex justify-content-evenly">
       <router-link
