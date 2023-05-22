@@ -32,7 +32,7 @@ export default {
       <div class="navbar-brand">
         <router-link
           :to="{ name: 'home' }"
-          class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
+          class="btn btn-outline btn-lg custom-btn"
         >
           DeliveBoo
         </router-link>
@@ -45,7 +45,7 @@ export default {
           <li class="nav-item">
             <router-link
               :to="{ name: 'restaurants' }"
-              class="navbar-nav nav-link text-light fs-5 me-2"
+              class="btn btn-outline btn-lg custom-btn"
             >
               Ristoranti
             </router-link>
@@ -60,8 +60,7 @@ export default {
     </div>
   </nav>
   <div class="mobile-icons" v-if="isMobileView">
-    <!-- Aggiungi qui le icone per la visualizzazione mobile -->
-    <!-- Esempio: -->
+    <!-- icone per la visualizzazione mobile -->
     <div class="mobile-icon text-white d-flex justify-content-evenly">
       <router-link
         :to="{ name: 'home' }"
@@ -78,54 +77,24 @@ export default {
       <img src="../../assets/svg-1.svg" alt="" />
     </div>
   </div>
-  <!-- <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarToggler"
-        aria-controls="navbarToggler"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        @click="toggleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarToggler">
-        <div class="navbar-brand" href="#">
-          <router-link
-            :to="{ name: 'home' }"
-            class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
-          >
-            DeliveBoo
-          </router-link>
-        </div>
-
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <router-link
-              :to="{ name: 'restaurants' }"
-              class="navbar-nav nav-link text-light fs-5 me-2"
-            >
-              Ristoranti
-            </router-link>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li>
-            <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
 </template>
 
 <style lang="scss" scoped>
 .navbar {
   background-color: #f8d24c;
   height: 4rem;
+}
+
+.btn.custom-btn {
+  font-weight: 800;
+  color: #bd2222;
+  border-color: 0;
+}
+
+.btn.custom-btn:hover {
+  color: #fff;
+  border-color: #bd2222;
+  background-color: #bd2222;
 }
 
 .mobile-icons {

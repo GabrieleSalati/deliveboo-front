@@ -45,12 +45,12 @@ export default {
     <div class="container text-center">
       <div class="text-white text-start ps-5">
         <h1 class="header-jumbo mb-2">DeliveBoo</h1>
-        <h4 class="header-txt mb-4">
+        <h3 class="header-txt mb-4">
           Soddisfa la tua fame con <span class="highlight">un click!</span
           ><br />
           Il cibo delizioso viene direttamente
           <span class="highlight">da te.</span>
-        </h4>
+        </h3>
         <router-link
           :to="{ name: 'restaurants' }"
           class="btn btn-outline-light btn-lg custom-btn"
@@ -114,10 +114,25 @@ export default {
   position: relative;
   z-index: 1;
 }
+h4:hover .highlight {
+  /* Stili al passaggio del mouse sull'h1 */
+  font-weight: 900;
+  color: #bd2222;
 
+  /* Transizione */
+  transition: font-weight 0.3s ease, color 0.3s ease;
+}
+
+h3:hover .highlight {
+  /* Stili al passaggio del mouse sull'h1 */
+  font-weight: 900;
+  color: #f8d24c;
+
+  /* Transizione */
+  transition: font-weight 0.3s ease, color 0.3s ease;
+}
 .highlight {
   color: #f8d24c;
-  font-weight: 900;
 }
 
 .header-jumbo {
