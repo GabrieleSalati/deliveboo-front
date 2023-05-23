@@ -30,6 +30,7 @@ export default {
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container">
       <div class="navbar-brand">
+        <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo" />
         <router-link
           :to="{ name: 'home' }"
           class="btn btn-outline btn-lg custom-btn"
@@ -83,6 +84,11 @@ export default {
 .navbar {
   background-color: #f8d24c;
   height: 4rem;
+}
+
+.logo {
+  height: 3.8rem;
+  margin-right: 1rem;
 }
 
 .btn.custom-btn {
