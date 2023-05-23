@@ -57,9 +57,16 @@ export default {
     // aggiunge un piatto all' array cartItems e se il piatto è già nell' array ne aumenta la quantity
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
-      if (cartItem) {
+
+      // console.log("dish.restaurant_id:", dish.restaurant_id);
+      // console.log("this.restaurant.id:", this.restaurant.id);
+
+      if (cartItem && cartItem.restaurant_id === dish.restaurant_id) {
         cartItem.quantity++;
-      } else {
+      } else if (
+        this.cartItems.length == 0 ||
+        this.cartItems[0].restaurant_id == dish.restaurant_id
+      ) {
         let obj = {
           id: dish.id,
           restaurant_id: dish.restaurant_id,
@@ -69,8 +76,12 @@ export default {
           picture: dish.picture,
         };
         this.cartItems.push(obj);
+      } else {
+        console.log(
+          "Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!"
+        );
       }
-      console.log(this.cartItems);
+
       this.sync(this.key, this.cartItems);
     },
 
