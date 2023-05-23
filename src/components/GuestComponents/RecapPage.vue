@@ -1,21 +1,22 @@
 <script>
-
+import Cart from "../GuestComponents/Cart.vue"
 
 export default {
     data() {
         return {
-            title: "Hello world"
+            title: "Ordina e paga!"
         }
-    }
+    },
 
-    // components: {
-    //   MyComponent,
-    // },
+    components: {
+        Cart,
+    },
 };
 </script>
 
 <template>
     <h1>{{ title }}</h1>
+    <Cart />
 </template>
 
 <style lang="scss" scoped></style>
