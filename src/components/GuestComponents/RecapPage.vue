@@ -173,16 +173,35 @@ export default {
     <h1>{{ title }}</h1>
     <Cart :cartItems="cartItems" />
     <h2>Contatta il ristoratore:</h2>
-    <div class="container">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <form action="POST">
+        <div class="container">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Total bill</label>
+                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Without shipping cost</label>
+                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Customer</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Germano Mosconi">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Customer email</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Customer address</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Via Tacchino 12">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Phone number</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="367859857">
+            </div>
+            <button type="submit">Ordina e paga!</button>
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-    </div>
+    </form>
 </template>
 
 <style lang="scss" scoped></style>
