@@ -38,6 +38,15 @@ export default {
       return sumQuantity;
     },
 
+    totalCartDishesnumber() {
+      let cartQuantity = 0;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        const cartItem = this.cartItems[i];
+        cartQuantity += cartItem.quantity;
+      }
+      return cartQuantity;
+    },
+
     removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
       this.sync(this.key, this.cartItems);
