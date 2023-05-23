@@ -174,8 +174,8 @@ export default {
                 :key="dish.id"
               >
                 <i
-                  class="bi bi-cart-plus"
-                  @click="incrementCounter(dish.id)"
+                  class="bi bi-cart-dash"
+                  @click="decrementCounter(dish.id)"
                 ></i>
                 {{ getCartItemQuantity(dish.id) }}
                 <i class="bi bi-cart-plus" @click="incrementCounter(dish)"></i>
