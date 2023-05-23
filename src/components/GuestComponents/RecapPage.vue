@@ -176,28 +176,28 @@ export default {
     <form action="POST">
         <div class="container">
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Total bill</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+                <label for="total_bill" class="form-label">Total bill</label>
+                <input type="number" class="form-control" id="total_bill" placeholder="00">
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Without shipping cost</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+                <label for="bill_no_shipping" class="form-label">Without shipping cost</label>
+                <input type="number" class="form-control" id="bill_no_shipping" placeholder="00">
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Customer</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Germano Mosconi">
+                <label for="guest_name" class="form-label">Customer</label>
+                <input type="text" class="form-control" id="guest_name" placeholder="Germano Mosconi">
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Customer email</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <label for="email" class="form-label">Customer email</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Customer address</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Via Tacchino 12">
+                <label for="address" class="form-label">Customer address</label>
+                <input type="text" class="form-control" id="address" placeholder="Via Tacchino 12">
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Phone number</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="367859857">
+                <label for="telephone" class="form-label">Phone number</label>
+                <input type="text" class="form-control" id="telephone" placeholder="367859857">
             </div>
             <button type="submit">Ordina e paga!</button>
         </div>
