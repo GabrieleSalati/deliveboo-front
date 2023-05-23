@@ -12,36 +12,30 @@ export default {
     };
   },
   components: {},
-  computed: {
-    syncCart(key) {
-      this.syncAfterRemove(key);
-      return (this.cartItems = []);
-    },
-  },
   methods: {
-    fetchid() {
-      this.id = this.getFromLocalStorage(this.key);
-    },
-
-    syncAfterRemove(key) {
+    // svuota il carrello cliccando il tasto "remove"
+    emptyCart(key) {
       this.removeFromLocalStorage(key);
-      return (this.cartItems = []);
+      this.cartItems.splice(0, this.cartItems.length);
     },
 
-    totalDishPrice(cartItem) {
+    // calcola il prezzo del singolo piatto per la quantità
+    singleDishTotalPrice(cartItem) {
       return cartItem.price * cartItem.quantity;
     },
-    totalDishesPrice() {
+
+    // calcola il valore totale del carrello
+    totalCartValue() {
       let sumQuantity = 0;
       for (let i = 0; i < this.cartItems.length; i++) {
         const cartItem = this.cartItems[i];
-        sumQuantity = cartItem.quantity * cartItem.price;
+        sumQuantity += cartItem.quantity * cartItem.price;
       }
+      return sumQuantity;
     },
   },
-  created() {
-    // this.fetchid();
-  },
+
+  created() {},
 };
 </script>
 <template>
@@ -56,19 +50,15 @@ export default {
           <div class="card-body">
             <h6 class="card-title">{{ cartItem.name }}</h6>
             <p class="card-text text-end">{{ cartItem.price }}€</p>
-            <!-- <span class="card-text">{{ cartItem.price }}€</span> -->
             <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
-            <p class="card-text text-end">Prezzo totale: {{ totalDishPrice(cartItem) }}€</p>
-
-            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
           </div>
         </div>
-        <!-- <h2>{{ cartItems }}</h2> -->
       </div>
     </div>
-    <div>
-      <button class="btn btn-danger" @click="syncCart(this.key)">Remove</button>
-      <span class="text-danger">Totale:{{ totalDishesPrice() }}</span>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-danger" @click="emptyCart(this.key)">Remove</button>
+      <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>
 </template>
