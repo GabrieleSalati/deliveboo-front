@@ -1,5 +1,7 @@
 <script>
 import localStorageMixin from "../../localStorageMixin.js";
+import { mapMutations } from "vuex";
+
 export default {
   mixins: [localStorageMixin],
   props: {
@@ -9,6 +11,7 @@ export default {
     return {
       title: "Cart",
       key: "carrello",
+      totalCartDishesnumber: 0,
     };
   },
   components: {},
@@ -17,6 +20,7 @@ export default {
     emptyCart(key) {
       this.removeFromLocalStorage(key);
       this.cartItems.splice(0, this.cartItems.length);
+      this.setTotalCartDishesnumber(0);
     },
 
     // calcola il prezzo del singolo piatto per la quantità
@@ -33,9 +37,11 @@ export default {
       }
       return sumQuantity;
     },
-    removeDish(id) {
+
+    removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
       this.sync(this.key, this.cartItems);
+      this.setTotalCartDishesnumber(this.totalCartDishesnumber - quantity);
     },
 
     // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
@@ -45,6 +51,7 @@ export default {
       // console.log("index", index);
       return index;
     },
+    ...mapMutations(["setTotalCartDishesnumber"]),
   },
 
   created() {},
@@ -57,20 +64,33 @@ export default {
       <div class="col-12" v-for="cartItem in cartItems">
         <div class="card d-flex flex-row align-items-center">
           <div class="col-3">
-            <img :src="cartItem.picture" class="px-1 img-fluid" :alt="cartItem.name" />
+            <img
+              :src="cartItem.picture"
+              class="px-1 img-fluid"
+              :alt="cartItem.name"
+            />
           </div>
           <div class="card-body">
             <h6 class="card-title">{{ cartItem.name }}</h6>
             <p class="card-text text-end">{{ cartItem.price }}€</p>
             <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
-            <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
+            <p class="card-text text-end">
+              Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€
+            </p>
           </div>
-          <button class="btn btn-link" @click="removeDish(cartItem.id)">Rimuovi</button>
+          <button
+            class="btn btn-link"
+            @click="removeDish(cartItem.id, cartItem.quantity)"
+          >
+            Rimuovi
+          </button>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <button class="btn btn-danger" @click="emptyCart(this.key)">Svuota Carrello</button>
+      <button class="btn btn-danger" @click="emptyCart(this.key)">
+        Svuota Carrello
+      </button>
       <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>
