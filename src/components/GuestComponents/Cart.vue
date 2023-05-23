@@ -12,6 +12,7 @@ export default {
       title: "Cart",
       key: "carrello",
       totalCartDishesnumber: 0,
+      cartQuantity: 0,
     };
   },
   components: {},
@@ -38,10 +39,21 @@ export default {
       return sumQuantity;
     },
 
+    totalCartDishesnumber(cartItems) {
+      for (let i = 0; i < cartItems.length; i++) {
+        this.cartQuantity += cartItems[i].quantity;
+      }
+      return this.cartQuantity;
+    },
+
     removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
       this.sync(this.key, this.cartItems);
-      this.setTotalCartDishesnumber(this.totalCartDishesnumber - quantity);
+      console.log(this.totalCartDishesnumber);
+      console.log(quantity);
+      this.setTotalCartDishesnumber(
+        this.totalCartDishesnumber(cartItems) - quantity
+      );
     },
 
     // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
