@@ -1,7 +1,8 @@
 <script>
 import AppHeader from "./components/_partials/AppHeader.vue";
 import AppFooter from "./components/_partials/AppFooter.vue";
-
+import InfoPrivacy from "./components/ExtraComponents/InfoPrivacy.vue";
+import CookiesVue from "./components/ExtraComponents/Cookies.vue";
 export default {
   data() {
     return {
@@ -10,15 +11,19 @@ export default {
   },
   components: {
     AppHeader,
+    InfoPrivacy,
     AppFooter,
+    CookiesVue,
   },
 };
 </script>
 
 <template>
-  <AppHeader />
+  <!-- <AppHeader />
   <router-view></router-view>
-  <AppFooter />
+  <AppFooter /> -->
+  <!-- <InfoPrivacy /> -->
+  <CookiesVue />
 </template>
 
 <style lang="scss" scoped></style>
