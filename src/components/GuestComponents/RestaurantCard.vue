@@ -21,14 +21,7 @@ export default {
     Cart,
   },
   computed: {
-    // totalCartDishes2() {
-    //   let totalCartDishesnumber = 0;
-    //   for (let i = 0; i < this.cartItems.length; i++) {
-    //     const quantityEl = this.cartItems[i].quantity;
-    //     totalCartDishesnumber += quantityEl;
-    //   }
-    //   return totalCartDishesnumber;
-    // },
+    // calcola la somma dei piatti aggiunti al carrello
     totalCartDishesnumber() {
       let sumQuantity = 0;
       for (let i = 0; i < this.cartItems.length; i++) {
@@ -38,6 +31,8 @@ export default {
       return (this.totalCartDishesnumber = sumQuantity);
     },
   },
+
+  // fetch del ristorante con i relativi piatti
   created() {
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
       this.restaurant = response.data[0];
@@ -45,11 +40,12 @@ export default {
       console.log(this.restaurant);
       console.log(this.dishesList);
     });
-    // localStorage.clear();
     this.init();
+    // localStorage.clear();
   },
 
   methods: {
+    // inizializza la variabile cartItems caricando al suo interno i dati da localStorage
     init() {
       this.cartItems = this.getFromLocalStorage(this.key);
       console.log("log di cartitems nell' init", this.cartItems);
@@ -58,41 +54,7 @@ export default {
       }
     },
 
-    // incrementCounter(dishId) {
-    //   // TODO portare come parametro il piatto intero e confrontare gli id
-    //   const cartItem = this.cartItems.find((item) => item.id === dishId);
-    //   if (cartItem) {
-    //     cartItem.quantity++;
-    //   } else {
-    //     let arr = this.dishesList.filter((dish) => {
-    //       if (dish.id === dishId) {
-    //         console.log("oggeto trovato dal filter", dish);
-    //         return true;
-    //       }
-    //     });
-    //     if (arr && arr[0]) {
-    //       let obj = {
-    //         id: arr[0].id,
-    //         restaurant_id: arr[0].restaurant_id,
-    //         name: arr[0].name,
-    //         quantity: 1,
-    //         price: arr[0].price,
-    //         picture: arr[0].picture,
-    //       };
-    //       this.cartItems.push(obj);
-    //       this.sync(this.key, this.cartItems);
-    //       // this.cartItems.push({
-    //       //   dishId: dishId,
-    //       //   quantity: 1,
-
-    //       // });
-    //     } else {
-    //       //product id does not exist in products data
-    //       console.error("Invalid Product");
-    //     }
-    //     console.log(this.cartItems);
-    //   }
-    // },
+    // aggiunge un piatto all' array cartItems e se il piatto è già nell' array ne aumenta la quantity
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
       if (cartItem) {
@@ -111,57 +73,31 @@ export default {
       console.log(this.cartItems);
       this.sync(this.key, this.cartItems);
     },
-    // incrementCounter(dishId) {
-    //   // TODO portare come parametro il piatto intero e confrontare gli id
-    //   const cartItem = this.cartItems.find((item) => item.dishId === dishId);
-    //   if (cartItem) {
-    //     cartItem.quantity++;
-    //   } else {
-    //     this.cartItems.push({
-    //       dishId: dishId,
-    //       quantity: 1,
-    //     });
-    //   }
-    //   console.log(this.cartItems);
-    // },
 
+    // riduce la quantity di un piatto nell' array cartItems e se la quantity=0 rimuove il piatto dall' array
     decrementCounter(dishId) {
       const cartItem = this.cartItems.find((item) => item.id === dishId);
       if (cartItem && cartItem.quantity > 0) {
         cartItem.quantity--;
       }
       if (cartItem && cartItem.quantity == 0) {
-        // const index = this.cartItems.indexOf(cartItem);
         this.cartItems.splice(this.getIndexItem(dishId), 1);
       }
-      console.log(this.cartItems);
       this.sync(this.key, this.cartItems);
     },
 
+    // indica la quantità di ogni singolo piatto all' interno dell' array cartItems, se il piatto non è presente nell' array imposta la quantity=0
     getCartItemQuantity(dishId) {
       const cartItem = this.cartItems.find((item) => item.id === dishId);
       return cartItem ? cartItem.quantity : 0;
     },
 
+    // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
     getIndexItem(dishId) {
       const cartItem = this.cartItems.find((item) => item.id == dishId);
       const index = this.cartItems.indexOf(cartItem);
-      console.log("index", index);
+      // console.log("index", index);
       return index;
-    },
-
-    //   saveToCart(dishId) {
-    //     // this.getIndexItem(dishId);
-    //     // const cartItem = this.cartItems.find((item) => item.id == dishId);
-    //     this.sync(this.key, this.cartItems);
-    // },
-    totalCartDishes() {
-      let sumQuantity = 0;
-      for (let i = 0; i < this.cartItems.length; i++) {
-        const quantityEl = this.cartItems[i].quantity;
-        sumQuantity += quantityEl;
-      }
-      return sumQuantity;
     },
   },
 };
@@ -214,7 +150,6 @@ export default {
               </div>
             </div>
           </div>
-          <!-- <h1 class="text-danger">totale piatti {{ this.totalCartDishesnumber }}</h1> -->
           <h1 class="text-danger">totale piatti {{ totalCartDishesnumber }}</h1>
           <Cart :cartItems="cartItems" />
         </div>
