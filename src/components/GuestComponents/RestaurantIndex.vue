@@ -1,14 +1,18 @@
 <script>
 import axios from "axios";
 import Loader from "../_partials/Loader.vue";
+import localStorageMixin from "../../localStorageMixin.js";
 
 export default {
+  mixins: [localStorageMixin],
   data() {
     return {
       restaurants: [],
       categories: [],
       selectedCategories: [],
       loading: true, // Variabile che indica se il loader deve essere visualizzato o meno
+      id: ["ciao", "ciao2"], //serve?
+      key: "chiave", //serve?
     };
   },
 
@@ -75,6 +79,8 @@ export default {
     if (this.$route.params.label) {
       this.selectedCategories.push(this.$route.params.label);
     }
+    // this.saveToLocalStorage(this.id, 123);
+    this.sync(this.id, this.key);
   },
 };
 </script>

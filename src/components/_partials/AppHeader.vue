@@ -54,7 +54,9 @@ export default {
         </ul>
         <ul class="navbar-nav ml-auto">
           <li>
-            <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
+            <router-link :to="{ name: 'cart' }" class="navbar-nav nav-link text-light fs-5 me-2">
+              <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
+            </router-link>
           </li>
         </ul>
       </div>
