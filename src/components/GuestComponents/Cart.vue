@@ -2,29 +2,41 @@
 import localStorageMixin from "../../localStorageMixin.js";
 export default {
   mixins: [localStorageMixin],
+  props: {
+    cartItems: Array,
+  },
   data() {
     return {
       title: "Cart",
-      id: [],
       key: "carrello",
     };
   },
   components: {},
   computed: {
-    fetchid2() {
-      return (this.id = this.getFromLocalStorage(this.key));
+    syncCart(key) {
+      this.syncAfterRemove(key);
+      return (this.cartItems = []);
     },
   },
   methods: {
-    // fetchid() {
-    //   this.id = this.getFromLocalStorage(this.key);
-    // },
     fetchid() {
       this.id = this.getFromLocalStorage(this.key);
     },
+
     syncAfterRemove(key) {
       this.removeFromLocalStorage(key);
-      this.fetchid();
+      return (this.cartItems = []);
+    },
+
+    totalDishPrice(cartItem) {
+      return cartItem.price * cartItem.quantity;
+    },
+    totalDishesPrice() {
+      let sumQuantity = 0;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        const cartItem = this.cartItems[i];
+        sumQuantity = cartItem.quantity * cartItem.price;
+      }
     },
   },
   created() {
@@ -35,9 +47,29 @@ export default {
 <template>
   <div>
     <h1>carrello</h1>
-    <h2 v-for="id in fetchid2">{{ id }}</h2>
+    <div class="row">
+      <div class="col-12" v-for="cartItem in cartItems">
+        <div class="card d-flex flex-row align-items-center">
+          <div class="col-3">
+            <img :src="cartItem.picture" class="px-1 img-fluid" :alt="cartItem.name" />
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">{{ cartItem.name }}</h6>
+            <p class="card-text text-end">{{ cartItem.price }}€</p>
+            <!-- <span class="card-text">{{ cartItem.price }}€</span> -->
+            <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
+            <p class="card-text text-end">Prezzo totale: {{ totalDishPrice(cartItem) }}€</p>
 
-    <button class="btn btn-danger" @click="this.syncAfterRemove(this.key)">Remove</button>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
+        </div>
+        <!-- <h2>{{ cartItems }}</h2> -->
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-danger" @click="syncCart(this.key)">Remove</button>
+      <span class="text-danger">Totale:{{ totalDishesPrice() }}</span>
+    </div>
   </div>
 </template>
 

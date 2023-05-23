@@ -21,7 +21,22 @@ export default {
     Cart,
   },
   computed: {
-    totalCartDishes2() {},
+    // totalCartDishes2() {
+    //   let totalCartDishesnumber = 0;
+    //   for (let i = 0; i < this.cartItems.length; i++) {
+    //     const quantityEl = this.cartItems[i].quantity;
+    //     totalCartDishesnumber += quantityEl;
+    //   }
+    //   return totalCartDishesnumber;
+    // },
+    totalCartDishesnumber() {
+      let sumQuantity = 0;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        const quantityEl = this.cartItems[i].quantity;
+        sumQuantity += quantityEl;
+      }
+      return (this.totalCartDishesnumber = sumQuantity);
+    },
   },
   created() {
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
@@ -36,13 +51,11 @@ export default {
 
   methods: {
     init() {
-      //check localStorage and initialize the contents of CART.contents
-      // let _cartItems =
       this.cartItems = this.getFromLocalStorage(this.key);
-
-      // if (_cartItems) {
-      //   this.cartItems = JSON.parse(_cartItems);
-      // } else this.cartItems;
+      console.log("log di cartitems nell' init", this.cartItems);
+      if (!this.cartItems) {
+        this.cartItems = [];
+      }
     },
 
     // incrementCounter(dishId) {
@@ -178,10 +191,10 @@ export default {
               :key="dish.id"
               class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center">
               <!-- MODIFICA FLEX BREAK POINT -->
-              <div class="col-3">
-                <img :src="dish.picture" class="dish-picture" alt="piatto" />
+              <div class="col-4">
+                <img :src="dish.picture" class="dish-picture img-fluid" alt="piatto" />
               </div>
-              <div class="col-8">
+              <div class="col-7">
                 <div class="text-start px-4 py-3">
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
@@ -194,16 +207,18 @@ export default {
                 <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
                 {{ getCartItemQuantity(dish.id) }}
                 <i class="bi bi-cart-plus" @click="incrementCounter(dish)"></i>
-                <button class="btn btn-danger" @click="sync(this.key, this.cartItems)">
+
+                <!-- <button class="btn btn-danger" @click="sync(this.key, this.cartItems)">
                   Aggiungi al carrello
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
+          <!-- <h1 class="text-danger">totale piatti {{ this.totalCartDishesnumber }}</h1> -->
+          <h1 class="text-danger">totale piatti {{ totalCartDishesnumber }}</h1>
+          <Cart :cartItems="cartItems" />
         </div>
-        <h1 class="text-danger">totale piatti {{ this.totalCartDishesnumber }}</h1>
       </div>
-      <Cart />
     </div>
   </div>
 </template>
