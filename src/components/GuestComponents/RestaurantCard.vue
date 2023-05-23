@@ -55,11 +55,19 @@ export default {
     },
 
     // aggiunge un piatto all' array cartItems e se il piatto è già nell' array ne aumenta la quantity
+
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
-      if (cartItem) {
+
+      // console.log("dish.restaurant_id:", dish.restaurant_id);
+      // console.log("this.restaurant.id:", this.restaurant.id);
+
+      if (cartItem && cartItem.restaurant_id === dish.restaurant_id) {
         cartItem.quantity++;
-      } else {
+      } else if (
+        this.cartItems.length == 0 ||
+        this.cartItems[0].restaurant_id == dish.restaurant_id
+      ) {
         let obj = {
           id: dish.id,
           restaurant_id: dish.restaurant_id,
@@ -69,8 +77,15 @@ export default {
           picture: dish.picture,
         };
         this.cartItems.push(obj);
+      } else {
+        alert("Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!");
+
+        document.getElementById("alert").innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        Puoi ordinare da un ristorante alla volta, svuota il carrello per continuare!
+      </div>      
+      `;
       }
-      console.log(this.cartItems);
       this.sync(this.key, this.cartItems);
     },
 
@@ -122,6 +137,7 @@ export default {
         <div class="menu">
           <div class="list-group d-flex my-5" id="myList" role="tablist">
             <div class="menu-title text-center fw-bold fs-2 my-4 rounded-top">Menu</div>
+            <div id="alert"></div>
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
