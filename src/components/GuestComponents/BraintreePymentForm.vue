@@ -3,7 +3,25 @@ import braintree from "braintree-web";
 
 export default {
   data() {
-    return {};
+    return {
+      hostedFieldInstance: false,
+      nonce: "",
+    };
+  },
+  methods: {
+    payWithCreditCard() {
+      if (this.hostedFieldInstance) {
+        this.hostedFieldInstance
+          .tokenize()
+          .then((payload) => {
+            console.log(payload);
+            this.nonce = payload.nonce;
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    },
   },
   mounted() {
     braintree.client
@@ -38,6 +56,7 @@ export default {
       })
       .then((hostedFieldInstance) => {
         // @TODO - Use hostedFieldInstance to send data to Braintree
+        this.hostedFieldInstance = hostedFieldInstance;
       })
       .catch((err) => {});
   },
@@ -45,6 +64,13 @@ export default {
 </script>
 
 <template>
+  <div class="card bg-light">
+    <div class="card-header">Payment Information</div>
+    <div class="card-body">
+      <div class="alert alert-success" v-if="nonce">Successfully generated nonce.</div>
+    </div>
+  </div>
+
   <form>
     <div class="form-group">
       <label for="amount">Amount</label>
@@ -70,6 +96,9 @@ export default {
         </div>
       </div>
     </div>
+    <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">
+      Pay with Credit Card
+    </button>
   </form>
 </template>
 
