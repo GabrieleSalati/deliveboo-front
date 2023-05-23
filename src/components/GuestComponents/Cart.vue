@@ -1,6 +1,6 @@
 <script>
 import localStorageMixin from "../../localStorageMixin.js";
-import { mapMutations } from "vuex";
+import { store } from "../../assets/data/store";
 
 export default {
   mixins: [localStorageMixin],
@@ -9,9 +9,9 @@ export default {
   },
   data() {
     return {
+      store,
       title: "Cart",
       key: "carrello",
-      totalCartDishesnumber: 0,
     };
   },
   components: {},
@@ -41,7 +41,7 @@ export default {
     removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
       this.sync(this.key, this.cartItems);
-      this.setTotalCartDishesnumber(this.totalCartDishesnumber - quantity);
+      this.setTotalCartDishesnumber(store.totalCartDishesnumber - quantity);
     },
 
     // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
@@ -51,7 +51,6 @@ export default {
       // console.log("index", index);
       return index;
     },
-    ...mapMutations(["setTotalCartDishesnumber"]),
   },
 
   created() {},
@@ -64,33 +63,22 @@ export default {
       <div class="col-12" v-for="cartItem in cartItems">
         <div class="card d-flex flex-row align-items-center">
           <div class="col-3">
-            <img
-              :src="cartItem.picture"
-              class="px-1 img-fluid"
-              :alt="cartItem.name"
-            />
+            <img :src="cartItem.picture" class="px-1 img-fluid" :alt="cartItem.name" />
           </div>
           <div class="card-body">
             <h6 class="card-title">{{ cartItem.name }}</h6>
             <p class="card-text text-end">{{ cartItem.price }}€</p>
             <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
-            <p class="card-text text-end">
-              Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€
-            </p>
+            <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
           </div>
-          <button
-            class="btn btn-link"
-            @click="removeDish(cartItem.id, cartItem.quantity)"
-          >
+          <button class="btn btn-link" @click="removeDish(cartItem.id, cartItem.quantity)">
             Rimuovi
           </button>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <button class="btn btn-danger" @click="emptyCart(this.key)">
-        Svuota Carrello
-      </button>
+      <button class="btn btn-danger" @click="emptyCart(this.key)">Svuota Carrello</button>
       <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>

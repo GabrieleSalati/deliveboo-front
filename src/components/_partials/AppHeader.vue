@@ -1,9 +1,13 @@
 <script>
-import { mapState } from "vuex";
+import { store } from "../../assets/data/store";
 
 export default {
   name: "AppHeader",
-
+  data() {
+    return {
+      store,
+    };
+  },
   methods: {
     redirectToPage() {
       window.location.href = "http://127.0.0.1:8000/login";
@@ -13,14 +17,12 @@ export default {
       navbarCollapse.classList.toggle("show");
     },
   },
-  computed: {
-    ...mapState(["totalCartDishesnumber"]),
-  },
+  computed: {},
 };
 </script>
 
 <template>
-  <span class="text-danger ms-5">{{ totalCartDishesnumber }}</span>
+  <span class="text-danger ms-5">{{ store.totalCartDishesnumber }}</span>
 
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
@@ -30,37 +32,28 @@ export default {
         data-bs-toggle="collapse"
         aria-expanded="false"
         aria-label="Toggle navigation"
-        @click="toggleNavbar"
-      >
+        @click="toggleNavbar">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <router-link
             :to="{ name: 'home' }"
-            class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
-          >
+            class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
             DeliveBoo
           </router-link>
-          <router-link
-            :to="{ name: 'home' }"
-            class="navbar-nav nav-link text-light fs-5 me-2"
-          >
+          <router-link :to="{ name: 'home' }" class="navbar-nav nav-link text-light fs-5 me-2">
             Home
           </router-link>
           <router-link
             :to="{ name: 'restaurants' }"
-            class="navbar-nav nav-link text-light fs-5 me-2"
-          >
+            class="navbar-nav nav-link text-light fs-5 me-2">
             Ristoranti
           </router-link>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li>
-            <router-link
-              :to="{ name: 'cart' }"
-              class="navbar-nav nav-link text-light fs-5 me-2"
-            >
+            <router-link :to="{ name: 'cart' }" class="navbar-nav nav-link text-light fs-5 me-2">
               <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
             </router-link>
           </li>
