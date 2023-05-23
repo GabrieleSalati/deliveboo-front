@@ -33,6 +33,18 @@ export default {
       }
       return sumQuantity;
     },
+    removeDish(id) {
+      this.cartItems.splice(this.getIndexItem(id), 1);
+      this.sync(this.key, this.cartItems);
+    },
+
+    // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
+    getIndexItem(id) {
+      const cartItem = this.cartItems.find((item) => item.id == id);
+      const index = this.cartItems.indexOf(cartItem);
+      // console.log("index", index);
+      return index;
+    },
   },
 
   created() {},
@@ -53,11 +65,12 @@ export default {
             <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
             <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
           </div>
+          <button class="btn btn-link" @click="removeDish(cartItem.id)">Rimuovi</button>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <button class="btn btn-danger" @click="emptyCart(this.key)">Remove</button>
+      <button class="btn btn-danger" @click="emptyCart(this.key)">Svuota Carrello</button>
       <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>
