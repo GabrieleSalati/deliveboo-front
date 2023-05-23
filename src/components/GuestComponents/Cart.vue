@@ -13,10 +13,15 @@ export default {
   },
   components: {},
   computed: {
-    syncCart(key) {
-      this.syncAfterRemove(key);
-      return (this.cartItems = []);
+    syncCart() {
+      // this.syncAfterRemove(key);
+      // return (this.cartItems = []);
+      localStorage.clear();
     },
+
+    // checkRestaurantId(cartItem) {
+    //   if(cartItem.restaurant_id != )
+    // }
   },
   methods: {
     fetchid() {
@@ -51,14 +56,20 @@ export default {
       <div class="col-12" v-for="cartItem in cartItems">
         <div class="card d-flex flex-row align-items-center">
           <div class="col-3">
-            <img :src="cartItem.picture" class="px-1 img-fluid" :alt="cartItem.name" />
+            <img
+              :src="cartItem.picture"
+              class="px-1 img-fluid"
+              :alt="cartItem.name"
+            />
           </div>
           <div class="card-body">
             <h6 class="card-title">{{ cartItem.name }}</h6>
             <p class="card-text text-end">{{ cartItem.price }}€</p>
             <!-- <span class="card-text">{{ cartItem.price }}€</span> -->
             <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
-            <p class="card-text text-end">Prezzo totale: {{ totalDishPrice(cartItem) }}€</p>
+            <p class="card-text text-end">
+              Prezzo totale: {{ totalDishPrice(cartItem) }}€
+            </p>
 
             <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
           </div>
@@ -67,7 +78,7 @@ export default {
       </div>
     </div>
     <div>
-      <button class="btn btn-danger" @click="syncCart(this.key)">Remove</button>
+      <button class="btn btn-danger" @click="syncCart()">Remove</button>
       <span class="text-danger">Totale:{{ totalDishesPrice() }}</span>
     </div>
   </div>
