@@ -6,6 +6,7 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 import App from "./App.vue";
 import './localStorageMixin.js';
 
+
 const app = createApp(App);
 app.use(router);
 app.mount("#app");

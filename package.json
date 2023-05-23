@@ -13,6 +13,8 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0-alpha3",
     "bootstrap-icons": "^1.10.5",
+    "braintree": "^3.15.0",
+    "braintree-web": "^3.94.0",
     "sass": "^1.62.1",
     "scss": "^0.2.4",
     "vue": "^3.2.47",
