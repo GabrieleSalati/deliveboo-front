@@ -3,6 +3,7 @@ import axios from "axios";
 import Cart from "./Cart.vue";
 import localStorageMixin from "../../localStorageMixin.js";
 import Loader from "../_partials/Loader.vue";
+import { store } from "../../assets/data/store";
 
 export default {
   mixins: [localStorageMixin],
@@ -10,11 +11,12 @@ export default {
 
   data() {
     return {
+      store,
       restaurant: {}, //ristorante
       cartItems: [], //carrello
       dishesList: [], //products
       // index: null,
-      totalCartDishesnumber: 0,
+
       key: "carrello",
       loading: true,
     };
@@ -31,7 +33,7 @@ export default {
         const quantityEl = this.cartItems[i].quantity;
         sumQuantity += quantityEl;
       }
-      return (this.totalCartDishesnumber = sumQuantity);
+      return (store.totalCartDishesnumber = sumQuantity);
     },
   },
 
@@ -64,10 +66,6 @@ export default {
 
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
-
-      // console.log("dish.restaurant_id:", dish.restaurant_id);
-      // console.log("this.restaurant.id:", this.restaurant.id);
-
       if (cartItem && cartItem.restaurant_id === dish.restaurant_id) {
         cartItem.quantity++;
       } else if (
@@ -119,7 +117,6 @@ export default {
     getIndexItem(dishId) {
       const cartItem = this.cartItems.find((item) => item.id == dishId);
       const index = this.cartItems.indexOf(cartItem);
-      // console.log("index", index);
       return index;
     },
   },
@@ -186,7 +183,9 @@ export default {
               </div>
             </div>
           </div>
-          <h1 class="text-danger">totale piatti {{ totalCartDishesnumber }}</h1>
+          <h1 class="text-danger">
+            totale piatti {{ store.totalCartDishesnumber }}
+          </h1>
           <Cart :cartItems="cartItems" />
         </div>
       </div>

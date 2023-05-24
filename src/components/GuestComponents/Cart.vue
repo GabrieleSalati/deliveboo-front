@@ -1,5 +1,7 @@
 <script>
 import localStorageMixin from "../../localStorageMixin.js";
+import { store } from "../../assets/data/store";
+
 export default {
   mixins: [localStorageMixin],
   props: {
@@ -7,6 +9,7 @@ export default {
   },
   data() {
     return {
+      store,
       title: "Cart",
       key: "carrello",
     };
@@ -17,6 +20,7 @@ export default {
     emptyCart(key) {
       this.removeFromLocalStorage(key);
       this.cartItems.splice(0, this.cartItems.length);
+      this.setTotalCartDishesnumber(0);
     },
 
     // calcola il prezzo del singolo piatto per la quantità
@@ -33,9 +37,20 @@ export default {
       }
       return sumQuantity;
     },
-    removeDish(id) {
+
+    totalCartDishesnumber() {
+      let cartQuantity = 0;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        const cartItem = this.cartItems[i];
+        cartQuantity += cartItem.quantity;
+      }
+      return cartQuantity;
+    },
+
+    removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
       this.sync(this.key, this.cartItems);
+      this.setTotalCartDishesnumber(store.totalCartDishesnumber - quantity);
     },
 
     // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
@@ -65,7 +80,9 @@ export default {
             <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
             <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
           </div>
-          <button class="btn btn-link" @click="removeDish(cartItem.id)">Rimuovi</button>
+          <button class="btn btn-link" @click="removeDish(cartItem.id, cartItem.quantity)">
+            Rimuovi
+          </button>
         </div>
       </div>
     </div>

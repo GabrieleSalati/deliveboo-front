@@ -1,9 +1,12 @@
 <script>
+import { store } from "../../assets/data/store";
+
 export default {
   name: "AppHeader",
   data() {
     return {
       isMobileView: false,
+      store,
     };
   },
   mounted() {
@@ -14,7 +17,6 @@ export default {
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);
   },
-
   methods: {
     redirectToPage() {
       window.location.href = "http://127.0.0.1:8000/login";
@@ -23,10 +25,14 @@ export default {
       this.isMobileView = window.innerWidth <= 767; // Imposta la visualizzazione mobile per larghezza <= 767px
     },
   },
+  computed: {},
 };
 </script>
 
 <template>
+  <!-- <span class="text-danger ms-5">{{ store.totalCartDishesnumber }}</span> -->
+  <!-- CONTATORE DISH -->
+
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container">
       <div class="navbar-brand">
@@ -54,7 +60,10 @@ export default {
         </ul>
         <ul class="navbar-nav ml-auto">
           <li>
-            <router-link :to="{ name: 'cart' }" class="navbar-nav nav-link text-light fs-5 me-2">
+            <router-link
+              :to="{ name: 'cart' }"
+              class="navbar-nav nav-link text-light fs-5 me-2"
+            >
               <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
             </router-link>
           </li>
