@@ -4,14 +4,11 @@ import { store } from "../../assets/data/store";
 
 export default {
   mixins: [localStorageMixin],
-  props: {
-    cartItems: Array,
-  },
   data() {
     return {
       store,
+      cartItems: store.cartItems,
       title: "Cart",
-      key: "carrello",
     };
   },
   components: {},
@@ -50,7 +47,7 @@ export default {
 
     removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
-      this.sync(this.key, this.cartItems);
+      this.sync(store.key, this.cartItems);
       this.updateTotalCartDishes();
     },
 
@@ -83,10 +80,10 @@ export default {
         document.getElementById("alert").innerHTML = `
       <div class="alert alert-danger" role="alert">
         Puoi ordinare da un ristorante alla volta, svuota il carrello per continuare!
-      </div>      
+      </div>
       `;
       }
-      this.sync(this.key, this.cartItems);
+      this.sync(store.key, this.cartItems);
       this.updateTotalCartDishes();
     },
 
@@ -99,7 +96,7 @@ export default {
       if (cartItem && cartItem.quantity == 0) {
         this.cartItems.splice(this.getIndexItem(dishId), 1);
       }
-      this.sync(this.key, this.cartItems);
+      this.sync(store.key, this.cartItems);
       this.updateTotalCartDishes();
     },
 
@@ -154,7 +151,7 @@ export default {
       </div>
     </div>
     <div class="d-flex justify-content-between mt-5 align-items-baseline">
-      <button class="btn custom-btn" @click="emptyCart(this.key)">Svuota Carrello</button>
+      <button class="btn custom-btn" @click="emptyCart(store.key)">Svuota Carrello</button>
       <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>
