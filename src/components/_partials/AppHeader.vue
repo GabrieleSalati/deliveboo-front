@@ -30,30 +30,18 @@ export default {
 </script>
 
 <template>
-  <!-- <span class="text-danger ms-5">{{ store.totalCartDishesnumber }}</span> -->
-  <!-- CONTATORE DISH -->
-
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container">
       <div class="navbar-brand">
         <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo" />
-        <router-link
-          :to="{ name: 'home' }"
-          class="btn btn-outline btn-lg custom-btn"
-        >
+        <router-link :to="{ name: 'home' }" class="btn btn-outline btn-lg custom-btn">
           DeliveBoo
         </router-link>
       </div>
-      <div
-        class="collapse navbar-collapse d-flex align-items-center"
-        id="navbarNav"
-      >
+      <div class="collapse navbar-collapse d-flex align-items-center" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'restaurants' }"
-              class="btn btn-outline btn-lg custom-btn"
-            >
+            <router-link :to="{ name: 'restaurants' }" class="btn btn-outline btn-lg custom-btn">
               Ristoranti
             </router-link>
           </li>
@@ -62,8 +50,13 @@ export default {
           <li>
             <router-link
               :to="{ name: 'cart' }"
-              class="navbar-nav nav-link text-light fs-5 me-2"
-            >
+              class="navbar-nav cart-icon nav-link text-light fs-5 me-2">
+              <!-- CONTATORE DISH -->
+
+              <span class="text-danger dish-badge ms-5"
+                ><strong>{{ store.totalCartDishesnumber }}</strong></span
+              >
+
               <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
             </router-link>
           </li>
@@ -74,19 +67,21 @@ export default {
   <div class="mobile-icons fixed-top" v-if="isMobileView">
     <!-- icone per la visualizzazione mobile -->
     <div class="mobile-icon text-white d-flex justify-content-evenly">
-      <router-link
-        :to="{ name: 'home' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
-      >
+      <router-link :to="{ name: 'home' }" class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
         <i class="bi bi-house-door-fill"></i>
       </router-link>
       <router-link
         :to="{ name: 'restaurants' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
-      >
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
         <i class="bi bi-book"></i>
       </router-link>
-      <img src="../../assets/svg-1.svg" alt="" />
+      <!-- CONTATORE DISH -->
+      <div class="cart-icon">
+        <span class="text-danger dish-badge ms-5"
+          ><strong>{{ store.totalCartDishesnumber }}</strong></span
+        >
+        <img src="../../assets/svg-1.svg" alt="" />
+      </div>
     </div>
   </div>
 </template>
@@ -112,6 +107,22 @@ export default {
   color: #fff;
   border-color: #bd2222;
   background-color: #bd2222;
+}
+
+.cart-icon {
+  position: relative;
+}
+.dish-badge {
+  position: absolute;
+  top: 7px;
+  right: 26px;
+  font-size: 0.9rem;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  padding: 1px 2px;
+  line-height: 0.9rem;
+  border-radius: 4px;
 }
 
 .mobile-icons {
