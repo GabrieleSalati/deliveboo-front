@@ -143,6 +143,30 @@ export default {
           this.error = error.message;
         });
     },
+
+    //funzione per calcolare totale carrello (senza spedizione) così da riportarlo sotto nel form
+    totalCheckOut() {
+      let totCart = 0;
+      for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
+        totCart +=
+          this.getFromLocalStorage(store.key)[i].quantity *
+          this.getFromLocalStorage(store.key)[i].price;
+      }
+      return totCart;
+    },
+
+    //funzione per calcolare totale carrello (con spedizione) così da riportarlo sotto nel form
+    totalCheckOutPlusShipping() {
+      let totCart = 0;
+      //   let spedizione = Math.floor((Math.random() * 7) + 3); QUANDO LA SALVO VUE MI CANCELLA LE PARENTESI
+      const spedizione = 4;
+      for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
+        totCart +=
+          this.getFromLocalStorage(store.key)[i].quantity *
+          this.getFromLocalStorage(store.key)[i].price;
+      }
+      return totCart + spedizione;
+    },
   },
 };
 </script>
@@ -154,14 +178,25 @@ export default {
     <h2 class="mt-5">Contatta il ristoratore:</h2>
     <form @submit.prevent="sendOrder">
       <div class="container row">
-        <!-- <div class="mb-3 col-6">
-                <label for="exampleFormControlInput1" class="form-label">Total bill</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
-            </div>
-            <div class="mb-3 col-6">
-                <label for="exampleFormControlInput1" class="form-label">Without shipping cost</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
-            </div> -->
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Totale</label
+          >
+          <p class="form-control">
+            <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
+            {{ this.totalCheckOutPlusShipping() }}
+          </p>
+        </div>
+
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Totale senza costi di spedizione</label
+          >
+          <p class="form-control">
+            {{ this.totalCheckOut() }}
+          </p>
+        </div>
+
         <div class="mb-3 col-6">
           <label for="guest_name" class="form-label">Nome Cliente</label>
           <input
