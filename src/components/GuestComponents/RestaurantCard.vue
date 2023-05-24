@@ -183,12 +183,12 @@ export default {
               </div>
             </div>
           </div>
-          <h1>
+          <!-- <h1>
             Numero totale piatti
             <span class="badge text-bg-danger">{{
               store.totalCartDishesnumber
             }}</span>
-          </h1>
+          </h1> -->
           <Cart :cartItems="cartItems" />
         </div>
       </div>
