@@ -59,6 +59,7 @@ export default {
   },
 
   methods: {
+    //inizializzazione carrello
     init() {
       this.cartItems = this.getFromLocalStorage(this.key);
       console.log("log di cartitems nell' init", this.cartItems);
@@ -67,6 +68,7 @@ export default {
       }
     },
 
+    //funzione per incrementare quantità prodotto nel carrello
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
       if (cartItem) {
@@ -86,6 +88,7 @@ export default {
       this.sync(this.key, this.cartItems);
     },
 
+    //funzione per decrementare quantità prodotto nel carrello
     decrementCounter(dishId) {
       const cartItem = this.cartItems.find((item) => item.id === dishId);
       if (cartItem && cartItem.quantity > 0) {
@@ -99,11 +102,13 @@ export default {
       this.sync(this.key, this.cartItems);
     },
 
+    //funzione che restituisce quantità di un determinato piatto nel carrello
     getCartItemQuantity(dishId) {
       const cartItem = this.cartItems.find((item) => item.id === dishId);
       return cartItem ? cartItem.quantity : 0;
     },
 
+    //funzione che restituisce la posizione di un determinato piatto nell' array carrello
     getIndexItem(dishId) {
       const cartItem = this.cartItems.find((item) => item.id == dishId);
       const index = this.cartItems.indexOf(cartItem);
@@ -111,11 +116,7 @@ export default {
       return index;
     },
 
-    //   saveToCart(dishId) {
-    //     // this.getIndexItem(dishId);
-    //     // const cartItem = this.cartItems.find((item) => item.id == dishId);
-    //     this.sync(this.key, this.cartItems);
-    // },
+    //funzione che restituisce il numero di piatti totali nel carrello
     totalCartDishes() {
       let sumQuantity = 0;
       for (let i = 0; i < this.cartItems.length; i++) {
@@ -125,8 +126,11 @@ export default {
       return sumQuantity;
     },
 
+    //funzione legata al submit.prevent
     sendOrder() {
       const order = {
+        totalBill: this.totalCheckOutPlusShipping(),
+        billNoShipping: this.totalCheckOut(),
         guestName: this.formData.guestName,
         email: this.formData.email,
         address: this.formData.address,
