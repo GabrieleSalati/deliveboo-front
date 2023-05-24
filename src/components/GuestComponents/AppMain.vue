@@ -41,16 +41,18 @@ export default {
   <Loader v-if="loading" />
 
   <!-- JUMBOTRON -->
-  <section class="jumbo mt-5">
-    <div class="container text-center">
-      <div class="text-white text-start ps-5">
-        <h1 class="header-jumbo mb-2">DeliveBoo</h1>
-        <h3 class="header-txt mb-4">
-          Soddisfa la tua fame con <span class="highlight">un click!</span
-          ><br />
-          Il cibo delizioso viene direttamente
-          <span class="highlight">da te.</span>
-        </h3>
+  <section class="jumbo mt-5 row justify-content-center">
+    <div class="col-lg-8 col-md-10 container align-self-center">
+      <div class="jumbo-text text-white text-start">
+        <div class="bg-mobile">
+          <h1 class="header-jumbo mb-2">DeliveBoo</h1>
+          <h3 class="header-txt mb-4">
+            Soddisfa la tua fame con <span class="highlight">un click!</span
+            ><br />
+            Il cibo delizioso viene direttamente
+            <span class="highlight">da te.</span>
+          </h3>
+        </div>
         <router-link
           :to="{ name: 'restaurants' }"
           class="btn btn-outline-light btn-lg custom-btn"
@@ -58,6 +60,15 @@ export default {
           Ordina subito!
         </router-link>
       </div>
+    </div>
+    <div
+      class="col-lg-4 col-md-6 d-flex justify-content-md-center align-items-end pb-0 mb-0"
+    >
+      <img
+        class="motorino img-fluid"
+        src="../../assets/motorino.png"
+        alt="motorino"
+      />
     </div>
   </section>
 
@@ -100,14 +111,25 @@ export default {
 
 <style lang="scss" scoped>
 .jumbo {
-  background-image: url(../../assets/jumbo-.svg);
+  background-image: url(../../assets/jumbo-.png);
   background-position: center bottom;
   object-fit: cover;
   background-size: cover;
   background-repeat: no-repeat;
   height: 80vh;
+  width: auto;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+}
+
+.motorino {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.jumbo-text {
+  margin-left: 25%;
 }
 
 .jumbo .text-white {
@@ -183,9 +205,31 @@ h3:hover .highlight {
   .jumbo {
     height: auto;
     padding-top: 3rem;
-    padding-bottom: 3rem;
   }
 
+  .motorino {
+    height: 20rem;
+    width: auto;
+  }
+
+  .bg-mobile {
+    // background-color: #f8d24c;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .bg-mobile > h3 > .highlight {
+    color: #bd2222;
+  }
+
+  .jumbo-text {
+    padding-left: 0;
+    margin-left: 0;
+    // background-image: url(../../assets/bg-text.png);
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    // background-position: center;
+  }
   .header-jumbo {
     font-size: 3rem;
   }
