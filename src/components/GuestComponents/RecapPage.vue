@@ -176,7 +176,7 @@ export default {
 
         handleSubmit(event) {
             event.preventDefault();
-            axios.post('/api/submit-form', this.formData)
+            axios.post('/api/submit', this.formData)
                 .then(response => {
                     // Gestisci la risposta
                 })
