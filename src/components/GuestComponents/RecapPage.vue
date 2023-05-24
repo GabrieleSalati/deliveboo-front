@@ -1,6 +1,7 @@
 <script>
 import Cart from "../GuestComponents/Cart.vue";
 import localStorageMixin from "../../localStorageMixin.js";
+import { store } from "../../assets/data/store";
 import axios from "axios";
 
 export default {
@@ -8,6 +9,7 @@ export default {
 
   data() {
     return {
+      store,
       title: "Effettua il checkout!",
       restaurant: {}, //ristorante
       cartItems: [], //carrello
@@ -15,7 +17,6 @@ export default {
       // index: null,
       totalCartDishesnumber: 0,
       key: "carrello",
-
       formData: {
         guestName: "",
         email: "",
@@ -25,9 +26,7 @@ export default {
     };
   },
 
-  components: {
-    Cart,
-  },
+  components: { Cart },
   computed: {
     // totalCartDishes2() {
     //   let totalCartDishesnumber = 0;
@@ -68,41 +67,6 @@ export default {
       }
     },
 
-    // incrementCounter(dishId) {
-    //   // TODO portare come parametro il piatto intero e confrontare gli id
-    //   const cartItem = this.cartItems.find((item) => item.id === dishId);
-    //   if (cartItem) {
-    //     cartItem.quantity++;
-    //   } else {
-    //     let arr = this.dishesList.filter((dish) => {
-    //       if (dish.id === dishId) {
-    //         console.log("oggeto trovato dal filter", dish);
-    //         return true;
-    //       }
-    //     });
-    //     if (arr && arr[0]) {
-    //       let obj = {
-    //         id: arr[0].id,
-    //         restaurant_id: arr[0].restaurant_id,
-    //         name: arr[0].name,
-    //         quantity: 1,
-    //         price: arr[0].price,
-    //         picture: arr[0].picture,
-    //       };
-    //       this.cartItems.push(obj);
-    //       this.sync(this.key, this.cartItems);
-    //       // this.cartItems.push({
-    //       //   dishId: dishId,
-    //       //   quantity: 1,
-
-    //       // });
-    //     } else {
-    //       //product id does not exist in products data
-    //       console.error("Invalid Product");
-    //     }
-    //     console.log(this.cartItems);
-    //   }
-    // },
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
       if (cartItem) {
@@ -121,19 +85,6 @@ export default {
       console.log(this.cartItems);
       this.sync(this.key, this.cartItems);
     },
-    // incrementCounter(dishId) {
-    //   // TODO portare come parametro il piatto intero e confrontare gli id
-    //   const cartItem = this.cartItems.find((item) => item.dishId === dishId);
-    //   if (cartItem) {
-    //     cartItem.quantity++;
-    //   } else {
-    //     this.cartItems.push({
-    //       dishId: dishId,
-    //       quantity: 1,
-    //     });
-    //   }
-    //   console.log(this.cartItems);
-    // },
 
     decrementCounter(dishId) {
       const cartItem = this.cartItems.find((item) => item.id === dishId);
@@ -174,15 +125,22 @@ export default {
       return sumQuantity;
     },
 
-    handleSubmit(event) {
-      event.preventDefault();
+    sendOrder() {
+      const order = {
+        guestName: this.formData.guestName,
+        email: this.formData.email,
+        address: this.formData.address,
+        telephone: this.formData.telephone,
+      };
+
       axios
-        .post("/api/submit-form", this.formData)
+        .post("http://127.0.0.1:8000/api/orders", order)
         .then((response) => {
-          // Gestisci la risposta
+          console.log(response);
         })
         .catch((error) => {
-          // Gestisci l'errore
+          console.log(error);
+          this.error = error.message;
         });
     },
   },
@@ -194,7 +152,7 @@ export default {
     <h1 class="pt-5 fw-bold">{{ title }}</h1>
     <Cart :cartItems="cartItems" />
     <h2 class="mt-5">Contatta il ristoratore:</h2>
-    <form @submit="handleSubmit">
+    <form @submit.prevent="sendOrder">
       <div class="container row">
         <!-- <div class="mb-3 col-6">
                 <label for="exampleFormControlInput1" class="form-label">Total bill</label>
@@ -205,53 +163,49 @@ export default {
                 <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
             </div> -->
         <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Nome Cliente</label
-          >
+          <label for="guest_name" class="form-label">Nome Cliente</label>
           <input
-            v-model="formData.guestName"
+            v-model="guestName"
             type="text"
             class="form-control"
-            id="exampleFormControlInput1"
+            id="guest_name"
             placeholder="Nome Cognome"
           />
         </div>
+
         <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Email Cliente</label
-          >
+          <label for="guest_email" class="form-label">Email Cliente</label>
           <input
-            v-model="formData.email"
+            v-model="email"
             type="email"
             class="form-control"
-            id="exampleFormControlInput1"
+            id="guest_email"
             placeholder="name@example.com"
           />
         </div>
+
         <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Indirizzo</label
-          >
+          <label for="guest_address" class="form-label">Indirizzo</label>
           <input
-            v-model="formData.address"
+            v-model="address"
             type="text"
             class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Via Tacchino 12"
+            id="guest_address"
+            placeholder="Via Tacchi 12"
           />
         </div>
+
         <div class="mb-5 col-6">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Cellulare</label
-          >
+          <label for="guest_telephone" class="form-label">Cellulare</label>
           <input
-            v-model="formData.telephone"
+            v-model="telephone"
             type="text"
             class="form-control"
-            id="exampleFormControlInput1"
+            id="guest_telephone"
             placeholder="367859857"
           />
         </div>
+
         <div class="mb-3 col-12 d-flex justify-content-center">
           <button class="btn custom-btn" type="submit">Ordina e paga!</button>
         </div>
