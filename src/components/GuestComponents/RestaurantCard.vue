@@ -14,11 +14,9 @@ export default {
     return {
       store,
       restaurant: {}, //ristorante
-      cartItems: [], //carrello
       dishesList: [], //products
       // index: null,
 
-      key: "carrello",
       loading: true,
     };
   },
@@ -45,21 +43,21 @@ export default {
   methods: {
     // inizializza la variabile cartItems caricando al suo interno i dati da localStorage
     init() {
-      this.cartItems = this.getFromLocalStorage(this.key);
-      console.log("log di cartitems nell' init", this.cartItems);
-      if (!this.cartItems) {
-        this.cartItems = [];
+      store.cartItems = this.getFromLocalStorage(store.key);
+      console.log("log di cartitems nell' init", store.cartItems);
+      if (!store.cartItems) {
+        store.cartItems = [];
       }
     },
 
     // aggiunge un piatto all' array cartItems e se il piatto è già nell' array ne aumenta la quantity
     incrementCounter(dish) {
-      const cartItem = this.cartItems.find((item) => item.id === dish.id);
+      const cartItem = store.cartItems.find((item) => item.id === dish.id);
       if (cartItem && cartItem.restaurant_id === dish.restaurant_id) {
         cartItem.quantity++;
       } else if (
-        this.cartItems.length == 0 ||
-        this.cartItems[0].restaurant_id == dish.restaurant_id
+        store.cartItems.length == 0 ||
+        store.cartItems[0].restaurant_id == dish.restaurant_id
       ) {
         let obj = {
           id: dish.id,
@@ -69,49 +67,48 @@ export default {
           price: dish.price,
           picture: dish.picture,
         };
-        this.cartItems.push(obj);
+        store.cartItems.push(obj);
       } else {
         alert("Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!");
 
         document.getElementById("alert").innerHTML = `
       <div class="alert alert-danger" role="alert">
         Puoi ordinare da un ristorante alla volta, svuota il carrello per continuare!
-      </div>      
+      </div>
       `;
       }
-      this.sync(this.key, this.cartItems);
+      this.sync(store.key, store.cartItems);
       this.updateTotalCartDishes();
-      // store.totalCartDishesnumber++;
     },
 
     // riduce la quantity di un piatto nell' array cartItems e se la quantity=0 rimuove il piatto dall' array
     decrementCounter(dishId) {
-      const cartItem = this.cartItems.find((item) => item.id === dishId);
+      const cartItem = store.cartItems.find((item) => item.id === dishId);
       if (cartItem && cartItem.quantity > 0) {
         cartItem.quantity--;
       }
       if (cartItem && cartItem.quantity == 0) {
-        this.cartItems.splice(this.getIndexItem(dishId), 1);
+        store.cartItems.splice(this.getIndexItem(dishId), 1);
       }
-      this.sync(this.key, this.cartItems);
+      this.sync(store.key, store.cartItems);
       this.updateTotalCartDishes();
       // store.totalCartDishesnumber--;
     },
 
     // indica la quantità di ogni singolo piatto all' interno dell' array cartItems, se il piatto non è presente nell' array imposta la quantity=0
     getCartItemQuantity(dishId) {
-      const cartItem = this.cartItems.find((item) => item.id === dishId);
+      const cartItem = store.cartItems.find((item) => item.id === dishId);
       return cartItem ? cartItem.quantity : 0;
     },
 
     // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
     getIndexItem(dishId) {
-      const cartItem = this.cartItems.find((item) => item.id == dishId);
-      const index = this.cartItems.indexOf(cartItem);
+      const cartItem = store.cartItems.find((item) => item.id == dishId);
+      const index = store.cartItems.indexOf(cartItem);
       return index;
     },
     updateTotalCartDishes() {
-      store.calculateDishesNumber(this.cartItems);
+      store.calculateDishesNumber(store.cartItems);
     },
   },
 };
@@ -161,7 +158,7 @@ export default {
                 {{ getCartItemQuantity(dish.id) }}
                 <i class="bi bi-cart-plus" @click="incrementCounter(dish)"></i>
 
-                <!-- <button class="btn btn-danger" @click="sync(this.key, this.cartItems)">
+                <!-- <button class="btn btn-danger" @click="sync(store.key, store.cartItems)">
                   Aggiungi al carrello
                 </button> -->
               </div>
@@ -173,7 +170,7 @@ export default {
               store.totalCartDishesnumber
             }}</span>
           </h1> -->
-          <Cart :cartItems="cartItems" />
+          <Cart />
         </div>
       </div>
     </div>
