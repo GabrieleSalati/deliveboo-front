@@ -37,8 +37,12 @@ export default {
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container">
       <div class="navbar-brand">
-        <router-link :to="{ name: 'home' }" class="">
-          <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo" />
+        <router-link :to="{ name: 'home' }">
+          <img
+            src="../../assets/Logo.svg"
+            alt="logo"
+            class="img-fluid logo mx-0"
+          />
         </router-link>
       </div>
       <div

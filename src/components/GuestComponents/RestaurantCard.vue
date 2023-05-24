@@ -30,12 +30,14 @@ export default {
   created() {
     this.loading = true;
 
-    axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
-      this.restaurant = response.data[0];
-      this.dishesList = this.restaurant.dishes;
-      this.loading = false;
-      console.log(this.dishesList);
-    });
+    axios
+      .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
+      .then((response) => {
+        this.restaurant = response.data[0];
+        this.dishesList = this.restaurant.dishes;
+        this.loading = false;
+        console.log(this.dishesList);
+      });
     this.init();
     // localStorage.clear();
     this.updateTotalCartDishes();
@@ -69,7 +71,9 @@ export default {
         };
         store.cartItems.push(obj);
       } else {
-        alert("Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!");
+        alert(
+          "Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!"
+        );
 
         document.getElementById("alert").innerHTML = `
       <div class="alert alert-danger" role="alert">
@@ -127,21 +131,27 @@ export default {
       <div class="card-body">
         <div class="info-restaurant text-center">
           <h5 class="card-title fs-1">{{ restaurant.restaurant_name }}</h5>
-          <p class="card-text"><i class="bi bi-geo-alt me-1"></i>{{ restaurant.address }}</p>
+          <p class="card-text">
+            <i class="bi bi-geo-alt me-1"></i>{{ restaurant.address }}
+          </p>
           <p>{{ restaurant.category }}</p>
         </div>
 
         <div class="menu">
           <div class="list-group d-flex my-5" id="myList" role="tablist">
-            <div class="menu-title text-center fw-bold fs-2 mt-4 rounded-top">Menu</div>
+            <div class="menu-title text-center fw-bold fs-2 mt-4 rounded-top">
+              Menu
+            </div>
             <div id="alert"></div>
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
-              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center">
+              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center"
+            >
               <!-- MODIFICA FLEX BREAK POINT -->
               <div
-                class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
+                class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center justify-content-center"
+              >
                 <img :src="dish.picture" class="dish-picture" alt="piatto" />
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12">
@@ -153,14 +163,14 @@ export default {
               </div>
               <div
                 class="col-lg-2 col-md-12 col-sm-12 d-flex align-items-center justify-content-evenly fs-4 my-3"
-                :key="dish.id">
-                <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
+                :key="dish.id"
+              >
+                <i
+                  class="bi bi-cart-dash"
+                  @click="decrementCounter(dish.id)"
+                ></i>
                 {{ getCartItemQuantity(dish.id) }}
                 <i class="bi bi-cart-plus" @click="incrementCounter(dish)"></i>
-
-                <!-- <button class="btn btn-danger" @click="sync(store.key, store.cartItems)">
-                  Aggiungi al carrello
-                </button> -->
               </div>
             </div>
           </div>
@@ -185,6 +195,12 @@ export default {
 .menu-title {
   color: #bd2222;
   border: 1px solid #bd2222;
+  transition: background-color 0.3s ease;
+}
+
+.menu:hover .menu-title {
+  border: 1px solid #f8d24c;
+  background-color: #f8d24c;
 }
 
 .dish-picture {
