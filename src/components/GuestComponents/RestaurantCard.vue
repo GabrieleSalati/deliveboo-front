@@ -144,7 +144,7 @@ export default {
 
         <div class="menu">
           <div class="list-group d-flex my-5" id="myList" role="tablist">
-            <div class="menu-title text-center fw-bold fs-2 my-4 rounded-top">
+            <div class="menu-title text-center fw-bold fs-2 mt-4 rounded-top">
               Menu
             </div>
             <div id="alert"></div>

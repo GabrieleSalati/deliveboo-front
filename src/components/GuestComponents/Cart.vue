@@ -118,7 +118,7 @@ export default {
     <h1>Il tuo carrello</h1>
     <div class="row">
       <div class="col-12" v-for="cartItem in cartItems">
-        <div class="card d-flex flex-row align-items-center">
+        <div class="card rounded-0 d-flex flex-row align-items-center">
           <div class="col-3">
             <img
               :src="cartItem.picture"
@@ -133,7 +133,7 @@ export default {
             </div>
             <div class="col">
               <p class="card-text text-end">
-                Quantità: {{ cartItem.quantity }}€
+                Quantità: {{ cartItem.quantity }}
               </p>
               <p class="card-text text-end">
                 Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€
