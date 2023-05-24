@@ -1,3 +1,4 @@
+s
 <script>
 import axios from "axios";
 import Cart from "./Cart.vue";
@@ -25,32 +26,21 @@ export default {
     Cart,
     Loader,
   },
-  computed: {
-    // calcola la somma dei piatti aggiunti al carrello
-    totalCartDishesnumber() {
-      let sumQuantity = 0;
-      for (let i = 0; i < this.cartItems.length; i++) {
-        const quantityEl = this.cartItems[i].quantity;
-        sumQuantity += quantityEl;
-      }
-      return (store.totalCartDishesnumber = sumQuantity);
-    },
-  },
+  computed: {},
 
   // fetch del ristorante con i relativi piatti
   created() {
     this.loading = true;
 
-    axios
-      .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
-      .then((response) => {
-        this.restaurant = response.data[0];
-        this.dishesList = this.restaurant.dishes;
-        this.loading = false;
-        console.log(this.dishesList);
-      });
+    axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
+      this.restaurant = response.data[0];
+      this.dishesList = this.restaurant.dishes;
+      this.loading = false;
+      console.log(this.dishesList);
+    });
     this.init();
     // localStorage.clear();
+    this.updateTotalCartDishes();
   },
   methods: {
     // inizializza la variabile cartItems caricando al suo interno i dati da localStorage
@@ -63,7 +53,6 @@ export default {
     },
 
     // aggiunge un piatto all' array cartItems e se il piatto è già nell' array ne aumenta la quantity
-
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
       if (cartItem && cartItem.restaurant_id === dish.restaurant_id) {
@@ -82,9 +71,7 @@ export default {
         };
         this.cartItems.push(obj);
       } else {
-        alert(
-          "Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!"
-        );
+        alert("Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!");
 
         document.getElementById("alert").innerHTML = `
       <div class="alert alert-danger" role="alert">
@@ -93,6 +80,8 @@ export default {
       `;
       }
       this.sync(this.key, this.cartItems);
+      this.updateTotalCartDishes();
+      // store.totalCartDishesnumber++;
     },
 
     // riduce la quantity di un piatto nell' array cartItems e se la quantity=0 rimuove il piatto dall' array
@@ -105,6 +94,8 @@ export default {
         this.cartItems.splice(this.getIndexItem(dishId), 1);
       }
       this.sync(this.key, this.cartItems);
+      this.updateTotalCartDishes();
+      // store.totalCartDishesnumber--;
     },
 
     // indica la quantità di ogni singolo piatto all' interno dell' array cartItems, se il piatto non è presente nell' array imposta la quantity=0
@@ -118,6 +109,9 @@ export default {
       const cartItem = this.cartItems.find((item) => item.id == dishId);
       const index = this.cartItems.indexOf(cartItem);
       return index;
+    },
+    updateTotalCartDishes() {
+      store.calculateDishesNumber(this.cartItems);
     },
   },
 };
@@ -136,27 +130,21 @@ export default {
       <div class="card-body">
         <div class="info-restaurant text-center">
           <h5 class="card-title fs-1">{{ restaurant.restaurant_name }}</h5>
-          <p class="card-text">
-            <i class="bi bi-geo-alt me-1"></i>{{ restaurant.address }}
-          </p>
+          <p class="card-text"><i class="bi bi-geo-alt me-1"></i>{{ restaurant.address }}</p>
           <p>{{ restaurant.category }}</p>
         </div>
 
         <div class="menu">
           <div class="list-group d-flex my-5" id="myList" role="tablist">
-            <div class="menu-title text-center fw-bold fs-2 mt-4 rounded-top">
-              Menu
-            </div>
+            <div class="menu-title text-center fw-bold fs-2 mt-4 rounded-top">Menu</div>
             <div id="alert"></div>
             <div
               v-for="dish in restaurant.dishes"
               :key="dish.id"
-              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center"
-            >
+              class="list-group-item row list-group-item-action d-flex justify-content-start align-self-center">
               <!-- MODIFICA FLEX BREAK POINT -->
               <div
-                class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center justify-content-center"
-              >
+                class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
                 <img :src="dish.picture" class="dish-picture" alt="piatto" />
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12">
@@ -168,12 +156,8 @@ export default {
               </div>
               <div
                 class="col-lg-2 col-md-12 col-sm-12 d-flex align-items-center justify-content-evenly fs-4 my-3"
-                :key="dish.id"
-              >
-                <i
-                  class="bi bi-cart-dash"
-                  @click="decrementCounter(dish.id)"
-                ></i>
+                :key="dish.id">
+                <i class="bi bi-cart-dash" @click="decrementCounter(dish.id)"></i>
                 {{ getCartItemQuantity(dish.id) }}
                 <i class="bi bi-cart-plus" @click="incrementCounter(dish)"></i>
 

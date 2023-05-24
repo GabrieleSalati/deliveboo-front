@@ -25,7 +25,11 @@ export default {
       this.isMobileView = window.innerWidth <= 767; // Imposta la visualizzazione mobile per larghezza <= 767px
     },
   },
-  computed: {},
+  computed: {
+    totalCartDishes() {
+      return store.totalCartDishesnumber;
+    },
+  },
 };
 </script>
 
