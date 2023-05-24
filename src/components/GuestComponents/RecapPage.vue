@@ -136,70 +136,85 @@ export default {
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
-  <Cart :cartItems="cartItems" />
-  <h2>Contatta il ristoratore:</h2>
-  <form action="POST">
-    <div class="container">
-      <div class="mb-3">
-        <label for="total_bill" class="form-label">Total bill</label>
-        <input
-          type="number"
-          class="form-control"
-          id="total_bill"
-          placeholder="00"
-        />
+  <div class="container my-5">
+    <h1 class="pt-5 fw-bold">{{ title }}</h1>
+    <Cart :cartItems="cartItems" />
+    <h2 class="mt-5">Contatta il ristoratore:</h2>
+    <form @submit="handleSubmit">
+      <div class="container row">
+        <!-- <div class="mb-3 col-6">
+                  <label for="exampleFormControlInput1" class="form-label">Total bill</label>
+                  <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+              </div>
+              <div class="mb-3 col-6">
+                  <label for="exampleFormControlInput1" class="form-label">Without shipping cost</label>
+                  <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+              </div> -->
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Nome Cliente</label
+          >
+          <input
+            v-model="formData.guestName"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Nome Cognome"
+          />
+        </div>
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Email Cliente</label
+          >
+          <input
+            v-model="formData.email"
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Indirizzo</label
+          >
+          <input
+            v-model="formData.address"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Via Tacchino 12"
+          />
+        </div>
+        <div class="mb-5 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Cellulare</label
+          >
+          <input
+            v-model="formData.telephone"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="367859857"
+          />
+        </div>
+        <div class="mb-3 col-12 d-flex justify-content-center">
+          <button class="btn custom-btn" type="submit">Ordina e paga!</button>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="bill_no_shipping" class="form-label"
-          >Without shipping cost</label
-        >
-        <input
-          type="number"
-          class="form-control"
-          id="bill_no_shipping"
-          placeholder="00"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="guest_name" class="form-label">Customer</label>
-        <input
-          type="text"
-          class="form-control"
-          id="guest_name"
-          placeholder="Germano Mosconi"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Customer email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="name@example.com"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="address" class="form-label">Customer address</label>
-        <input
-          type="text"
-          class="form-control"
-          id="address"
-          placeholder="Via Tacchino 12"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="telephone" class="form-label">Phone number</label>
-        <input
-          type="text"
-          class="form-control"
-          id="telephone"
-          placeholder="367859857"
-        />
-      </div>
-      <button type="submit">Ordina e paga!</button>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn.custom-btn {
+  font-weight: 800;
+  color: #bd2222;
+  border-color: #bd2222;
+}
+
+.btn.custom-btn:hover {
+  color: #fff;
+  background-color: #bd2222;
+}
+</style>
