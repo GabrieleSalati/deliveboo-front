@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import App from "./App.vue";
+import { store } from "./assets/data/store";
 import "./localStorageMixin.js";
 
 const app = createApp(App);
