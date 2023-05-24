@@ -33,15 +33,20 @@ export default {
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container">
       <div class="navbar-brand">
-        <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo" />
-        <router-link :to="{ name: 'home' }" class="btn btn-outline btn-lg custom-btn">
-          DeliveBoo
+        <router-link :to="{ name: 'home' }" class="">
+          <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo" />
         </router-link>
       </div>
-      <div class="collapse navbar-collapse d-flex align-items-center" id="navbarNav">
+      <div
+        class="collapse navbar-collapse d-flex align-items-center"
+        id="navbarNav"
+      >
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link :to="{ name: 'restaurants' }" class="btn btn-outline btn-lg custom-btn">
+            <router-link
+              :to="{ name: 'restaurants' }"
+              class="btn btn-outline btn-lg custom-btn"
+            >
               Ristoranti
             </router-link>
           </li>
@@ -50,7 +55,8 @@ export default {
           <li>
             <router-link
               :to="{ name: 'cart' }"
-              class="navbar-nav cart-icon nav-link text-light fs-5 me-2">
+              class="navbar-nav cart-icon nav-link text-light fs-5 me-2"
+            >
               <!-- CONTATORE DISH -->
 
               <span class="text-danger dish-badge ms-5"
@@ -64,15 +70,25 @@ export default {
       </div>
     </div>
   </nav>
-  <div class="mobile-icons fixed-top" v-if="isMobileView">
+  <div class="mobile-icons fixed-top m-0 p-0" v-if="isMobileView">
     <!-- icone per la visualizzazione mobile -->
-    <div class="mobile-icon text-white d-flex justify-content-evenly">
-      <router-link :to="{ name: 'home' }" class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
-        <i class="bi bi-house-door-fill"></i>
+    <div
+      class="mobile-icon text-white d-flex align-items-center justify-content-evenly"
+    >
+      <router-link
+        :to="{ name: 'home' }"
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100"
+      >
+        <img
+          src="../../assets/Logo.svg"
+          alt="logo"
+          class="mobile-logo img-fluid logo"
+        />
       </router-link>
       <router-link
         :to="{ name: 'restaurants' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
+      >
         <i class="bi bi-book"></i>
       </router-link>
       <!-- CONTATORE DISH -->
@@ -149,6 +165,12 @@ export default {
 
   .mobile-icons {
     display: block;
+  }
+
+  .mobile-logo {
+    height: 2.5rem;
+    margin: 0;
+    padding: 0;
   }
 }
 </style>

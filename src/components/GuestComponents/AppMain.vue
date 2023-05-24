@@ -41,34 +41,39 @@ export default {
   <Loader v-if="loading" />
 
   <!-- JUMBOTRON -->
-  <section class="jumbo mt-5 row justify-content-center">
-    <div class="col-lg-8 col-md-10 container align-self-center">
-      <div class="jumbo-text text-white text-start">
-        <div class="bg-mobile">
-          <h1 class="header-jumbo mb-2">DeliveBoo</h1>
-          <h3 class="header-txt mb-4">
-            Soddisfa la tua fame con <span class="highlight">un click!</span
-            ><br />
-            Il cibo delizioso viene direttamente
-            <span class="highlight">da te.</span>
-          </h3>
-        </div>
-        <router-link
-          :to="{ name: 'restaurants' }"
-          class="btn btn-outline-light btn-lg custom-btn"
+  <section class="jumbo mt-5 justify-content-center w-100 mx-0">
+    <div class="container h-100">
+      <div class="row align-items-center h-100">
+        <div
+          class="col col-lg-8 col-md-8 d-flex aling-items-evenly justify-content-center pe-0"
         >
-          Ordina subito!
-        </router-link>
+          <div class="jumbo-text text-white text-start">
+            <h1 class="header-jumbo mb-2">DeliveBoo</h1>
+            <h3 class="header-txt mb-2">
+              Soddisfa la tua fame con <span class="highlight">un click!</span
+              ><br />
+              Il cibo delizioso viene direttamente
+              <span class="highlight">da te.</span>
+            </h3>
+
+            <router-link
+              :to="{ name: 'restaurants' }"
+              class="btn jumbo-custom-btn custom-btn my-2"
+            >
+              Ordina subito!
+            </router-link>
+          </div>
+        </div>
+        <div
+          class="col col-lg-4 col-md-4 d-flex justify-content-md-center align-self-end pb-0 mb-0 pe-0 me-0 flex-shrink-1"
+        >
+          <img
+            class="motorino img-fluid"
+            src="../../assets/motorino.png"
+            alt="motorino"
+          />
+        </div>
       </div>
-    </div>
-    <div
-      class="col-lg-4 col-md-6 d-flex justify-content-md-center align-items-end pb-0 mb-0"
-    >
-      <img
-        class="motorino img-fluid"
-        src="../../assets/motorino.png"
-        alt="motorino"
-      />
     </div>
   </section>
 
@@ -123,14 +128,14 @@ export default {
 }
 
 .motorino {
-  height: 100%;
-  width: 100%;
+  height: auto;
+  max-width: 100%;
   object-fit: cover;
 }
 
-.jumbo-text {
-  margin-left: 25%;
-}
+// .jumbo-text {
+//   margin-left: 25%;
+// }
 
 .jumbo .text-white {
   position: relative;
@@ -190,6 +195,9 @@ h3:hover .highlight {
   font-size: 2rem;
 }
 
+.jumbo-custom-btn {
+  background-color: #bd2222;
+}
 .btn.custom-btn {
   font-weight: 800;
   color: #f8d24c;
@@ -207,9 +215,16 @@ h3:hover .highlight {
     padding-top: 3rem;
   }
 
+  .jumbo .d-flex {
+    justify-content: center;
+    align-items: flex-end;
+  }
+
   .motorino {
-    height: 20rem;
-    width: auto;
+    // height: 15rem;
+    // width: auto;
+    margin-top: auto;
+    margin-bottom: 0;
   }
 
   .bg-mobile {
@@ -219,7 +234,7 @@ h3:hover .highlight {
   }
 
   .bg-mobile > h3 > .highlight {
-    color: #bd2222;
+    color: #f8d24c;
   }
 
   .jumbo-text {

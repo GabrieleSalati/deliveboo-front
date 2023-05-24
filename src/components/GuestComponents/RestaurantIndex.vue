@@ -96,7 +96,7 @@ export default {
       <h4>A casa tua a tempo <span style="color: #f8d24c"> di click!</span></h4>
     </div>
 
-    <div class="bg-category container shadow-lg">
+    <div class="bg-category container shadow-sm">
       <h4 class="fs-2 ms-3 mb-2" style="color: #bd2222">
         Scegli cosa mangiare:
       </h4>
@@ -153,7 +153,7 @@ export default {
         class="col-lg-4 col-md-6 col-sm-12 g-5"
         v-for="restaurant in filteredRestaurants"
       >
-        <div class="card h-100 border-0 shadow-lg">
+        <div class="card h-100 border shadow-lg">
           <img
             :src="restaurant.picture"
             class="card-img-top restaurant-picture img-fluid"
