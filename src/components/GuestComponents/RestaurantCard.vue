@@ -2,7 +2,7 @@ s
 <script>
 import axios from "axios";
 import Cart from "./Cart.vue";
-import localStorageMixin from "../../localStorageMixin.js";
+import localStorageMixin from "../../localStorageMixin";
 import Loader from "../_partials/Loader.vue";
 import { store } from "../../assets/data/store";
 
@@ -43,11 +43,11 @@ export default {
   methods: {
     // inizializza la variabile cartItems caricando al suo interno i dati da localStorage
     init() {
-      store.cartItems = this.getFromLocalStorage(store.key);
-      console.log("log di cartitems nell' init", store.cartItems);
-      if (!store.cartItems) {
-        store.cartItems = [];
-      }
+      store.cartItems = this.getFromLocalStorage(store.key) || [];
+      // console.log("log di cartitems nell' init", store.cartItems);
+      // if (!store.cartItems) {
+      //   store.cartItems = [];
+      // }
     },
 
     // aggiunge un piatto all' array cartItems e se il piatto è già nell' array ne aumenta la quantity
@@ -78,6 +78,7 @@ export default {
       `;
       }
       this.sync(store.key, store.cartItems);
+      this.init();
       this.updateTotalCartDishes();
     },
 
@@ -92,6 +93,7 @@ export default {
       }
       this.sync(store.key, store.cartItems);
       this.updateTotalCartDishes();
+      this.init();
       // store.totalCartDishesnumber--;
     },
 

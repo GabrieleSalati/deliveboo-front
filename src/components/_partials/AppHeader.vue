@@ -1,23 +1,40 @@
 <script>
 import { store } from "../../assets/data/store";
+import localStorageMixin from "../../localStorageMixin.js";
+import Cart from "../GuestComponents/Cart.vue";
 
 export default {
+  mixins: [localStorageMixin],
   name: "AppHeader",
   data() {
     return {
-      isMobileView: false,
       store,
+      isMobileView: false,
     };
+  },
+  computed: {
+    totalCartDishesNumber() {
+      return store.totalCartDishesnumber;
+    },
+  },
+  created() {
+    // this.updateTotalCartDishes();
+    this.init();
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
   },
-
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
+    // updateTotalCartDishes() {
+    //   store.calculateDishesNumber(store.cartItems);
+    // },
+    init() {
+      store.cartItems = this.getFromLocalStorage(store.key) || [];
+    },
     redirectToPage() {
       window.location.href = "http://127.0.0.1:8000/login";
     },
@@ -25,11 +42,7 @@ export default {
       this.isMobileView = window.innerWidth <= 767; // Imposta la visualizzazione mobile per larghezza <= 767px
     },
   },
-  computed: {
-    totalCartDishes() {
-      return store.totalCartDishesnumber;
-    },
-  },
+  components: { Cart },
 };
 </script>
 
@@ -41,16 +54,10 @@ export default {
           <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo" />
         </router-link>
       </div>
-      <div
-        class="collapse navbar-collapse d-flex align-items-center"
-        id="navbarNav"
-      >
+      <div class="collapse navbar-collapse d-flex align-items-center" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'restaurants' }"
-              class="btn btn-outline btn-lg custom-btn"
-            >
+            <router-link :to="{ name: 'restaurants' }" class="btn btn-outline btn-lg custom-btn">
               Ristoranti
             </router-link>
           </li>
@@ -59,8 +66,7 @@ export default {
           <li>
             <router-link
               :to="{ name: 'cart' }"
-              class="navbar-nav cart-icon nav-link text-light fs-5 me-2"
-            >
+              class="navbar-nav cart-icon nav-link text-light fs-5 me-2">
               <!-- CONTATORE DISH -->
 
               <span class="text-danger dish-badge ms-5"
@@ -68,6 +74,9 @@ export default {
               >
 
               <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
+              <div class="d-none">
+                <Cart />
+              </div>
             </router-link>
           </li>
         </ul>
@@ -76,23 +85,15 @@ export default {
   </nav>
   <div class="mobile-icons fixed-top m-0 p-0" v-if="isMobileView">
     <!-- icone per la visualizzazione mobile -->
-    <div
-      class="mobile-icon text-white d-flex align-items-center justify-content-evenly"
-    >
+    <div class="mobile-icon text-white d-flex align-items-center justify-content-evenly">
       <router-link
         :to="{ name: 'home' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100"
-      >
-        <img
-          src="../../assets/Logo.svg"
-          alt="logo"
-          class="mobile-logo img-fluid logo"
-        />
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100">
+        <img src="../../assets/Logo.svg" alt="logo" class="mobile-logo img-fluid logo" />
       </router-link>
       <router-link
         :to="{ name: 'restaurants' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
-      >
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
         <i class="bi bi-book"></i>
       </router-link>
       <!-- CONTATORE DISH -->
