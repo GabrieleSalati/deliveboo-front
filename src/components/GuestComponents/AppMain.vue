@@ -90,7 +90,7 @@ export default {
       class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3"
     >
       <div v-for="category in categories" :key="category.id" class="col">
-        <div class="card position-relative zoom-effect">
+        <div class="card position-relative zoom-effect shadow-sm">
           <router-link
             :to="{
               name: 'restaurants',
