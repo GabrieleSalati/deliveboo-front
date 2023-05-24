@@ -9,6 +9,15 @@ const router = createRouter({
   history: createWebHistory(),
   linkActiveClass: "active",
   linkExactActiveClass: "",
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // Se è disponibile una posizione salvata, torna a quella posizione
+      return savedPosition;
+    } else {
+      // Altrimenti, scorri fino all'inizio della pagina
+      return { left: 0, top: 0 };
+    }
+  },
   routes: [
     {
       path: "/",
