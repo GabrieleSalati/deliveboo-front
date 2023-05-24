@@ -66,31 +66,59 @@ export default {
 };
 </script>
 <template>
-  <div>
-    <h1>carrello</h1>
+  <div class="">
+    <h1>Il tuo carrello</h1>
     <div class="row">
       <div class="col-12" v-for="cartItem in cartItems">
         <div class="card d-flex flex-row align-items-center">
           <div class="col-3">
-            <img :src="cartItem.picture" class="px-1 img-fluid" :alt="cartItem.name" />
+            <img
+              :src="cartItem.picture"
+              class="img-fluid"
+              :alt="cartItem.name"
+            />
           </div>
-          <div class="card-body">
-            <h6 class="card-title">{{ cartItem.name }}</h6>
-            <p class="card-text text-end">{{ cartItem.price }}€</p>
-            <span class="card-text"> Quantità:{{ cartItem.quantity }}</span>
-            <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
+          <div class="card-body row">
+            <div class="col">
+              <h5 class="card-title fw-bold">{{ cartItem.name }}</h5>
+              <p class="card-text">Prezzo: {{ cartItem.price }}€</p>
+            </div>
+            <div class="col">
+              <p class="card-text text-end">
+                Quantità: {{ cartItem.quantity }}€
+              </p>
+              <p class="card-text text-end">
+                Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€
+              </p>
+            </div>
           </div>
-          <button class="btn btn-link" @click="removeDish(cartItem.id, cartItem.quantity)">
+          <button
+            class="btn custom-btn mx-3"
+            @click="removeDish(cartItem.id, cartItem.quantity)"
+          >
             Rimuovi
           </button>
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-danger" @click="emptyCart(this.key)">Svuota Carrello</button>
+    <div class="d-flex justify-content-between mt-5 align-items-baseline">
+      <button class="btn custom-btn" @click="emptyCart(this.key)">
+        Svuota Carrello
+      </button>
       <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn.custom-btn {
+  font-weight: 800;
+  color: #bd2222;
+  border-color: #bd2222;
+}
+
+.btn.custom-btn:hover {
+  color: #fff;
+  background-color: #bd2222;
+}
+</style>
