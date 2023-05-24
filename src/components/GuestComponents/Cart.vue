@@ -15,12 +15,13 @@ export default {
     };
   },
   components: {},
+  computed: {},
   methods: {
     // svuota il carrello cliccando il tasto "remove"
     emptyCart(key) {
       this.removeFromLocalStorage(key);
       this.cartItems.splice(0, this.cartItems.length);
-      this.setTotalCartDishesnumber(0);
+      this.updateTotalCartDishes();
     },
 
     // calcola il prezzo del singolo piatto per la quantità
@@ -30,34 +31,33 @@ export default {
 
     // calcola il valore totale del carrello
     totalCartValue() {
-      let sumQuantity = 0;
+      let sumPrice = 0;
       for (let i = 0; i < this.cartItems.length; i++) {
         const cartItem = this.cartItems[i];
-        sumQuantity += cartItem.quantity * cartItem.price;
+        sumPrice += cartItem.quantity * cartItem.price;
       }
-      return sumQuantity;
+      return sumPrice;
     },
 
-    totalCartDishesnumber() {
-      let cartQuantity = 0;
-      for (let i = 0; i < this.cartItems.length; i++) {
-        const cartItem = this.cartItems[i];
-        cartQuantity += cartItem.quantity;
-      }
-      return cartQuantity;
-    },
+    // totalCartDishesnumber() {
+    //   let cartQuantity = 0;
+    //   for (let i = 0; i < this.cartItems.length; i++) {
+    //     const cartItem = this.cartItems[i];
+    //     cartQuantity += cartItem.quantity;
+    //   }
+    //   return cartQuantity;
+    // },
 
     removeDish(id, quantity) {
       this.cartItems.splice(this.getIndexItem(id), 1);
       this.sync(this.key, this.cartItems);
-      this.setTotalCartDishesnumber(store.totalCartDishesnumber - quantity);
+      this.updateTotalCartDishes();
     },
 
     // funzione di utility per determinare l'indice di un piatto nell' array cartItems in base al valore del campo id
     getIndexItem(id) {
       const cartItem = this.cartItems.find((item) => item.id == id);
       const index = this.cartItems.indexOf(cartItem);
-      // console.log("index", index);
       return index;
     },
     incrementCounter(dish) {
@@ -78,9 +78,7 @@ export default {
         };
         this.cartItems.push(obj);
       } else {
-        alert(
-          "Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!"
-        );
+        alert("Questo piatto non può essere aggiunto al carrello perché è di un altro ristorante!");
 
         document.getElementById("alert").innerHTML = `
       <div class="alert alert-danger" role="alert">
@@ -89,6 +87,7 @@ export default {
       `;
       }
       this.sync(this.key, this.cartItems);
+      this.updateTotalCartDishes();
     },
 
     // riduce la quantity di un piatto nell' array cartItems e se la quantity=0 rimuove il piatto dall' array
@@ -101,6 +100,7 @@ export default {
         this.cartItems.splice(this.getIndexItem(dishId), 1);
       }
       this.sync(this.key, this.cartItems);
+      this.updateTotalCartDishes();
     },
 
     // indica la quantità di ogni singolo piatto all' interno dell' array cartItems, se il piatto non è presente nell' array imposta la quantity=0
@@ -108,9 +108,14 @@ export default {
       const cartItem = this.cartItems.find((item) => item.id === dishId);
       return cartItem ? cartItem.quantity : 0;
     },
+    updateTotalCartDishes() {
+      store.calculateDishesNumber(this.cartItems);
+    },
   },
 
-  created() {},
+  created() {
+    this.updateTotalCartDishes();
+  },
 };
 </script>
 <template>
@@ -120,11 +125,7 @@ export default {
       <div class="col-12" v-for="cartItem in cartItems">
         <div class="card rounded-0 d-flex flex-row align-items-center">
           <div class="col-3">
-            <img
-              :src="cartItem.picture"
-              class="img-fluid"
-              :alt="cartItem.name"
-            />
+            <img :src="cartItem.picture" class="img-fluid" :alt="cartItem.name" />
           </div>
           <div class="card-body row">
             <div class="col-6">
@@ -132,30 +133,19 @@ export default {
               <p class="card-text">Prezzo: {{ cartItem.price }}€</p>
             </div>
             <div class="col">
-              <p class="card-text text-end">
-                Quantità: {{ cartItem.quantity }}
-              </p>
-              <p class="card-text text-end">
-                Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€
-              </p>
+              <p class="card-text text-end">Quantità: {{ cartItem.quantity }}</p>
+              <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
             </div>
             <div class="col-3 d-flex flex-column align-items-center">
               <div class="mb-2 fs-4">
-                <i
-                  class="bi bi-cart-dash"
-                  @click="decrementCounter(cartItem.id)"
-                ></i>
+                <i class="bi bi-cart-dash" @click="decrementCounter(cartItem.id)"></i>
                 {{ getCartItemQuantity(cartItem.id) }}
-                <i
-                  class="bi bi-cart-plus"
-                  @click="incrementCounter(cartItem)"
-                ></i>
+                <i class="bi bi-cart-plus" @click="incrementCounter(cartItem)"></i>
               </div>
 
               <button
                 class="btn custom-btn mx-3"
-                @click="removeDish(cartItem.id, cartItem.quantity)"
-              >
+                @click="removeDish(cartItem.id, cartItem.quantity)">
                 Rimuovi
               </button>
             </div>
@@ -164,9 +154,7 @@ export default {
       </div>
     </div>
     <div class="d-flex justify-content-between mt-5 align-items-baseline">
-      <button class="btn custom-btn" @click="emptyCart(this.key)">
-        Svuota Carrello
-      </button>
+      <button class="btn custom-btn" @click="emptyCart(this.key)">Svuota Carrello</button>
       <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
     </div>
   </div>
