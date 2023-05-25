@@ -74,6 +74,7 @@ export default {
         this.cartItems.push(obj);
       }
       console.log(this.cartItems);
+      console.log(this.cartItems[0]);
       this.sync(this.key, this.cartItems);
     },
 
@@ -117,12 +118,13 @@ export default {
     //funzione legata al submit.prevent
     sendOrder() {
       const order = {
-        totalBill: this.totalCheckOutPlusShipping(),
-        billNoShipping: this.totalCheckOut(),
-        guestName: this.formData.guestName,
+        total_bill: this.totalCheckOutPlusShipping(),
+        bill_no_shipping: this.totalCartValue(),
+        guest_name: this.formData.guestName,
         email: this.formData.email,
         address: this.formData.address,
         telephone: this.formData.telephone,
+        restaurant_id: this.cartItems[0].restaurant_id,
       };
 
       axios
@@ -131,8 +133,8 @@ export default {
           console.log(response);
         })
         .catch((error) => {
-          console.log(error);
           this.error = error.message;
+          console.log(error.message);
         });
     },
 
@@ -188,7 +190,7 @@ export default {
         <div class="mb-3 col-6">
           <label for="guest_name" class="form-label">Nome Cliente</label>
           <input
-            v-model="guestName"
+            v-model="formData.guestName"
             type="text"
             class="form-control"
             id="guest_name"
@@ -198,7 +200,7 @@ export default {
         <div class="mb-3 col-6">
           <label for="guest_email" class="form-label">Email Cliente</label>
           <input
-            v-model="email"
+            v-model="formData.email"
             type="email"
             class="form-control"
             id="guest_email"
@@ -208,7 +210,7 @@ export default {
         <div class="mb-3 col-6">
           <label for="guest_address" class="form-label">Indirizzo</label>
           <input
-            v-model="address"
+            v-model="formData.address"
             type="text"
             class="form-control"
             id="guest_address"
@@ -218,7 +220,7 @@ export default {
         <div class="mb-5 col-6">
           <label for="guest_telephone" class="form-label">Cellulare</label>
           <input
-            v-model="telephone"
+            v-model="formData.telephone"
             type="text"
             class="form-control"
             id="guest_telephone"
