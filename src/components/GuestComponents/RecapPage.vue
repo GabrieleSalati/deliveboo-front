@@ -3,7 +3,6 @@ import Cart from "../GuestComponents/Cart.vue";
 import localStorageMixin from "../../localStorageMixin.js";
 import { store } from "../../assets/data/store";
 import axios from "axios";
-import braintree from "braintree-web-drop-in";
 
 export default {
   mixins: [localStorageMixin],
@@ -27,7 +26,91 @@ export default {
   },
 
   components: { Cart },
-  mounted() {},
+  mounted() {
+    // var button = document.querySelector("#submit-button");
+    // braintree.dropin.create(
+    //   {
+    //     // Insert your tokenization key here
+    //     authorization: "<sandbox_x6qjgfj8_ngjd87g97h24v34p>",
+    //     container: "#dropin-container",
+    //   },
+    //   function (createErr, instance) {
+    //     button.addEventListener("click", function () {
+    //       instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+    //         // When the user clicks on the 'Submit payment' button this code will send the
+    //         // encrypted payment information in a variable called a payment method nonce
+    //         $.ajax({
+    //           type: "POST",
+    //           url: "/checkout",
+    //           data: { paymentMethodNonce: payload.nonce },
+    //         }).done(function (result) {
+    //           // Tear down the Drop-in UI
+    //           instance.teardown(function (teardownErr) {
+    //             if (teardownErr) {
+    //               console.error("Could not tear down Drop-in UI!");
+    //             } else {
+    //               console.info("Drop-in UI has been torn down!");
+    //               // Remove the 'Submit payment' button
+    //               $("#submit-button").remove();
+    //             }
+    //           });
+    //           if (result.success) {
+    //             $("#checkout-message").html(
+    //               '<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>'
+    //             );
+    //           } else {
+    //             console.log(result);
+    //             $("#checkout-message").html("<h1>Error</h1><p>Check your console.</p>");
+    //           }
+    //         });
+    //       });
+    //     });
+    //   }
+    // );
+    var submitButton = document.querySelector("#submit-button");
+    braintree.dropin.create(
+      {
+        authorization: "sandbox_x6qjgfj8_ngjd87g97h24v34p",
+        selector: "#dropin-container",
+      },
+      function (err, dropinInstance) {
+        if (err) {
+          // Handle any errors that might've occurred when creating Drop-in
+          console.error(err);
+          return;
+        }
+        submitButton.addEventListener("click", function () {
+          dropinInstance.requestPaymentMethod(function (err, payload) {
+            ajax({
+              type: "POST",
+              url: "/checkout",
+              data: { paymentMethodNonce: payload.nonce },
+            }).done(function (result) {
+              // Tear down the Drop-in UI
+              instance.teardown(function (teardownErr) {
+                if (teardownErr) {
+                  console.error("Could not tear down Drop-in UI!");
+                } else {
+                  console.info("Drop-in UI has been torn down!");
+                  // Remove the 'Submit payment' button
+                  $("#submit-button").remove();
+                }
+              });
+              if (result.success) {
+                $("#checkout-message").html(
+                  '<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>'
+                );
+              } else {
+                console.log(result);
+                $("#checkout-message").html("<h1>Error</h1><p>Check your console.</p>");
+              }
+            });
+            // Send payload.nonce to your server
+          });
+        });
+      }
+    );
+  },
 
   computed: {
     totalCartDishesnumber() {
@@ -47,38 +130,36 @@ export default {
     },
   },
   created() {
-    this.initializeBraintree();
     // localStorage.clear();
     this.init();
   },
 
   methods: {
-    initializeBraintree() {
-      var submitButton = document.querySelector("#submit-button");
+    // initializeBraintree() {
+    // var submitButton = document.querySelector("#submit-button");
+    // braintree.dropin.create(
+    //   {
+    //     authorization: "sandbox_dx95q2nspm7qnxyv",
+    //     container: "#dropin-container",
+    //   },
+    //   function (err, dropinInstance) {
+    //     if (err) {
+    //       // Handle any errors that might've occurred when creating Drop-in
+    //       console.error(err);
+    //       return;
+    //     }
+    //     submitButton.addEventListener("click", function () {
+    //       dropinInstance.requestPaymentMethod(function (err, payload) {
+    //         if (err) {
+    //           // Handle errors in requesting payment method
+    //         }
+    //         // Send payload.nonce to your server
+    //       });
+    //     });
+    //   }
+    // );
+    // },
 
-      braintree.dropin.create(
-        {
-          authorization: "sandbox_dx95q2nspm7qnxyv",
-          container: "#dropin-container",
-        },
-        function (err, dropinInstance) {
-          if (err) {
-            // Handle any errors that might've occurred when creating Drop-in
-            console.error(err);
-            return;
-          }
-          submitButton.addEventListener("click", function () {
-            dropinInstance.requestPaymentMethod(function (err, payload) {
-              if (err) {
-                // Handle errors in requesting payment method
-              }
-
-              // Send payload.nonce to your server
-            });
-          });
-        }
-      );
-    },
     //inizializzazione carrello
     init() {
       this.cartItems = this.getFromLocalStorage(this.key);
@@ -88,20 +169,20 @@ export default {
       }
     },
 
-    braintreeCall() {
-      braintree.dropin
-        .create({
-          container: document.getElementById("dropin-container"),
-          // ...plus remaining configuration
-          authorization: sandbox_x6qjgfj8_ngjd87g97h24v34p,
-          container: "#dropin-container",
-        })
-        .then((dropinInstance) => {
-          // Use `dropinInstance` here
-          // Methods documented at https://braintree.github.io/braintree-web-drop-in/docs/current/Dropin.html
-        })
-        .catch((error) => {});
-    },
+    // braintreeCall() {
+    //   braintree.dropin
+    //     .create({
+    //       container: document.getElementById("dropin-container"),
+    //       // ...plus remaining configuration
+    //       authorization: sandbox_x6qjgfj8_ngjd87g97h24v34p,
+    //       container: "#dropin-container",
+    //     })
+    //     .then((dropinInstance) => {
+    //       // Use `dropinInstance` here
+    //       // Methods documented at https://braintree.github.io/braintree-web-drop-in/docs/current/Dropin.html
+    //     })
+    //     .catch((error) => {});
+    // },
 
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
@@ -224,9 +305,7 @@ export default {
         <form @submit.prevent="sendOrder">
           <div class="container row">
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Totale</label
-              >
+              <label for="exampleFormControlInput1" class="form-label">Totale</label>
               <p class="form-control">
                 <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
                 {{ this.totalCheckOutPlusShipping() }}
@@ -249,8 +328,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_name"
-                placeholder="Nome Cognome"
-              />
+                placeholder="Nome Cognome" />
             </div>
 
             <div class="mb-3 col-6">
@@ -260,8 +338,7 @@ export default {
                 type="email"
                 class="form-control"
                 id="guest_email"
-                placeholder="name@example.com"
-              />
+                placeholder="name@example.com" />
             </div>
 
             <div class="mb-3 col-6">
@@ -271,8 +348,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_address"
-                placeholder="Via Tacchi 12"
-              />
+                placeholder="Via Tacchi 12" />
             </div>
 
             <div class="mb-5 col-6">
@@ -282,23 +358,16 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_telephone"
-                placeholder="367859857"
-              />
+                placeholder="367859857" />
             </div>
             <div class="mb-5 col-12">
-              <label for="payment-button" class="form-label"
-                >Paga con Braintree</label
-              >
-              <div id="dropin-container"></div>
-              <button
-                id="payment-button"
-                class="button button--small button--green"
-              >
-                Paga
-              </button>
+              <div id="dropin-wrapper">
+                <div id="checkout-message"></div>
+                <div id="dropin-container"></div>
+              </div>
             </div>
             <div class="mb-3 col-12 d-flex justify-content-center">
-              <button class="btn custom-btn" type="submit">
+              <button class="btn custom-btn" id="submit-button" type="submit">
                 Ordina e paga!
               </button>
             </div>
