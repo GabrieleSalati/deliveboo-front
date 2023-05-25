@@ -151,13 +151,16 @@ export default {
     //funzione per calcolare totale carrello (con spedizione) così da riportarlo sotto nel form
     totalCheckOutPlusShipping() {
       let totCart = 0;
+      const cartItems = this.getFromLocalStorage(store.key);
 
-      for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
-        totCart +=
-          this.getFromLocalStorage(store.key)[i].quantity *
-          this.getFromLocalStorage(store.key)[i].price;
+      if (cartItems && cartItems.length !== 0) {
+        for (let i = 0; i < cartItems.length; i++) {
+          totCart += cartItems[i].quantity * cartItems[i].price;
+        }
+        return totCart + this.spedizione;
+      } else {
+        return 0;
       }
-      return totCart + this.spedizione;
     },
   },
 };
