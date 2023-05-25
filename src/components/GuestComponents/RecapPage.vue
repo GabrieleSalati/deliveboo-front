@@ -14,6 +14,7 @@ export default {
       cartItems: [], //carrello
 
       totalCartDishesnumber: 0,
+      spedizione: 0,
       key: "carrello",
       formData: {
         guestName: "",
@@ -34,14 +35,15 @@ export default {
       }
       return (this.totalCartDishesnumber = sumQuantity);
     },
+    spedizionePrice() {
+      if (this.totalCartDishes() == 0) return (this.spedizione = 0);
+      else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
+      else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
+        return (this.spedizione = 5);
+      else return (this.spedizione = 7);
+    },
   },
   created() {
-    // axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
-    //   this.restaurant = response.data[0];
-    //   this.dishesList = this.restaurant.dishes;
-    //   console.log(this.restaurant);
-    //   console.log(this.dishesList);
-    // });
     // localStorage.clear();
     this.init();
   },
@@ -82,7 +84,6 @@ export default {
         cartItem.quantity--;
       }
       if (cartItem && cartItem.quantity == 0) {
-        // const index = this.cartItems.indexOf(cartItem);
         this.cartItems.splice(this.getIndexItem(dishId), 1);
       }
       console.log(this.cartItems);
@@ -136,27 +137,25 @@ export default {
     },
 
     //funzione per calcolare totale carrello (senza spedizione) così da riportarlo sotto nel form
-    totalCheckOut() {
-      let totCart = 0;
-      for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
-        totCart +=
-          this.getFromLocalStorage(store.key)[i].quantity *
-          this.getFromLocalStorage(store.key)[i].price;
+    totalCartValue() {
+      let sumPrice = 0;
+      for (let i = 0; i < store.cartItems.length; i++) {
+        const cartItem = store.cartItems[i];
+        sumPrice += cartItem.quantity * cartItem.price;
       }
-      return totCart;
+      return sumPrice;
     },
 
     //funzione per calcolare totale carrello (con spedizione) così da riportarlo sotto nel form
     totalCheckOutPlusShipping() {
       let totCart = 0;
-      //   let spedizione = Math.floor((Math.random() * 7) + 3); QUANDO LA SALVO VUE MI CANCELLA LE PARENTESI
-      const spedizione = 4;
+
       for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
         totCart +=
           this.getFromLocalStorage(store.key)[i].quantity *
           this.getFromLocalStorage(store.key)[i].price;
       }
-      return totCart + spedizione;
+      return totCart + this.spedizione;
     },
   },
 };
@@ -182,7 +181,7 @@ export default {
             >Totale senza costi di spedizione</label
           >
           <p class="form-control">
-            {{ this.totalCheckOut() }}
+            {{ this.totalCartValue() }}
           </p>
         </div>
 
