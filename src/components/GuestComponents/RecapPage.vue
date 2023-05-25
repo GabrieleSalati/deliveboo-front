@@ -164,72 +164,87 @@ export default {
 <template>
   <div class="container my-5">
     <h1 class="pt-5 fw-bold">{{ title }}</h1>
-    <Cart :cartItems="cartItems" />
-    <h2 class="mt-5">Contatta il ristoratore:</h2>
-    <form @submit.prevent="sendOrder">
-      <div class="container row">
-        <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label">Totale</label>
-          <p class="form-control">
-            <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
-            {{ this.totalCheckOutPlusShipping() }}
-          </p>
-        </div>
+  </div>
 
-        <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Totale senza costi di spedizione</label
-          >
-          <p class="form-control">
-            {{ this.totalCartValue() }}
-          </p>
-        </div>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6 col-md-12"><Cart :cartItems="cartItems" /></div>
+      <div class="col-lg-6 col-md-12">
+        <h2 class="my-5">Inserisci le tue credenziali:</h2>
+        <form @submit.prevent="sendOrder">
+          <div class="container row">
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Totale</label
+              >
+              <p class="form-control">
+                <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
+                {{ this.totalCheckOutPlusShipping() }}
+              </p>
+            </div>
 
-        <div class="mb-3 col-6">
-          <label for="guest_name" class="form-label">Nome Cliente</label>
-          <input
-            v-model="guestName"
-            type="text"
-            class="form-control"
-            id="guest_name"
-            placeholder="Nome Cognome" />
-        </div>
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Totale senza costi di spedizione</label
+              >
+              <p class="form-control">
+                {{ this.totalCartValue() }}
+              </p>
+            </div>
 
-        <div class="mb-3 col-6">
-          <label for="guest_email" class="form-label">Email Cliente</label>
-          <input
-            v-model="email"
-            type="email"
-            class="form-control"
-            id="guest_email"
-            placeholder="name@example.com" />
-        </div>
+            <div class="mb-3 col-6">
+              <label for="guest_name" class="form-label">Nome Cliente</label>
+              <input
+                v-model="guestName"
+                type="text"
+                class="form-control"
+                id="guest_name"
+                placeholder="Nome Cognome"
+              />
+            </div>
 
-        <div class="mb-3 col-6">
-          <label for="guest_address" class="form-label">Indirizzo</label>
-          <input
-            v-model="address"
-            type="text"
-            class="form-control"
-            id="guest_address"
-            placeholder="Via Tacchi 12" />
-        </div>
+            <div class="mb-3 col-6">
+              <label for="guest_email" class="form-label">Email Cliente</label>
+              <input
+                v-model="email"
+                type="email"
+                class="form-control"
+                id="guest_email"
+                placeholder="name@example.com"
+              />
+            </div>
 
-        <div class="mb-5 col-6">
-          <label for="guest_telephone" class="form-label">Cellulare</label>
-          <input
-            v-model="telephone"
-            type="text"
-            class="form-control"
-            id="guest_telephone"
-            placeholder="367859857" />
-        </div>
+            <div class="mb-3 col-6">
+              <label for="guest_address" class="form-label">Indirizzo</label>
+              <input
+                v-model="address"
+                type="text"
+                class="form-control"
+                id="guest_address"
+                placeholder="Via Tacchi 12"
+              />
+            </div>
 
-        <div class="mb-3 col-12 d-flex justify-content-center">
-          <button class="btn custom-btn" type="submit">Ordina e paga!</button>
-        </div>
+            <div class="mb-5 col-6">
+              <label for="guest_telephone" class="form-label">Cellulare</label>
+              <input
+                v-model="telephone"
+                type="text"
+                class="form-control"
+                id="guest_telephone"
+                placeholder="367859857"
+              />
+            </div>
+
+            <div class="mb-3 col-12 d-flex justify-content-center">
+              <button class="btn custom-btn" type="submit">
+                Ordina e paga!
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
