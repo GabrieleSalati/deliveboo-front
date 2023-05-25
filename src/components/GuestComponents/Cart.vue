@@ -9,14 +9,14 @@ export default {
       store,
       // cartItems: store.cartItems,
       title: "Cart",
-      showButton: true,
+      // showButton: true,
     };
   },
 
   mounted() {
-    if (this.$route.name === "cart") {
-      this.showButton = false;
-    }
+    // if (this.$route.name === "cart") {
+    //   this.showButton = false;
+    // }
   },
   computed: {},
   created() {
@@ -181,13 +181,13 @@ export default {
     <h4 class="mt-3 p-0 text-dark text-center">
       Totale: <strong>{{ totalCartValue() }} €</strong>
     </h4>
-    <div class="d-flex justify-content-between my-3 pb-3 align-items-baseline">
+    <div class="d-flex justify-content-between my-3 align-items-baseline">
       <button class="btn custom-btn" @click="emptyCart(store.key)">
         Svuota Carrello
       </button>
+      <!-- v-if="showButton" -->
       <router-link
         :to="{ name: 'cart' }"
-        v-if="showButton"
         class="navbar-nav nav-link text-light fs-5 me-2"
       >
         <button class="btn custom-btn">Vai al checkout</button>
