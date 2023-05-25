@@ -1,6 +1,7 @@
 <script>
 import Cart from "../GuestComponents/Cart.vue";
 import localStorageMixin from "../../localStorageMixin.js";
+import { store } from "../../assets/data/store";
 import axios from "axios";
 
 export default {
@@ -8,12 +9,12 @@ export default {
 
   data() {
     return {
+      store,
       title: "Effettua il checkout!",
       cartItems: [], //carrello
 
       totalCartDishesnumber: 0,
       key: "carrello",
-
       formData: {
         guestName: "",
         email: "",
@@ -23,9 +24,7 @@ export default {
     };
   },
 
-  components: {
-    Cart,
-  },
+  components: { Cart },
   computed: {
     totalCartDishesnumber() {
       let sumQuantity = 0;
@@ -48,6 +47,7 @@ export default {
   },
 
   methods: {
+    //inizializzazione carrello
     init() {
       this.cartItems = this.getFromLocalStorage(this.key);
       console.log("log di cartitems nell' init", this.cartItems);
@@ -83,23 +83,27 @@ export default {
         this.sync(this.key, this.cartItems);
       },
 
+      //funzione per decrementare quantità prodotto nel carrello
       decrementCounter(dishId) {
         const cartItem = this.cartItems.find((item) => item.id === dishId);
         if (cartItem && cartItem.quantity > 0) {
           cartItem.quantity--;
         }
         if (cartItem && cartItem.quantity == 0) {
+          // const index = this.cartItems.indexOf(cartItem);
           this.cartItems.splice(this.getIndexItem(dishId), 1);
         }
         console.log(this.cartItems);
         this.sync(this.key, this.cartItems);
       },
 
+      //funzione che restituisce quantità di un determinato piatto nel carrello
       getCartItemQuantity(dishId) {
         const cartItem = this.cartItems.find((item) => item.id === dishId);
         return cartItem ? cartItem.quantity : 0;
       },
 
+      //funzione che restituisce la posizione di un determinato piatto nell' array carrello
       getIndexItem(dishId) {
         const cartItem = this.cartItems.find((item) => item.id == dishId);
         const index = this.cartItems.indexOf(cartItem);
@@ -107,11 +111,7 @@ export default {
         return index;
       },
 
-      //   saveToCart(dishId) {
-      //     // this.getIndexItem(dishId);
-      //     // const cartItem = this.cartItems.find((item) => item.id == dishId);
-      //     this.sync(this.key, this.cartItems);
-      // },
+      //funzione che restituisce il numero di piatti totali nel carrello
       totalCartDishes() {
         let sumQuantity = 0;
         for (let i = 0; i < this.cartItems.length; i++) {
@@ -121,16 +121,50 @@ export default {
         return sumQuantity;
       },
 
-      handleSubmit(event) {
-        event.preventDefault();
+      //funzione legata al submit.prevent
+      sendOrder() {
+        const order = {
+          totalBill: this.totalCheckOutPlusShipping(),
+          billNoShipping: this.totalCheckOut(),
+          guestName: this.formData.guestName,
+          email: this.formData.email,
+          address: this.formData.address,
+          telephone: this.formData.telephone,
+        };
+
         axios
-          .post("/api/submit-form", this.formData)
+          .post("http://127.0.0.1:8000/api/orders", order)
           .then((response) => {
-            // Gestisci la risposta
+            console.log(response);
           })
           .catch((error) => {
-            // Gestisci l'errore
+            console.log(error);
+            this.error = error.message;
           });
+      },
+
+      //funzione per calcolare totale carrello (senza spedizione) così da riportarlo sotto nel form
+      totalCheckOut() {
+        let totCart = 0;
+        for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
+          totCart +=
+            this.getFromLocalStorage(store.key)[i].quantity *
+            this.getFromLocalStorage(store.key)[i].price;
+        }
+        return totCart;
+      },
+
+      //funzione per calcolare totale carrello (con spedizione) così da riportarlo sotto nel form
+      totalCheckOutPlusShipping() {
+        let totCart = 0;
+        //   let spedizione = Math.floor((Math.random() * 7) + 3); QUANDO LA SALVO VUE MI CANCELLA LE PARENTESI
+        const spedizione = 4;
+        for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
+          totCart +=
+            this.getFromLocalStorage(store.key)[i].quantity *
+            this.getFromLocalStorage(store.key)[i].price;
+        }
+        return totCart + spedizione;
       },
     },
   },
@@ -142,44 +176,65 @@ export default {
     <h1 class="pt-5 fw-bold">{{ title }}</h1>
     <Cart :cartItems="cartItems" />
     <h2 class="mt-5">Contatta il ristoratore:</h2>
-    <form @submit="handleSubmit">
+    <form @submit.prevent="sendOrder">
       <div class="container row">
         <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label">Nome Cliente</label>
+          <label for="exampleFormControlInput1" class="form-label">Totale</label>
+          <p class="form-control">
+            <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
+            {{ this.totalCheckOutPlusShipping() }}
+          </p>
+        </div>
+
+        <div class="mb-3 col-6">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Totale senza costi di spedizione</label
+          >
+          <p class="form-control">
+            {{ this.totalCheckOut() }}
+          </p>
+        </div>
+
+        <div class="mb-3 col-6">
+          <label for="guest_name" class="form-label">Nome Cliente</label>
           <input
-            v-model="formData.guestName"
+            v-model="guestName"
             type="text"
             class="form-control"
-            id="exampleFormControlInput1"
+            id="guest_name"
             placeholder="Nome Cognome" />
         </div>
+
         <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label">Email Cliente</label>
+          <label for="guest_email" class="form-label">Email Cliente</label>
           <input
-            v-model="formData.email"
+            v-model="email"
             type="email"
             class="form-control"
-            id="exampleFormControlInput1"
+            id="guest_email"
             placeholder="name@example.com" />
         </div>
+
         <div class="mb-3 col-6">
-          <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
+          <label for="guest_address" class="form-label">Indirizzo</label>
           <input
-            v-model="formData.address"
+            v-model="address"
             type="text"
             class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Via Tacchino 12" />
+            id="guest_address"
+            placeholder="Via Tacchi 12" />
         </div>
+
         <div class="mb-5 col-6">
-          <label for="exampleFormControlInput1" class="form-label">Cellulare</label>
+          <label for="guest_telephone" class="form-label">Cellulare</label>
           <input
-            v-model="formData.telephone"
+            v-model="telephone"
             type="text"
             class="form-control"
-            id="exampleFormControlInput1"
+            id="guest_telephone"
             placeholder="367859857" />
         </div>
+
         <div class="mb-3 col-12 d-flex justify-content-center">
           <button class="btn custom-btn" type="submit">Ordina e paga!</button>
         </div>
