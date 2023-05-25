@@ -55,117 +55,108 @@ export default {
         this.cartItems = [];
       }
     },
-    methods: {
-      init() {
-        this.cartItems = this.getFromLocalStorage(this.key);
-        console.log("log di cartitems nell' init", this.cartItems);
-        if (!this.cartItems) {
-          this.cartItems = [];
-        }
-      },
 
-      incrementCounter(dish) {
-        const cartItem = this.cartItems.find((item) => item.id === dish.id);
-        if (cartItem) {
-          cartItem.quantity++;
-        } else {
-          let obj = {
-            id: dish.id,
-            restaurant_id: dish.restaurant_id,
-            name: dish.name,
-            quantity: 1,
-            price: dish.price,
-            picture: dish.picture,
-          };
-          this.cartItems.push(obj);
-        }
-        console.log(this.cartItems);
-        this.sync(this.key, this.cartItems);
-      },
-
-      //funzione per decrementare quantità prodotto nel carrello
-      decrementCounter(dishId) {
-        const cartItem = this.cartItems.find((item) => item.id === dishId);
-        if (cartItem && cartItem.quantity > 0) {
-          cartItem.quantity--;
-        }
-        if (cartItem && cartItem.quantity == 0) {
-          // const index = this.cartItems.indexOf(cartItem);
-          this.cartItems.splice(this.getIndexItem(dishId), 1);
-        }
-        console.log(this.cartItems);
-        this.sync(this.key, this.cartItems);
-      },
-
-      //funzione che restituisce quantità di un determinato piatto nel carrello
-      getCartItemQuantity(dishId) {
-        const cartItem = this.cartItems.find((item) => item.id === dishId);
-        return cartItem ? cartItem.quantity : 0;
-      },
-
-      //funzione che restituisce la posizione di un determinato piatto nell' array carrello
-      getIndexItem(dishId) {
-        const cartItem = this.cartItems.find((item) => item.id == dishId);
-        const index = this.cartItems.indexOf(cartItem);
-        console.log("index", index);
-        return index;
-      },
-
-      //funzione che restituisce il numero di piatti totali nel carrello
-      totalCartDishes() {
-        let sumQuantity = 0;
-        for (let i = 0; i < this.cartItems.length; i++) {
-          const quantityEl = this.cartItems[i].quantity;
-          sumQuantity += quantityEl;
-        }
-        return sumQuantity;
-      },
-
-      //funzione legata al submit.prevent
-      sendOrder() {
-        const order = {
-          totalBill: this.totalCheckOutPlusShipping(),
-          billNoShipping: this.totalCheckOut(),
-          guestName: this.formData.guestName,
-          email: this.formData.email,
-          address: this.formData.address,
-          telephone: this.formData.telephone,
+    incrementCounter(dish) {
+      const cartItem = this.cartItems.find((item) => item.id === dish.id);
+      if (cartItem) {
+        cartItem.quantity++;
+      } else {
+        let obj = {
+          id: dish.id,
+          restaurant_id: dish.restaurant_id,
+          name: dish.name,
+          quantity: 1,
+          price: dish.price,
+          picture: dish.picture,
         };
+        this.cartItems.push(obj);
+      }
+      console.log(this.cartItems);
+      this.sync(this.key, this.cartItems);
+    },
 
-        axios
-          .post("http://127.0.0.1:8000/api/orders", order)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-            this.error = error.message;
-          });
-      },
+    //funzione per decrementare quantità prodotto nel carrello
+    decrementCounter(dishId) {
+      const cartItem = this.cartItems.find((item) => item.id === dishId);
+      if (cartItem && cartItem.quantity > 0) {
+        cartItem.quantity--;
+      }
+      if (cartItem && cartItem.quantity == 0) {
+        // const index = this.cartItems.indexOf(cartItem);
+        this.cartItems.splice(this.getIndexItem(dishId), 1);
+      }
+      console.log(this.cartItems);
+      this.sync(this.key, this.cartItems);
+    },
 
-      //funzione per calcolare totale carrello (senza spedizione) così da riportarlo sotto nel form
-      totalCheckOut() {
-        let totCart = 0;
-        for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
-          totCart +=
-            this.getFromLocalStorage(store.key)[i].quantity *
-            this.getFromLocalStorage(store.key)[i].price;
-        }
-        return totCart;
-      },
+    //funzione che restituisce quantità di un determinato piatto nel carrello
+    getCartItemQuantity(dishId) {
+      const cartItem = this.cartItems.find((item) => item.id === dishId);
+      return cartItem ? cartItem.quantity : 0;
+    },
 
-      //funzione per calcolare totale carrello (con spedizione) così da riportarlo sotto nel form
-      totalCheckOutPlusShipping() {
-        let totCart = 0;
-        //   let spedizione = Math.floor((Math.random() * 7) + 3); QUANDO LA SALVO VUE MI CANCELLA LE PARENTESI
-        const spedizione = 4;
-        for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
-          totCart +=
-            this.getFromLocalStorage(store.key)[i].quantity *
-            this.getFromLocalStorage(store.key)[i].price;
-        }
-        return totCart + spedizione;
-      },
+    //funzione che restituisce la posizione di un determinato piatto nell' array carrello
+    getIndexItem(dishId) {
+      const cartItem = this.cartItems.find((item) => item.id == dishId);
+      const index = this.cartItems.indexOf(cartItem);
+      console.log("index", index);
+      return index;
+    },
+
+    //funzione che restituisce il numero di piatti totali nel carrello
+    totalCartDishes() {
+      let sumQuantity = 0;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        const quantityEl = this.cartItems[i].quantity;
+        sumQuantity += quantityEl;
+      }
+      return sumQuantity;
+    },
+
+    //funzione legata al submit.prevent
+    sendOrder() {
+      const order = {
+        totalBill: this.totalCheckOutPlusShipping(),
+        billNoShipping: this.totalCheckOut(),
+        guestName: this.formData.guestName,
+        email: this.formData.email,
+        address: this.formData.address,
+        telephone: this.formData.telephone,
+      };
+
+      axios
+        .post("http://127.0.0.1:8000/api/orders", order)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = error.message;
+        });
+    },
+
+    //funzione per calcolare totale carrello (senza spedizione) così da riportarlo sotto nel form
+    totalCheckOut() {
+      let totCart = 0;
+      for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
+        totCart +=
+          this.getFromLocalStorage(store.key)[i].quantity *
+          this.getFromLocalStorage(store.key)[i].price;
+      }
+      return totCart;
+    },
+
+    //funzione per calcolare totale carrello (con spedizione) così da riportarlo sotto nel form
+    totalCheckOutPlusShipping() {
+      let totCart = 0;
+      //   let spedizione = Math.floor((Math.random() * 7) + 3); QUANDO LA SALVO VUE MI CANCELLA LE PARENTESI
+      const spedizione = 4;
+      for (let i = 0; i < this.getFromLocalStorage(store.key).length; i++) {
+        totCart +=
+          this.getFromLocalStorage(store.key)[i].quantity *
+          this.getFromLocalStorage(store.key)[i].price;
+      }
+      return totCart + spedizione;
     },
   },
 };
