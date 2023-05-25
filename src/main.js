@@ -6,6 +6,7 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 import App from "./App.vue";
 import { store } from "./assets/data/store";
 import "./localStorageMixin.js";
+// import braintree from "braintree";
 
 const app = createApp(App);
 app.use(router);

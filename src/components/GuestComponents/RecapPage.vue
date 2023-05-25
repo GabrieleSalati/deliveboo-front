@@ -58,6 +58,21 @@ export default {
       }
     },
 
+    braintreeCall() {
+      braintree.dropin
+        .create({
+          container: document.getElementById("dropin-container"),
+          // ...plus remaining configuration
+          authorization: sandbox_x6qjgfj8_ngjd87g97h24v34p,
+          container: "#dropin-container",
+        })
+        .then((dropinInstance) => {
+          // Use `dropinInstance` here
+          // Methods documented at https://braintree.github.io/braintree-web-drop-in/docs/current/Dropin.html
+        })
+        .catch((error) => {});
+    },
+
     incrementCounter(dish) {
       const cartItem = this.cartItems.find((item) => item.id === dish.id);
       if (cartItem) {
@@ -179,9 +194,7 @@ export default {
         <form @submit.prevent="sendOrder">
           <div class="container row">
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Totale</label
-              >
+              <label for="exampleFormControlInput1" class="form-label">Totale</label>
               <p class="form-control">
                 <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
                 {{ this.totalCheckOutPlusShipping() }}
@@ -204,8 +217,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_name"
-                placeholder="Nome Cognome"
-              />
+                placeholder="Nome Cognome" />
             </div>
 
             <div class="mb-3 col-6">
@@ -215,8 +227,7 @@ export default {
                 type="email"
                 class="form-control"
                 id="guest_email"
-                placeholder="name@example.com"
-              />
+                placeholder="name@example.com" />
             </div>
 
             <div class="mb-3 col-6">
@@ -226,8 +237,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_address"
-                placeholder="Via Tacchi 12"
-              />
+                placeholder="Via Tacchi 12" />
             </div>
 
             <div class="mb-5 col-6">
@@ -237,14 +247,20 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_telephone"
-                placeholder="367859857"
-              />
+                placeholder="367859857" />
             </div>
+            <form id="payment-form" action="/route/on/your/server" method="post">
+              <!-- Putting the empty container you plan to pass to
+              `braintree.dropin.create` inside a form will make layout and flow
+              easier to manage -->
+
+              <div id="dropin-container"></div>
+              <input type="submit" />
+              <input type="hidden" id="nonce" name="payment_method_nonce" />
+            </form>
 
             <div class="mb-3 col-12 d-flex justify-content-center">
-              <button class="btn custom-btn" type="submit">
-                Ordina e paga!
-              </button>
+              <button class="btn custom-btn" type="submit">Ordina e paga!</button>
             </div>
           </div>
         </form>
