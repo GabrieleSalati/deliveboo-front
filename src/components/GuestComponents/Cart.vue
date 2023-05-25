@@ -9,9 +9,15 @@ export default {
       store,
       // cartItems: store.cartItems,
       title: "Cart",
+      showButton: true,
     };
   },
 
+  mounted() {
+    if (this.$route.name === "cart") {
+      this.showButton = false;
+    }
+  },
   computed: {},
   created() {
     this.updateTotalCartDishes();
@@ -119,44 +125,48 @@ export default {
 };
 </script>
 <template>
-  <div class="">
-    <h1>Il tuo carrello</h1>
-    <div class="row">
-      <div class="col-12" v-for="cartItem in store.cartItems">
-        <div class="card rounded-0 d-flex flex-row align-items-center">
-          <div class="col-3">
-            <img :src="cartItem.picture" class="img-fluid" :alt="cartItem.name" />
+  <h1 class="text-dark">Il tuo carrello</h1>
+  <div class="row d-flex">
+    <div class="col-12" v-for="cartItem in store.cartItems">
+      <div class="card row rounded-0 d-flex flex-row align-items-center">
+        <div class="col-12 col-md-3">
+          <img :src="cartItem.picture" class="img-fluid" :alt="cartItem.name" />
+        </div>
+        <div class="card-body row">
+          <div class="col-12">
+            <h5 class="card-title fw-bold">{{ cartItem.name }}</h5>
+            <p class="card-text">Prezzo: {{ cartItem.price }}€</p>
           </div>
-          <div class="card-body row">
-            <div class="col-6">
-              <h5 class="card-title fw-bold">{{ cartItem.name }}</h5>
-              <p class="card-text">Prezzo: {{ cartItem.price }}€</p>
+          <div class="col-12">
+            <p class="card-text text-end">Quantità: {{ cartItem.quantity }}</p>
+            <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
+          </div>
+          <div class="col-12 d-flex flex-column align-items-center">
+            <div class="mb-2 fs-4">
+              <i class="bi bi-cart-dash" @click="decrementCounter(cartItem.id)"></i>
+              {{ getCartItemQuantity(cartItem.id) }}
+              <i class="bi bi-cart-plus" @click="incrementCounter(cartItem)"></i>
             </div>
-            <div class="col">
-              <p class="card-text text-end">Quantità: {{ cartItem.quantity }}</p>
-              <p class="card-text text-end">Prezzo totale: {{ singleDishTotalPrice(cartItem) }}€</p>
-            </div>
-            <div class="col-3 d-flex flex-column align-items-center">
-              <div class="mb-2 fs-4">
-                <i class="bi bi-cart-dash" @click="decrementCounter(cartItem.id)"></i>
-                {{ getCartItemQuantity(cartItem.id) }}
-                <i class="bi bi-cart-plus" @click="incrementCounter(cartItem)"></i>
-              </div>
 
-              <button
-                class="btn custom-btn mx-3"
-                @click="removeDish(cartItem.id, cartItem.quantity)">
-                Rimuovi
-              </button>
-            </div>
+            <button class="btn custom-btn mx-3" @click="removeDish(cartItem.id, cartItem.quantity)">
+              Rimuovi
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-between mt-5 align-items-baseline">
-      <button class="btn custom-btn" @click="emptyCart(store.key)">Svuota Carrello</button>
-      <p class="text-danger m-0 p-0">Totale:{{ totalCartValue() }} €</p>
-    </div>
+  </div>
+  <h4 class="mt-3 p-0 text-dark text-center">
+    Totale: <strong>{{ totalCartValue() }} €</strong>
+  </h4>
+  <div class="d-flex justify-content-between mt-5 align-items-baseline">
+    <button class="btn custom-btn" @click="emptyCart(store.key)">Svuota Carrello</button>
+    <router-link
+      :to="{ name: 'cart' }"
+      v-if="showButton"
+      class="navbar-nav nav-link text-light fs-5 me-2">
+      <button class="btn custom-btn">Vai al checkout</button>
+    </router-link>
   </div>
 </template>
 

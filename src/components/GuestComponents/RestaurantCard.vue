@@ -172,7 +172,7 @@ export default {
               store.totalCartDishesnumber
             }}</span>
           </h1> -->
-          <Cart />
+          <!-- <Cart /> -->
         </div>
       </div>
     </div>

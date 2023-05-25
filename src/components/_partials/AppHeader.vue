@@ -10,6 +10,7 @@ export default {
     return {
       store,
       isMobileView: false,
+      showCart: false,
     };
   },
   computed: {
@@ -41,6 +42,9 @@ export default {
     handleResize() {
       this.isMobileView = window.innerWidth <= 767; // Imposta la visualizzazione mobile per larghezza <= 767px
     },
+    toggleCart() {
+      this.showCart = !this.showCart;
+    },
   },
   components: { Cart },
 };
@@ -63,21 +67,18 @@ export default {
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li>
-            <router-link
-              :to="{ name: 'cart' }"
-              class="navbar-nav cart-icon nav-link text-light fs-5 me-2">
-              <!-- CONTATORE DISH -->
+          <li class="cart-icon">
+            <!-- CONTATORE DISH -->
+            <span class="text-danger dish-badge ms-5"
+              ><strong>{{ store.totalCartDishesnumber }}</strong></span
+            >
 
-              <span class="text-danger dish-badge ms-5"
-                ><strong>{{ store.totalCartDishesnumber }}</strong></span
-              >
-
-              <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" />
-              <div class="d-none">
+            <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" @click="toggleCart" />
+            <div class="d-none bg-light" :class="{ 'show-cart': showCart }">
+              <div class="container-fluid my-3">
                 <Cart />
               </div>
-            </router-link>
+            </div>
           </li>
         </ul>
       </div>
@@ -101,7 +102,12 @@ export default {
         <span class="text-danger dish-badge ms-5"
           ><strong>{{ store.totalCartDishesnumber }}</strong></span
         >
-        <img src="../../assets/svg-1.svg" alt="" />
+        <img src="../../assets/svg-1.svg" alt="" @click="toggleCart" />
+        <div class="d-none bg-light" :class="{ 'show-cart': showCart }">
+          <div class="container-fluid my-3">
+            <Cart />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -161,6 +167,18 @@ export default {
   width: 1.5rem;
   height: 1.5rem;
   align-self: center;
+}
+
+.show-cart {
+  display: block !important;
+  position: absolute;
+  // bottom: 0;
+  right: 0;
+  width: 25vw;
+  min-width: 350px;
+  max-height: 80vh;
+  // overflow-y: auto;
+  overflow: auto;
 }
 
 @media (max-width: 767px) {
