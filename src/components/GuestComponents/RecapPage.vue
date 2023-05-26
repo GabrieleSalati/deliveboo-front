@@ -126,7 +126,8 @@ export default {
         address: this.formData.address,
         telephone: this.formData.telephone,
         restaurant_id: this.cartItems[0].restaurant_id,
-        cartItems: this.getFromLocalStorage(store.key),
+        dishesId: this.getDishIdsFromOrder(),
+        dishesQty: this.getDishQtyFromOrder(),
       };
 
       axios
@@ -167,6 +168,48 @@ export default {
 
     click() {
       console.log("submittato");
+    },
+    // Funzione per ottenere l'array di Id dei piatti contenuti nell'ordine.
+    getDishIdsFromOrder() {
+      let dishIds = [];
+
+      const cartItems = this.getFromLocalStorage(store.key);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const cartItemId = cartItems[i].id;
+        dishIds.push(cartItemId);
+      }
+
+      // console.log(dishIds);
+      console.log(dishIds);
+      return dishIds;
+    },
+    getDishQtyFromOrder() {
+      let dishQty = [];
+
+      const cartItems = this.getFromLocalStorage(store.key);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const cartItemQty = cartItems[i].quantity;
+        dishQty.push(cartItemQty);
+      }
+
+      // console.log(dishIds);
+      console.log(dishQty);
+
+      return dishQty;
+    },
+
+    getPHPArray() {
+      const cartItems = this.getFromLocalStorage(store.key);
+      const associativeCartItems = cartItems.map((dish) => {
+        // let arrayassociativo = [];
+        return { [dish.id]: dish };
+        // console.log("cosa strana:", arrayassociativo);
+      });
+      console.log("array Associativo Wannabe:", associativeCartItems);
+      console.log("cartItems:", cartItems);
+      return associativeCartItems;
     },
   },
 
