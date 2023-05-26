@@ -128,7 +128,7 @@ export default {
         address: this.formData.address,
         telephone: this.formData.telephone,
         restaurant_id: this.cartItems[0].restaurant_id,
-        dish_ids: this.getDishIdsFromOrder(),
+        cartItems: this.getFromLocalStorage(store.key),
       };
 
       axios
@@ -166,24 +166,12 @@ export default {
         return 0;
       }
     },
-    getDishIdsFromOrder() {
-      let dishIds = [];
 
-      const cartItems = this.getFromLocalStorage(store.key);
-
-      for (let i = 0; i < cartItems.length; i++) {
-        const cartItemId = cartItems[i].id;
-        dishIds.push(cartItemId);
-      }
-
-      console.log(dishIds);
-
-      return dishIds;
-    },
     click() {
       console.log("submittato");
     },
   },
+
   mounted() {
     var submitButton = document.querySelector("#submit-button");
 
@@ -228,7 +216,9 @@ export default {
         <form @submit.prevent="click()">
           <div class="container row">
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label">Totale</label>
+              <label for="exampleFormControlInput1" class="form-label"
+                >Totale</label
+              >
               <p class="form-control">
                 <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
                 {{ this.totalCheckOutPlusShipping() }}
@@ -251,7 +241,8 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_name"
-                placeholder="Nome Cognome" />
+                placeholder="Nome Cognome"
+              />
             </div>
 
             <div class="mb-3 col-6">
@@ -261,7 +252,8 @@ export default {
                 type="email"
                 class="form-control"
                 id="guest_email"
-                placeholder="name@example.com" />
+                placeholder="name@example.com"
+              />
             </div>
 
             <div class="mb-3 col-6">
@@ -271,7 +263,8 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_address"
-                placeholder="Via Tacchi 12" />
+                placeholder="Via Tacchi 12"
+              />
             </div>
 
             <div class="mb-5 col-6">
@@ -281,7 +274,8 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_telephone"
-                placeholder="367859857" />
+                placeholder="367859857"
+              />
             </div>
             <div class="mb-5 col-12">
               <div id="dropin-wrapper">
