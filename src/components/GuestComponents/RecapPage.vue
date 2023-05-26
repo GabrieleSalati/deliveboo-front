@@ -17,10 +17,10 @@ export default {
       spedizione: 0,
       key: "carrello",
       formData: {
-        guestName: "",
-        email: "",
-        address: "",
-        telephone: "",
+        guestName: "123",
+        email: "123@123",
+        address: "123",
+        telephone: "1231231233",
       },
     };
   },
@@ -50,8 +50,6 @@ export default {
   },
 
   methods: {
-    initializeBraintree() {},
-
     //inizializzazione carrello
     init() {
       this.cartItems = this.getFromLocalStorage(this.key);
@@ -216,9 +214,7 @@ export default {
         <form @submit.prevent="click()">
           <div class="container row">
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Totale</label
-              >
+              <label for="exampleFormControlInput1" class="form-label">Totale</label>
               <p class="form-control">
                 <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
                 {{ this.totalCheckOutPlusShipping() }}
@@ -241,8 +237,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_name"
-                placeholder="Nome Cognome"
-              />
+                placeholder="Nome Cognome" />
             </div>
 
             <div class="mb-3 col-6">
@@ -252,8 +247,7 @@ export default {
                 type="email"
                 class="form-control"
                 id="guest_email"
-                placeholder="name@example.com"
-              />
+                placeholder="name@example.com" />
             </div>
 
             <div class="mb-3 col-6">
@@ -263,8 +257,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_address"
-                placeholder="Via Tacchi 12"
-              />
+                placeholder="Via Tacchi 12" />
             </div>
 
             <div class="mb-5 col-6">
@@ -274,8 +267,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_telephone"
-                placeholder="367859857"
-              />
+                placeholder="367859857" />
             </div>
             <div class="mb-5 col-12">
               <div id="dropin-wrapper">
