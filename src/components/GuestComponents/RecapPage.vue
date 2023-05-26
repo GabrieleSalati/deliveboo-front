@@ -171,8 +171,8 @@ export default {
       const cartItems = this.getFromLocalStorage(store.key);
 
       for (let i = 0; i < cartItems.length; i++) {
-        const cartItemId = cartItems[i].id;
-        dishIds.push(cartItemId);
+        const cartItem = cartItems[i];
+        dishIds.push(cartItem);
       }
 
       console.log(dishIds);
