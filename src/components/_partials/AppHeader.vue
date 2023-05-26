@@ -24,10 +24,14 @@ export default {
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);
+    // sul click esterno chiudi il cart
+    document.addEventListener("click", this.handleClickOutsideDropdown);
     this.handleResize();
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);
+    // sul click esterno chiudi il cart
+    document.removeEventListener("click", this.handleClickOutsideDropdown);
   },
   methods: {
     // updateTotalCartDishes() {
@@ -44,6 +48,21 @@ export default {
     },
     toggleCart() {
       this.showCart = !this.showCart;
+    },
+    toggleCartDropdown() {
+      this.showCart = !this.showCart;
+    },
+
+    // sul click esterno chiudi il cart
+    handleClickOutsideDropdown(event) {
+      const cartIcon = this.$refs.cartIcon;
+      const cartDropdown = this.$refs.cartDropdown;
+      if (
+        !cartIcon.contains(event.target) &&
+        !cartDropdown.contains(event.target)
+      ) {
+        this.showCart = false;
+      }
     },
   },
   components: { Cart },
@@ -62,10 +81,16 @@ export default {
           />
         </router-link>
       </div>
-      <div class="collapse navbar-collapse d-flex align-items-center" id="navbarNav">
+      <div
+        class="collapse navbar-collapse d-flex align-items-center"
+        id="navbarNav"
+      >
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link :to="{ name: 'restaurants' }" class="btn btn-outline btn-lg custom-btn">
+            <router-link
+              :to="{ name: 'restaurants' }"
+              class="btn btn-outline btn-lg custom-btn"
+            >
               Ristoranti
             </router-link>
           </li>
@@ -77,8 +102,18 @@ export default {
               ><strong>{{ store.totalCartDishesnumber }}</strong></span
             >
 
-            <img src="../../assets/svg-1.svg" alt="" class="ms-2 mt-2" @click="toggleCart" />
-            <div class="d-none bg-light" :class="{ 'show-cart': showCart }">
+            <img
+              src="../../assets/svg-1.svg"
+              alt=""
+              class="motorino ms-2 mt-2"
+              @click="toggleCart"
+              ref="cartIcon"
+            />
+            <div
+              class="d-none bg-light"
+              :class="{ 'show-cart': showCart }"
+              ref="cartDropdown"
+            >
               <div class="container-fluid my-3">
                 <Cart />
               </div>
@@ -90,15 +125,23 @@ export default {
   </nav>
   <div class="mobile-icons fixed-top m-0 p-0" v-if="isMobileView">
     <!-- icone per la visualizzazione mobile -->
-    <div class="mobile-icon text-white d-flex align-items-center justify-content-evenly">
+    <div
+      class="mobile-icon text-white d-flex align-items-center justify-content-evenly"
+    >
       <router-link
         :to="{ name: 'home' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100">
-        <img src="../../assets/Logo.svg" alt="logo" class="mobile-logo img-fluid logo" />
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100"
+      >
+        <img
+          src="../../assets/Logo.svg"
+          alt="logo"
+          class="mobile-logo img-fluid logo"
+        />
       </router-link>
       <router-link
         :to="{ name: 'restaurants' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
+      >
         <i class="bi bi-book"></i>
       </router-link>
       <!-- CONTATORE DISH -->
@@ -106,8 +149,18 @@ export default {
         <span class="text-danger dish-badge ms-5"
           ><strong>{{ store.totalCartDishesnumber }}</strong></span
         >
-        <img src="../../assets/svg-1.svg" alt="" @click="toggleCart" />
-        <div class="d-none bg-light" :class="{ 'show-cart': showCart }">
+        <img
+          src="../../assets/svg-1.svg"
+          alt=""
+          class="motorino"
+          @click="toggleCart"
+          ref="cartIcon"
+        />
+        <div
+          class="d-none bg-light"
+          :class="{ 'show-cart': showCart }"
+          ref="cartDropdown"
+        >
           <div class="container-fluid my-3">
             <Cart />
           </div>
@@ -183,6 +236,11 @@ export default {
   max-height: 80vh;
   // overflow-y: auto;
   overflow: auto;
+  border-radius: 5px;
+}
+
+.motorino {
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {
