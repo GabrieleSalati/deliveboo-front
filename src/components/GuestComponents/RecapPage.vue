@@ -125,6 +125,7 @@ export default {
         address: this.formData.address,
         telephone: this.formData.telephone,
         restaurant_id: this.cartItems[0].restaurant_id,
+        dish_ids: this.getDishIdsFromOrder(),
       };
 
       axios
@@ -162,6 +163,23 @@ export default {
         return 0;
       }
     },
+
+    // Funzione per ottenere l'array di Id dei piatti contenuti nell'ordine.
+    getDishIdsFromOrder() {
+      let dishIds = [];
+
+      const cartItems = this.getFromLocalStorage(store.key);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const cartItemId = cartItems[i].id;
+        dishIds.push(cartItemId);
+      }
+
+      console.log(dishIds);
+
+      return dishIds;
+    },
+
   },
 };
 </script>
@@ -173,15 +191,15 @@ export default {
 
   <div class="container">
     <div class="row g-5">
-      <div class="col-lg-6 col-md-12"><Cart :cartItems="cartItems" /></div>
+      <div class="col-lg-6 col-md-12">
+        <Cart :cartItems="cartItems" />
+      </div>
       <div class="col-lg-6 col-md-12">
         <h2 class="my-5">Inserisci le tue credenziali:</h2>
         <form @submit.prevent="sendOrder">
           <div class="container row">
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Totale</label
-              >
+              <label for="exampleFormControlInput1" class="form-label">Totale</label>
               <p class="form-control">
                 <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
                 {{ this.totalCheckOutPlusShipping() }}
@@ -189,9 +207,7 @@ export default {
             </div>
 
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Totale senza costi di spedizione</label
-              >
+              <label for="exampleFormControlInput1" class="form-label">Totale senza costi di spedizione</label>
               <p class="form-control">
                 {{ this.totalCartValue() }}
               </p>
@@ -199,46 +215,26 @@ export default {
 
             <div class="mb-3 col-6">
               <label for="guest_name" class="form-label">Nome Cliente</label>
-              <input
-                v-model="formData.guestName"
-                type="text"
-                class="form-control"
-                id="guest_name"
-                placeholder="Nome Cognome"
-              />
+              <input v-model="formData.guestName" type="text" class="form-control" id="guest_name"
+                placeholder="Nome Cognome" />
             </div>
 
             <div class="mb-3 col-6">
               <label for="guest_email" class="form-label">Email Cliente</label>
-              <input
-                v-model="formData.email"
-                type="email"
-                class="form-control"
-                id="guest_email"
-                placeholder="name@example.com"
-              />
+              <input v-model="formData.email" type="email" class="form-control" id="guest_email"
+                placeholder="name@example.com" />
             </div>
 
             <div class="mb-3 col-6">
               <label for="guest_address" class="form-label">Indirizzo</label>
-              <input
-                v-model="formData.address"
-                type="text"
-                class="form-control"
-                id="guest_address"
-                placeholder="Via Tacchi 12"
-              />
+              <input v-model="formData.address" type="text" class="form-control" id="guest_address"
+                placeholder="Via Tacchi 12" />
             </div>
 
             <div class="mb-5 col-6">
               <label for="guest_telephone" class="form-label">Cellulare</label>
-              <input
-                v-model="formData.telephone"
-                type="text"
-                class="form-control"
-                id="guest_telephone"
-                placeholder="367859857"
-              />
+              <input v-model="formData.telephone" type="text" class="form-control" id="guest_telephone"
+                placeholder="367859857" />
             </div>
 
             <div class="mb-3 col-12 d-flex justify-content-center">
