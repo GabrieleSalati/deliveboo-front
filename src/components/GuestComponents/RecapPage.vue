@@ -128,6 +128,7 @@ export default {
         address: this.formData.address,
         telephone: this.formData.telephone,
         restaurant_id: this.cartItems[0].restaurant_id,
+        dish_ids: this.getDishIdsFromOrder(),
       };
 
       axios
@@ -164,6 +165,20 @@ export default {
       } else {
         return 0;
       }
+    },
+    getDishIdsFromOrder() {
+      let dishIds = [];
+
+      const cartItems = this.getFromLocalStorage(store.key);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const cartItemId = cartItems[i].id;
+        dishIds.push(cartItemId);
+      }
+
+      console.log(dishIds);
+
+      return dishIds;
     },
     click() {
       console.log("submittato");
@@ -204,7 +219,9 @@ export default {
 
   <div class="container">
     <div class="row g-5">
-      <div class="col-lg-6 col-md-12"><Cart :cartItems="cartItems" /></div>
+      <div class="col-lg-6 col-md-12">
+        <Cart :cartItems="cartItems" />
+      </div>
       <div class="col-lg-6 col-md-12">
         <h2 class="my-5">Inserisci le tue credenziali:</h2>
 
