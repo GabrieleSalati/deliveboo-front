@@ -57,10 +57,7 @@ export default {
     handleClickOutsideDropdown(event) {
       const cartIcon = this.$refs.cartIcon;
       const cartDropdown = this.$refs.cartDropdown;
-      if (
-        !cartIcon.contains(event.target) &&
-        !cartDropdown.contains(event.target)
-      ) {
+      if (!cartIcon.contains(event.target) && !cartDropdown.contains(event.target)) {
         this.showCart = false;
       }
     },
@@ -74,23 +71,13 @@ export default {
     <div class="container">
       <div class="navbar-brand">
         <router-link :to="{ name: 'home' }">
-          <img
-            src="../../assets/Logo.svg"
-            alt="logo"
-            class="img-fluid logo mx-0"
-          />
+          <img src="../../assets/Logo.svg" alt="logo" class="img-fluid logo mx-0" />
         </router-link>
       </div>
-      <div
-        class="collapse navbar-collapse d-flex align-items-center"
-        id="navbarNav"
-      >
+      <div class="collapse navbar-collapse d-flex align-items-center" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'restaurants' }"
-              class="btn btn-outline btn-lg custom-btn"
-            >
+            <router-link :to="{ name: 'restaurants' }" class="btn btn-outline btn-lg custom-btn">
               Ristoranti
             </router-link>
           </li>
@@ -107,13 +94,8 @@ export default {
               alt=""
               class="motorino ms-2 mt-2"
               @click="toggleCart"
-              ref="cartIcon"
-            />
-            <div
-              class="d-none bg-light"
-              :class="{ 'show-cart': showCart }"
-              ref="cartDropdown"
-            >
+              ref="cartIcon" />
+            <div class="d-none bg-light" :class="{ 'show-cart': showCart }" ref="cartDropdown">
               <div class="container-fluid my-3">
                 <Cart />
               </div>
@@ -125,28 +107,20 @@ export default {
   </nav>
   <div class="mobile-icons fixed-top m-0 p-0" v-if="isMobileView">
     <!-- icone per la visualizzazione mobile -->
-    <div
-      class="mobile-icon text-white d-flex align-items-center justify-content-evenly"
-    >
+    <div class="mobile-icon text-white d-flex align-items-center justify-content-evenly">
       <router-link
         :to="{ name: 'home' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100"
-      >
-        <img
-          src="../../assets/Logo.svg"
-          alt="logo"
-          class="mobile-logo img-fluid logo"
-        />
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold h-100">
+        <img src="../../assets/Logo.svg" alt="logo" class="mobile-logo img-fluid logo" />
       </router-link>
       <router-link
         :to="{ name: 'restaurants' }"
-        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold"
-      >
+        class="navbar-nav nav-link text-light fs-5 me-2 fw-bold">
         <i class="bi bi-book"></i>
       </router-link>
       <!-- CONTATORE DISH -->
       <div class="cart-icon">
-        <span class="text-danger dish-badge ms-5"
+        <span class="text-danger dish-badge dish-badge-mobile ms-5"
           ><strong>{{ store.totalCartDishesnumber }}</strong></span
         >
         <img
@@ -154,13 +128,8 @@ export default {
           alt=""
           class="motorino"
           @click="toggleCart"
-          ref="cartIcon"
-        />
-        <div
-          class="d-none bg-light"
-          :class="{ 'show-cart': showCart }"
-          ref="cartDropdown"
-        >
+          ref="cartIcon" />
+        <div class="d-none bg-light" :class="{ 'show-cart': showCart }" ref="cartDropdown">
           <div class="container-fluid my-3">
             <Cart />
           </div>
@@ -198,8 +167,8 @@ export default {
 }
 .dish-badge {
   position: absolute;
-  top: 7px;
-  right: 26px;
+  top: 2px;
+  right: 20px;
   font-size: 0.9rem;
   background-color: white;
   margin: 0;
@@ -207,6 +176,9 @@ export default {
   padding: 1px 2px;
   line-height: 0.9rem;
   border-radius: 4px;
+}
+.dish-badge.dish-badge-mobile {
+  top: 5px;
 }
 
 .mobile-icons {
@@ -241,6 +213,11 @@ export default {
 
 .motorino {
   cursor: pointer;
+}
+.cart-icon {
+  &:hover {
+    transform: scale(1.4);
+  }
 }
 
 @media (max-width: 767px) {
