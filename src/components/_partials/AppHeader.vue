@@ -173,9 +173,9 @@ export default {
   background-color: white;
   margin: 0;
   padding: 0;
-  padding: 1px 2px;
+  padding: 1px 3px;
   line-height: 0.9rem;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 .dish-badge.dish-badge-mobile {
   top: 5px;
