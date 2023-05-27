@@ -17,10 +17,10 @@ export default {
       spedizione: 0,
       key: "carrello",
       formData: {
-        guestName: "123",
-        email: "123@123",
-        address: "123",
-        telephone: "1231231233",
+        guestName: "",
+        email: "",
+        address: "",
+        telephone: "",
       },
     };
   },
@@ -300,7 +300,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_address"
-                placeholder="Via Tacchi 12" />
+                placeholder="Indirizzo" />
             </div>
 
             <div class="mb-5 col-6">
@@ -310,7 +310,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_telephone"
-                placeholder="367859857" />
+                placeholder="Telefono" />
             </div>
             <div class="mb-5 col-12">
               <div id="dropin-wrapper">
