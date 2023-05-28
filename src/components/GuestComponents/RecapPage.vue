@@ -14,7 +14,7 @@ export default {
       cartItems: [], //carrello
       goodPayment: false,
       totalCartDishesnumber: 0,
-      spedizione: 0,
+      spedizione: 5,
       key: "carrello",
       formData: {
         guestName: "",
@@ -36,13 +36,13 @@ export default {
       }
       return (this.totalCartDishesnumber = sumQuantity);
     },
-    spedizionePrice() {
-      if (this.totalCartDishes() == 0) return (this.spedizione = 0);
-      else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
-      else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
-        return (this.spedizione = 5);
-      else return (this.spedizione = 7);
-    },
+    // spedizionePrice() {
+    //   if (this.totalCartDishes() == 0) return (this.spedizione = 0);
+    //   else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
+    //   else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
+    //     return (this.spedizione = 5);
+    //   else return (this.spedizione = 7);
+    // },
   },
   created() {
     // localStorage.clear();
