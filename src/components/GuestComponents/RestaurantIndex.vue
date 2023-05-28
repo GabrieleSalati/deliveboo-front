@@ -137,8 +137,8 @@ export default {
   <!-- CARDS GRID -->
 
   <div class="container card-group pb-5">
-    <div class="row justify-content-between g-5">
-      <div class="col-lg-4 col-md-6 col-sm-12" v-for="restaurant in filteredRestaurants">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 px-3 my-3" v-for="restaurant in filteredRestaurants">
         <div class="card h-100 border shadow-lg">
           <img
             :src="restaurant.picture"
