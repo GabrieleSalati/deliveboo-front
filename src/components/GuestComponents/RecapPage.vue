@@ -232,6 +232,7 @@ export default {
             if (err === null) {
               console.log("sto funzionando");
               this.sendOrder();
+              this.$refs.cart.emptyCart(store.key);
             }
           });
         });
@@ -249,7 +250,7 @@ export default {
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-6 col-md-12">
-        <Cart :cartItems="cartItems" />
+        <Cart ref="cart" :cartItems="cartItems" />
       </div>
       <div class="col-lg-6 col-md-12">
         <h2 class="my-5">Inserisci le tue credenziali:</h2>
