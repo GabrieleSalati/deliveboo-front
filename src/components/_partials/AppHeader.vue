@@ -206,7 +206,6 @@ export default {
   width: 25vw;
   min-width: 350px;
   max-height: 80vh;
-  // overflow-y: auto;
   overflow: auto;
   border-radius: 5px;
 }
@@ -214,11 +213,11 @@ export default {
 .motorino {
   cursor: pointer;
 }
-.cart-icon {
-  &:hover {
-    transform: scale(1.4);
-  }
-}
+// .cart-icon {
+//   &:hover {
+//     transform: scale(1.4);
+//   }
+// }
 
 @media (max-width: 767px) {
   .navbar {

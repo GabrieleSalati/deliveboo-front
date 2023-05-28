@@ -13,9 +13,11 @@ export default {
       title: "Effettua il checkout!",
       cartItems: [], //carrello
       goodPayment: false,
+      failedPayment: false,
       totalCartDishesnumber: 0,
-      spedizione: 0,
+      spedizione: 5,
       key: "carrello",
+
       formData: {
         guestName: "",
         email: "",
@@ -36,13 +38,13 @@ export default {
       }
       return (this.totalCartDishesnumber = sumQuantity);
     },
-    spedizionePrice() {
-      if (this.totalCartDishes() == 0) return (this.spedizione = 0);
-      else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
-      else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
-        return (this.spedizione = 5);
-      else return (this.spedizione = 7);
-    },
+    // spedizionePrice() {
+    //   if (this.totalCartDishes() == 0) return (this.spedizione = 0);
+    //   else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
+    //   else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
+    //     return (this.spedizione = 5);
+    //   else return (this.spedizione = 7);
+    // },
   },
   created() {
     // localStorage.clear();
@@ -232,6 +234,12 @@ export default {
             if (err === null) {
               console.log("sto funzionando");
               this.sendOrder();
+              this.$refs.cart.emptyCart(store.key);
+              this.goodPayment = true;
+              this.failedPayment = false;
+              this.$router.push("/goodPayment");
+            } else {
+              this.failedPayment = true;
             }
           });
         });
@@ -245,11 +253,15 @@ export default {
   <div class="container my-5">
     <h1 class="pt-5 fw-bold">{{ title }}</h1>
   </div>
-
   <div class="container">
     <div class="row g-5">
+      <div v-if="failedPayment == true">
+        <div class="alert alert-danger" role="alert">
+          Attenzione! Pagamento rifiutato, controlla di aver inserito i dati giusti
+        </div>
+      </div>
       <div class="col-lg-6 col-md-12">
-        <Cart :cartItems="cartItems" />
+        <Cart ref="cart" :cartItems="cartItems" />
       </div>
       <div class="col-lg-6 col-md-12">
         <h2 class="my-5">Inserisci le tue credenziali:</h2>
@@ -346,4 +358,12 @@ export default {
   color: #fff;
   background-color: #bd2222;
 }
+// .goodPayment {
+//   position: absolute;
+//   height: 100vh;
+//   width: 100vw;
+//   top: 0;
+//   left: 0;
+//   z-index: 999;
+// }
 </style>

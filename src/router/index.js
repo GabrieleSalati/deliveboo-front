@@ -4,6 +4,7 @@ import HomePage from "../components/GuestComponents/HomePage.vue";
 import RestaurantIndex from "../components/GuestComponents/RestaurantIndex.vue";
 import RestaurantCard from "../components/GuestComponents/RestaurantCard.vue";
 import RecapPage from "../components/GuestComponents/RecapPage.vue";
+import GoodPayment from "../components/_partials/GoodPayment.vue"
 
 const router = createRouter({
   history: createWebHistory(),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: "/cart",
       name: "cart",
       component: RecapPage,
+    },
+    {
+      path: "/goodpayment",
+      name: "goodpayment",
+      component: GoodPayment,
     },
   ],
 });
