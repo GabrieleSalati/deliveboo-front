@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100">
+  <div class="height">
     <div class="d-flex flex-column justify-content-center align-items-center h-100">
       <h1>Pagamento andato a buon fine! Grazie!</h1>
       <h3>Controlla la tua mail per il recap dell' ordine</h3>
@@ -30,5 +30,8 @@ export default {};
   background-color: #bd2222;
   color: #fff;
   background-color: #bd2222;
+}
+.height {
+  height: 70vh;
 }
 </style>
