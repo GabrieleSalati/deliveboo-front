@@ -16,9 +16,17 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
-  <router-view></router-view>
-  <AppFooter />
+  <div class="app d-flex flex-column">
+    <AppHeader />
+    <router-view></router-view>
+    <div class="mt-auto">
+      <AppFooter />
+    </div>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app {
+  min-height: 100vh;
+}
+</style>
