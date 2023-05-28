@@ -1,10 +1,10 @@
 <template>
-  <div class="height">
-    <div class="d-flex flex-column justify-content-center align-items-center h-100">
-      <h1>Pagamento andato a buon fine! Grazie!</h1>
-      <h3>Controlla la tua mail per il recap dell' ordine</h3>
+  <div class="container height">
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 text-center">
+      <h1>Pagamento andato a buon fine, grazie!</h1>
+      <h3 class="my-3">Controlla la tua mail per il recap dell' ordine</h3>
 
-      <router-link :to="{ name: 'home' }" class="btn custom-btn fs-5 me-2 fw-bold">
+      <router-link :to="{ name: 'home' }" class="btn custom-btn fs-5 m-4 fw-bold">
         Torna alla Homepage
       </router-link>
     </div>
