@@ -236,6 +236,7 @@ export default {
   max-height: 80vh;
   // overflow-y: auto;
   overflow: auto;
+  border: 3px #f8d24c solid;
   border-radius: 5px;
 }
 
