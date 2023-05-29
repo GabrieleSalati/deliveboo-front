@@ -40,7 +40,7 @@ export default {
       // Mostra il loader prima di avviare la chiamata API
       this.loading = true;
       axios.get("http://127.0.0.1:8000/api/restaurants").then((response) => {
-        this.restaurants = response.data;
+        this.restaurants = response.data.restaurants;
         // console.log(this.restaurants);
         this.loading = false; // Nasconde il loader quando i dati sono stati caricati
       });

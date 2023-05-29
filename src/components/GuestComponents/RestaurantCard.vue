@@ -32,9 +32,11 @@ export default {
 
     axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`).then((response) => {
       this.restaurant = response.data[0];
+      this.loading = false;
+    });
+    axios.get(`http://127.0.0.1:8000/api/dishes`).then((response) => {
       this.dishesList = this.restaurant.dishes;
       this.loading = false;
-      console.log(this.dishesList);
     });
     this.init();
     // localStorage.clear();
