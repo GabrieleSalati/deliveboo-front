@@ -14,7 +14,7 @@ export default {
       cartItems: [], //carrello
       goodPayment: false,
       totalCartDishesnumber: 0,
-      spedizione: 0,
+      spedizione: 5,
       key: "carrello",
       formData: {
         guestName: "",
@@ -36,13 +36,13 @@ export default {
       }
       return (this.totalCartDishesnumber = sumQuantity);
     },
-    spedizionePrice() {
-      if (this.totalCartDishes() == 0) return (this.spedizione = 0);
-      else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
-      else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
-        return (this.spedizione = 5);
-      else return (this.spedizione = 7);
-    },
+    // spedizionePrice() {
+    //   if (this.totalCartDishes() == 0) return (this.spedizione = 0);
+    //   else if (this.totalCartDishes() < 10) return (this.spedizione = 3);
+    //   else if (this.totalCartDishes() >= 10 && this.totalCartDishes() < 15)
+    //     return (this.spedizione = 5);
+    //   else return (this.spedizione = 7);
+    // },
   },
   created() {
     // localStorage.clear();
@@ -50,8 +50,6 @@ export default {
   },
 
   methods: {
-    initializeBraintree() {},
-
     //inizializzazione carrello
     init() {
       this.cartItems = this.getFromLocalStorage(this.key);
@@ -128,7 +126,8 @@ export default {
         address: this.formData.address,
         telephone: this.formData.telephone,
         restaurant_id: this.cartItems[0].restaurant_id,
-        cartItems: this.getFromLocalStorage(store.key),
+        dishesId: this.getDishIdsFromOrder(),
+        dishesQty: this.getDishQtyFromOrder(),
       };
 
       axios
@@ -170,6 +169,48 @@ export default {
     click() {
       console.log("submittato");
     },
+    // Funzione per ottenere l'array di Id dei piatti contenuti nell'ordine.
+    getDishIdsFromOrder() {
+      let dishIds = [];
+
+      const cartItems = this.getFromLocalStorage(store.key);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const cartItemId = cartItems[i].id;
+        dishIds.push(cartItemId);
+      }
+
+      // console.log(dishIds);
+      console.log(dishIds);
+      return dishIds;
+    },
+    getDishQtyFromOrder() {
+      let dishQty = [];
+
+      const cartItems = this.getFromLocalStorage(store.key);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const cartItemQty = cartItems[i].quantity;
+        dishQty.push(cartItemQty);
+      }
+
+      // console.log(dishIds);
+      console.log(dishQty);
+
+      return dishQty;
+    },
+
+    getPHPArray() {
+      const cartItems = this.getFromLocalStorage(store.key);
+      const associativeCartItems = cartItems.map((dish) => {
+        // let arrayassociativo = [];
+        return { [dish.id]: dish };
+        // console.log("cosa strana:", arrayassociativo);
+      });
+      console.log("array Associativo Wannabe:", associativeCartItems);
+      console.log("cartItems:", cartItems);
+      return associativeCartItems;
+    },
   },
 
   mounted() {
@@ -191,6 +232,7 @@ export default {
             if (err === null) {
               console.log("sto funzionando");
               this.sendOrder();
+              this.$refs.cart.emptyCart(store.key);
             }
           });
         });
@@ -208,7 +250,7 @@ export default {
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-6 col-md-12">
-        <Cart :cartItems="cartItems" />
+        <Cart ref="cart" :cartItems="cartItems" />
       </div>
       <div class="col-lg-6 col-md-12">
         <h2 class="my-5">Inserisci le tue credenziali:</h2>
@@ -216,9 +258,7 @@ export default {
         <form @submit.prevent="click()">
           <div class="container row">
             <div class="mb-3 col-6">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Totale</label
-              >
+              <label for="exampleFormControlInput1" class="form-label">Totale</label>
               <p class="form-control">
                 <!-- {{ this.getFromLocalStorage(store.key)[0].price }} -->
                 {{ this.totalCheckOutPlusShipping() }}
@@ -241,8 +281,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_name"
-                placeholder="Nome Cognome"
-              />
+                placeholder="Nome Cognome" />
             </div>
 
             <div class="mb-3 col-6">
@@ -252,8 +291,7 @@ export default {
                 type="email"
                 class="form-control"
                 id="guest_email"
-                placeholder="name@example.com"
-              />
+                placeholder="name@example.com" />
             </div>
 
             <div class="mb-3 col-6">
@@ -263,8 +301,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_address"
-                placeholder="Via Tacchi 12"
-              />
+                placeholder="Indirizzo" />
             </div>
 
             <div class="mb-5 col-6">
@@ -274,8 +311,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="guest_telephone"
-                placeholder="367859857"
-              />
+                placeholder="Telefono" />
             </div>
             <div class="mb-5 col-12">
               <div id="dropin-wrapper">
